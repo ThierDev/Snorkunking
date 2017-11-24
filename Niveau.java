@@ -26,12 +26,12 @@ public class Niveau extends Grotte{
 	    int niveauxC1 = 0;
 	    int niveauxC2 = 0;
 	    int niveauxC3 = 0;
-	    while (niveauxC1<9 || niveauxC1>12) {
-	    niveauxC1 = randomGenerator.nextInt(12); }
-	    while (niveauxC2<6 || niveauxC2>9) {
-	    niveauxC2 = randomGenerator.nextInt(9); }
-	    while (niveauxC3<3 || niveauxC3>6) {
-	    niveauxC3 = randomGenerator.nextInt(6); }
+	    //while (niveauxC1<9 || niveauxC1>12) {
+	    niveauxC1 = 9+randomGenerator.nextInt(12-9);//}
+	    //while (niveauxC2<6 || niveauxC2>9) {
+	    niveauxC2 = 6+randomGenerator.nextInt(9-6); //}
+	    //while (niveauxC3<3 || niveauxC3>6) {
+	    niveauxC3 = 3+ randomGenerator.nextInt(6-3); //}
 		System.out.println(niveauxC1);
 		System.out.println(niveauxC2);
 		System.out.println(niveauxC3);

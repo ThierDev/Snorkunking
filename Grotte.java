@@ -1,7 +1,7 @@
 public class Grotte {
 
 	public String nom;
-	public static int nbCave = 3;
+	public  int nbCave = 3;
 
 	public Grotte(String vNom,Integer vNbCave){
 	this.nom=vNom;
