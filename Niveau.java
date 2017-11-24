@@ -22,7 +22,6 @@ public class Niveau extends Grotte{
         double deltaZ=1;
 		int spawn1=0;
         
-        
 	    Random randomGenerator = new Random();
 	    int niveauxC1 = 0;
 	    int niveauxC2 = 0;
@@ -43,9 +42,8 @@ public class Niveau extends Grotte{
 		
         while(true){
 		
-		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.text(X_MAX/2, Y_MAX-2, "Utilisez les flèches");
+		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
+
         StdDraw.setPenColor(StdDraw.YELLOW);
         
 		for (int i = 0; i < niveauxC3; i++) {
@@ -79,6 +77,8 @@ public class Niveau extends Grotte{
 	    while (spawn1<4 || spawn1>116) {
 	    spawn1 = randomGenerator.nextInt(9); }
         StdDraw.filledCircle(spawn1,h1-deltaY,1);
+        StdDraw.picture(spawn1, h1-deltaY,"plongeur.png");
+        
         
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.filledRectangle(X_MAX/2,(2+4*niveauxC3),58,2);
