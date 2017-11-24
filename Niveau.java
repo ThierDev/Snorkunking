@@ -41,15 +41,19 @@ public class Niveau extends Grotte{
 		
 		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
 
-        StdDraw.setPenColor(StdDraw.YELLOW);
+        StdDraw.setPenColor(StdDraw.RED);
         
 		for (int i = 0; i < niveauxC3; i++) {
 			StdDraw.rectangle(X_MAX/2,(2+4*i),58,1.5);
 		}
 		
+        StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);
+		
         for (int i = 0; i < niveauxC2; i++) {
 			StdDraw.rectangle(X_MAX/2,(6+4*niveauxC3+4*i),58,1.5);
         }
+        
+        StdDraw.setPenColor(StdDraw.YELLOW);
         
         for (int i = 0; i < niveauxC1; i++) {
 			StdDraw.rectangle(X_MAX/2,(10+4*niveauxC3+4*niveauxC2+4*i),58,1.5);
@@ -73,14 +77,8 @@ public class Niveau extends Grotte{
 		double h1 = 10+4*niveauxC3+4*niveauxC2+4*niveauxC1;
 	    while (spawn1<4 || spawn1>116) {
 	    spawn1 = randomGenerator.nextInt(9); }
-        StdDraw.filledCircle(spawn1,h1-deltaY,1);
-        StdDraw.picture(spawn1, h1-deltaY,"plongeur.png");
-        
-        
-		StdDraw.setPenColor(StdDraw.BLACK);
-		StdDraw.filledRectangle(X_MAX/2,(2+4*niveauxC3),58,2);
-		StdDraw.filledRectangle(X_MAX/2,(6+4*niveauxC3+4*niveauxC2),58,2);
-		
+        StdDraw.picture(spawn1, h1-deltaY,"plongeur.png",50,20);
+        		
         StdDraw.show(120);
         
         	}
