@@ -1,6 +1,11 @@
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
+import java.io.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.util.Scanner;
 
 public class Niveau extends Grotte{
 
@@ -14,14 +19,14 @@ public class Niveau extends Grotte{
 	}
 	
 	public static void main(String[] args) {	
-
+		
 	    final int FPS= 1000;
 	    final int NB_JOUEURS = 4;
         double deltaX=0;
         double deltaY=0;
         double deltaZ=1;
 		int spawn1=0;
-        
+		
 	    Random randomGenerator = new Random();
 	    int niveauxC1 = 0;
 	    int niveauxC2 = 0;
@@ -37,8 +42,8 @@ public class Niveau extends Grotte{
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
 		
-        while(true){
-		
+        while(true){	
+        	
 		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
 
         StdDraw.setPenColor(StdDraw.RED);
@@ -77,6 +82,7 @@ public class Niveau extends Grotte{
 		double h1 = 10+4*niveauxC3+4*niveauxC2+4*niveauxC1;
 	    while (spawn1<4 || spawn1>116) {
 	    spawn1 = randomGenerator.nextInt(9); }
+	    StdDraw.picture(spawn1, h1-deltaY,"explosion.gif");
         StdDraw.picture(spawn1, h1-deltaY,"plongeur.png",50,20);
         		
         StdDraw.show(120);
@@ -85,3 +91,4 @@ public class Niveau extends Grotte{
         }
         
 }
+     

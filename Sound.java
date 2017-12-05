@@ -1,19 +1,27 @@
-import java.io.* ;
-import sun.audio.* ;
+import java.io.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.util.Scanner;
 
-public class Sound
-{
-  public static void main(String[] args)
-  throws Exception
-  {
-    // open the sound file as a Java input stream
-    String gongFile = "/mnt/monster/home/eleves/v/ving10785/Téléchargements/1-welcome.wav";
-    InputStream in = new FileInputStream(gongFile);
-
-   // create an audiostream from the inputstream
-    AudioStream audioStream = new AudioStream(in);
-
-   // play the audio clip with the audioplayer class
-    AudioPlayer.player.start(audioStream);
-  }
-}
+    public class Sound extends Main {
+    	
+    	public static void launchMusic() 
+            throws Exception
+    {
+        Scanner scan = new Scanner(System.in);
+        int m = 0;
+        AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
+        AudioInputStream in2 = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
+        Clip test = AudioSystem.getClip();
+        Clip test2 = AudioSystem.getClip();
+        test.open(in);
+        test.loop(Clip.LOOP_CONTINUOUSLY);
+        Thread.sleep(100);
+        while(test.isRunning()&&m==0)
+        {
+            m = scan.nextInt();
+            Thread.sleep(100);
+        }
+    }  
+   }
