@@ -7,18 +7,14 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.util.Scanner;
 
-public class Niveau extends Grotte{
+public class Niveau extends Main{
 
 	public int index;
 	public final static int X_MAX=120;
 	public final static int Y_MAX=120;
 	public final static double WIDTH=0.5f;
 	
-	public Niveau(String vNom,Integer vNbCave) {
-		super(vNom, vNbCave);
-	}
-	
-	public static void main(String[] args) {	
+	public static void Graphique() throws Exception {	
 		
 	    final int FPS= 1000;
 	    final int NB_JOUEURS = 4;
@@ -26,6 +22,7 @@ public class Niveau extends Grotte{
         double deltaY=0;
         double deltaZ=1;
 		int spawn1=0;
+		int compteurbouteille = 0;
 		
 	    Random randomGenerator = new Random();
 	    int niveauxC1 = 0;
@@ -80,15 +77,34 @@ public class Niveau extends Grotte{
         
 		StdDraw.setPenColor(StdDraw.RED);
 		double h1 = 10+4*niveauxC3+4*niveauxC2+4*niveauxC1;
+		
+
+		
+		if (compteurbouteille<1) {
+		for (int i = Y_MAX; i> 20; i--) {
+		
+		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
+	    StdDraw.picture(X_MAX/2, i,"bouteille.png",20,20);
+	    	if (i<= 25) {StdDraw.picture(X_MAX/2, i,"explosion.gif");
+	    	StdDraw.show(20); 
+	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
+	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 100, 100);	    	
+	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100); }
+	    	StdDraw.show(30);}
+    		StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100);
+    		Sound.launchMusic();
+			StdDraw.show(3000);}
+		
 	    while (spawn1<4 || spawn1>116) {
 	    spawn1 = randomGenerator.nextInt(9); }
-	    StdDraw.picture(spawn1, h1-deltaY,"explosion.gif");
         StdDraw.picture(spawn1, h1-deltaY,"plongeur.png",50,20);
-        		
+        
+        compteurbouteille++;
+        
         StdDraw.show(120);
         
         	}
         }
-        
 }
+
      

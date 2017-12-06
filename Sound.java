@@ -17,11 +17,5 @@ import java.util.Scanner;
         Clip test2 = AudioSystem.getClip();
         test.open(in);
         test.loop(Clip.LOOP_CONTINUOUSLY);
-        Thread.sleep(100);
-        while(test.isRunning()&&m==0)
-        {
-            m = scan.nextInt();
-            Thread.sleep(100);
-        }
     }  
    }
