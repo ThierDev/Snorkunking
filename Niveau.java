@@ -2,10 +2,16 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
 import java.io.*;
+
 import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioInputStream.*;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.util.Scanner;
+import java.io.*;
+import javax.sound.sampled.AudioInputStream.*;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Niveau extends Main{
 
@@ -13,6 +19,8 @@ public class Niveau extends Main{
 	public final static int X_MAX=120;
 	public final static int Y_MAX=120;
 	public final static double WIDTH=0.5f;
+	
+
 	
 	public static void Graphique() throws Exception {	
 		
@@ -38,9 +46,11 @@ public class Niveau extends Main{
 		StdDraw.setCanvasSize(720,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
-		
+        AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
+        Sound2 menuTheme = new Sound2("GuileTheme.wav");
+        
         while(true){	
-        	
+
 		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
 
         StdDraw.setPenColor(StdDraw.RED);
@@ -78,21 +88,22 @@ public class Niveau extends Main{
 		StdDraw.setPenColor(StdDraw.RED);
 		double h1 = 10+4*niveauxC3+4*niveauxC2+4*niveauxC1;
 		
-
-		
 		if (compteurbouteille<1) {
-		for (int i = Y_MAX; i> 20; i--) {
+		for (int i = Y_MAX; i> 20; i=i-2) {
 		
 		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
 	    StdDraw.picture(X_MAX/2, i,"bouteille.png",20,20);
+	    
 	    	if (i<= 25) {StdDraw.picture(X_MAX/2, i,"explosion.gif");
 	    	StdDraw.show(20); 
 	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
-	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 100, 100);	    	
+	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 100, 100);	
 	    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100); }
 	    	StdDraw.show(30);}
-    		StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100);
-    		Sound.launchMusic();
+			
+			menuTheme.PlaySoundC();
+	        
+			StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100);
 			StdDraw.show(3000);}
 		
 	    while (spawn1<4 || spawn1>116) {
@@ -105,6 +116,7 @@ public class Niveau extends Main{
         
         	}
         }
+	
 }
 
      
