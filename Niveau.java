@@ -22,15 +22,8 @@ public class Niveau extends Titre{
 
 	public static void Graphique() throws Exception {	
 		
-	    final int FPS= 1000;
-	    final int NB_JOUEURS = 4;
-        double deltaX=0;
         double deltaY=0;
-        double deltaZ=1;
-		int spawn1=0;
-		int compteurlancement = 0;
-		Boolean bool1 = false;
-		
+        double deltaY2=0;
 	    Random randomGenerator = new Random();
 	    int niveauxC1 = 0;
 	    int niveauxC2 = 0;
@@ -38,9 +31,6 @@ public class Niveau extends Titre{
 	    niveauxC1 = 9+randomGenerator.nextInt(12-9);
 	    niveauxC2 = 6+randomGenerator.nextInt(9-6);
 	    niveauxC3 = 3+ randomGenerator.nextInt(6-3);
-		System.out.println(niveauxC1);
-		System.out.println(niveauxC2);
-		System.out.println(niveauxC3);
 		
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
@@ -50,8 +40,7 @@ public class Niveau extends Titre{
         
         while(true){	
 
-
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");
 
     		        StdDraw.setPenColor(StdDraw.RED);
     		        
@@ -79,30 +68,27 @@ public class Niveau extends Titre{
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
     		            deltaY= deltaY-4;
     		        }
+    		        
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+    		            deltaY2= deltaY2+4;
+    		        }
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
+    		            deltaY2= deltaY2-4;
+    		        }
     				
     		        if (deltaY<=0) deltaY = 0 ;
     		        if (deltaY>(8+4*niveauxC3+4*niveauxC2+4*niveauxC1)) deltaY = 8+4*niveauxC3+4*niveauxC2+4*niveauxC1 ;        
     		        
+    		        if (deltaY2<=0) deltaY2 = 0 ;
+    		        if (deltaY2>(8+4*niveauxC3+4*niveauxC2+4*niveauxC1)) deltaY2 = 8+4*niveauxC3+4*niveauxC2+4*niveauxC1 ;    
+    		        
     				StdDraw.setPenColor(StdDraw.RED);
     				double h1 = 10+4*niveauxC3+4*niveauxC2+4*niveauxC1;
     				
-
-    				
-    			    while (spawn1<4 || spawn1>116) {
-    			    spawn1 = randomGenerator.nextInt(9); }
-    		        StdDraw.picture(spawn1, h1-deltaY,"plongeur.png",25,10);
+    		        StdDraw.picture(15, h1-deltaY2+4.5,"bob.png", 6, 12);
+    		        StdDraw.picture(X_MAX-15, h1-deltaY+4.2,"patrick.png", 6, 12);
     		        
-    		        compteurlancement++;
-    		        
-    		        StdDraw.show(120);
-    		        
+    		        StdDraw.show(50);
     		        
     		        }
     			} }     	
-        
-        
-        	
-        
-	
-
-     

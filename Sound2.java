@@ -21,6 +21,13 @@ public class Sound2 {
 			        clip.open(AudioSystem.getAudioInputStream(this.content));
 			        clip.loop(Clip.LOOP_CONTINUOUSLY);
 			    }
+			    public void PlaySound()
+			    throws Exception
+			    {
+			        Clip clip = AudioSystem.getClip();
+			        clip.open(AudioSystem.getAudioInputStream(this.content));
+			        clip.start();
+			    }
 	
 }
 

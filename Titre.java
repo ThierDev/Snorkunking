@@ -25,74 +25,87 @@ public class Titre extends Main{
 		
 		int compteurlancement = 0;
 		Boolean bool1 = false;
-		
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD, 40);
-		
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
+        Sound2 Explosion = new Sound2("explosion.wav");
         
         while(true){	
 
     		if (compteurlancement<1) {
-    			for (int i = Y_MAX; i> 20; i=i-4) { //Chute de la bouteille
+    			for (int i = Y_MAX; i> 20; i=i-5) { //Chute de la bouteille
     			
     			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg"); 
-    		    StdDraw.picture(X_MAX/2, i,"bouteille.png",30,30);
+    		    StdDraw.picture(X_MAX/2, i,"bouteille.png",50,50);
     		    
     		    	if (i<= 25) {StdDraw.picture(X_MAX/2, i,"explosion.gif");
 
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
-    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 500, 500);	
-    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 320, 240); }
+    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350, 350);	
+    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240); }
     		    	StdDraw.show(20);}
     				
-    				menuTheme.PlaySoundC(); // Logo + Musique + Explosion
-    		    	
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 500, 500);
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 320, 240);
+    				Explosion.PlaySound(); // Musique
+
+    				for (int i=0; i <=50; i = i +5) {  // Explosions + Titre
+    					
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350, 350);
+    				StdDraw.show(10); 
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240);
+    				StdDraw.show(10);
+    				StdDraw.picture(X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350, 350);
+    				StdDraw.show(10); 
+    				StdDraw.picture(X_MAX/4, Y_MAX/4,"explosion.gif", 350, 350);
+    				StdDraw.show(10); 
+    				StdDraw.picture(3*X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350, 350);
+    				StdDraw.show(10); 
+    				StdDraw.picture(3*X_MAX/4, Y_MAX/4,"explosion.gif", 350, 350);
+    				StdDraw.show(10); }
+    				menuTheme.PlaySoundC();
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240);
     				StdDraw.show(3000);
     				
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");  // Ecran titre
+    				StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380, 240);
     				StdDraw.setPenColor(StdDraw.WHITE);
     				StdDraw.setFont(FontSelctionTitre);
-    				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
-    				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
-    				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
-    				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
-    				StdDraw.show(100);
+    				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50,60,20);
+    				StdDraw.text(X_MAX/4,Y_MAX/2-52,"1 JOUEUR");
+    				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50,60,20);
+    				StdDraw.text(3*X_MAX/4,Y_MAX/2-52,"2 JOUEURS");	
+    				StdDraw.show();
     				
     				while(bool1 == false) {
-    				
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
+    					
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
-        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
-        				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
+        				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50,60,20);
+        				StdDraw.text(X_MAX/4,Y_MAX/2-52,"1 JOUEUR");
         			
         				StdDraw.setPenColor(StdDraw.WHITE);
-        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
-        				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
+        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50,60,20);
+        				StdDraw.text(3*X_MAX/4,Y_MAX/2-52,"2 JOUEURS");
         				StdDraw.show();}
     		        
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
-        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
-        				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
+        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50,60,20);
+        				StdDraw.text(3*X_MAX/4,Y_MAX/2-52,"2 JOUEURS");
         				
         				StdDraw.setPenColor(StdDraw.WHITE);
-        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
-        				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
+        				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50,60,20);
+        				StdDraw.text(X_MAX/4,Y_MAX/2-52,"1 JOUEUR");
         				StdDraw.show();}
-    		        
+    		         
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
     		        
-    		        	Niveau.Graphique();
-    		     
-    		        }
+    		        	Niveau.Graphique();} // Detection choix mode de jeu
+    		        
     			} }     	
         
         	}
