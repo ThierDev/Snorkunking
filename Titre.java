@@ -17,11 +17,9 @@ import javax.sound.sampled.Clip;
 public class Titre extends Main{
 
 	public int index;
-	public final static int X_MAX=120;
-	public final static int Y_MAX=120;
+	public final static int X_MAX=640;
+	public final static int Y_MAX=360;
 	public final static double WIDTH=0.5f;
-	
-
 	
 	public static void Launch() throws Exception {	
 		
@@ -30,18 +28,7 @@ public class Titre extends Main{
 		
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD, 40);
 		
-	    Random randomGenerator = new Random();
-	    int niveauxC1 = 0;
-	    int niveauxC2 = 0;
-	    int niveauxC3 = 0;
-	    niveauxC1 = 9+randomGenerator.nextInt(12-9);
-	    niveauxC2 = 6+randomGenerator.nextInt(9-6);
-	    niveauxC3 = 3+ randomGenerator.nextInt(6-3);
-		System.out.println(niveauxC1);
-		System.out.println(niveauxC2);
-		System.out.println(niveauxC3);
-		
-		StdDraw.setCanvasSize(720,720);
+		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
@@ -50,30 +37,31 @@ public class Titre extends Main{
         while(true){	
 
     		if (compteurlancement<1) {
-    			for (int i = Y_MAX; i> 20; i=i-2) { //Chute de la bouteille
+    			for (int i = Y_MAX; i> 20; i=i-4) { //Chute de la bouteille
     			
     			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg"); 
-    		    StdDraw.picture(X_MAX/2, i,"bouteille.png",20,20);
+    		    StdDraw.picture(X_MAX/2, i,"bouteille.png",30,30);
     		    
     		    	if (i<= 25) {StdDraw.picture(X_MAX/2, i,"explosion.gif");
-    		    	StdDraw.show(20); 
+
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
-    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 100, 100);	
-    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100); }
-    		    	StdDraw.show(30);}
+    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 500, 500);	
+    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 320, 240); }
+    		    	StdDraw.show(20);}
     				
     				menuTheme.PlaySoundC(); // Logo + Musique + Explosion
-    		        
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 120, 100);
+    		    	
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 500, 500);
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 320, 240);
     				StdDraw.show(3000);
     				
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");  // Ecran titre
     				StdDraw.setPenColor(StdDraw.WHITE);
     				StdDraw.setFont(FontSelctionTitre);
-    				StdDraw.rectangle(X_MAX/4,Y_MAX/2,20,10);
-    				StdDraw.text(X_MAX/4,Y_MAX/2,"1 JOUEUR");
-    				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,20,10);
-    				StdDraw.text(3*X_MAX/4,Y_MAX/2,"2 JOUEUR");
+    				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
+    				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
+    				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
+    				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
     				StdDraw.show(100);
     				
     				while(bool1 == false) {
@@ -81,23 +69,23 @@ public class Titre extends Main{
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
-        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,20,10);
-        				StdDraw.text(X_MAX/4,Y_MAX/2,"1 JOUEUR");
+        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
+        				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
         			
         				StdDraw.setPenColor(StdDraw.WHITE);
-        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,20,10);
-        				StdDraw.text(3*X_MAX/4,Y_MAX/2,"2 JOUEUR");
+        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
+        				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
         				StdDraw.show();}
     		        
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
-        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,20,10);
-        				StdDraw.text(3*X_MAX/4,Y_MAX/2,"2 JOUEUR");
+        				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2,55,20);
+        				StdDraw.text(3*X_MAX/4,Y_MAX/2-2,"2 JOUEUR");
         				
         				StdDraw.setPenColor(StdDraw.WHITE);
-        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,20,10);
-        				StdDraw.text(X_MAX/4,Y_MAX/2,"1 JOUEUR");
+        				StdDraw.rectangle(X_MAX/4,Y_MAX/2,55,20);
+        				StdDraw.text(X_MAX/4,Y_MAX/2-2,"1 JOUEUR");
         				StdDraw.show();}
     		        
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
@@ -111,5 +99,3 @@ public class Titre extends Main{
         }
 	
 }
-
-     

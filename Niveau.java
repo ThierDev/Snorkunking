@@ -42,7 +42,7 @@ public class Niveau extends Titre{
 		System.out.println(niveauxC2);
 		System.out.println(niveauxC3);
 		
-		StdDraw.setCanvasSize(720,720);
+		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
