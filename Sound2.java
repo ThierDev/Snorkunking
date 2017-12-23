@@ -7,27 +7,33 @@ import javax.swing.*;
 public class Sound2 {
 
 			    public File content;
+			    public Clip klip;
 			    
 			    public Sound2(String nom)
 			    throws Exception
 			    {
 			        this.content = new File(nom);
+			        this.klip = AudioSystem.getClip();
 			    }
 			    
 			    public void PlaySoundC()
 			    throws Exception
 			    {
-			        Clip clip = AudioSystem.getClip();
-			        clip.open(AudioSystem.getAudioInputStream(this.content));
-			        clip.loop(Clip.LOOP_CONTINUOUSLY);
+			        klip.open(AudioSystem.getAudioInputStream(this.content));
+			        klip.loop(Clip.LOOP_CONTINUOUSLY);
 			    }
+			    
+			    public void Stop()
+			    throws Exception
+			    {
+			        klip.close();
+			    }
+			    
 			    public void PlaySound()
 			    throws Exception
 			    {
-			        Clip clip = AudioSystem.getClip();
-			        clip.open(AudioSystem.getAudioInputStream(this.content));
-			        clip.start();
+			        klip.open(AudioSystem.getAudioInputStream(this.content));
+			        klip.start();
 			    }
-	
 }
 

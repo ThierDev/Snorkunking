@@ -47,6 +47,11 @@ public class Titre extends Main{
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350, 350);	
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240); }
     		    	StdDraw.show(20);}
+    			
+    				try {
+    					Thread.sleep(1000);   }             
+    				catch(InterruptedException ex) {
+    					Thread.currentThread().interrupt();  }
     				
     				Explosion.PlaySound(); // Musique
 
@@ -103,9 +108,8 @@ public class Titre extends Main{
         				StdDraw.show();}
     		         
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
-    		        
+    		        	menuTheme.Stop();
     		        	Niveau.Graphique();} // Detection choix mode de jeu
-    		        
     			} }     	
         
         	}
