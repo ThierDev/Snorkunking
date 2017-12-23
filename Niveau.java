@@ -25,6 +25,10 @@ public class Niveau extends Titre{
         double deltaY2=0;
         int positionJ1 = 0;
         int positionJ2 = 0;
+	    boolean bool = true;
+	    boolean boolMove1 = true;
+	    boolean boolMove2 = true;
+	    boolean boolMove3 = true;
 	    
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
@@ -61,63 +65,6 @@ public class Niveau extends Titre{
     					StdDraw.picture(X_MAX/2, 5+5*i, "coffre.png", 7, 7);
     				}
     				
-    		        //Sélection du joueur
-    		        
-    		        if (positionJ1>positionJ2) {
-    		        	
-    		        }
-    		        
-    		        if (positionJ1<positionJ2) {
-    		        	
-    		        }
-    				
-    		        if (positionJ1==positionJ2) {
-    		        	
-    		        }
-    				
-    				
-    				//Détection des entrées clavier
-    				
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {  
-    		            deltaY= deltaY+5;	//Modification graphique de la position
-    		            positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
-    		        }
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-    		            deltaY= deltaY-5;
-    		            positionJ1 = positionJ1 - 1;
-    		        }
-    		        
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-    		            deltaY= deltaY+5;
-    		        }
-    		        
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
-    		            deltaY2= deltaY2+5;
-    		            positionJ2 = positionJ2 + 1;
-    		        }
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
-    		            deltaY2= deltaY2-5;
-    		            positionJ2 = positionJ2 - 1;
-    		        }
-    				
-    		        //Blocage du déplacement en haut et en bas des niveaux
-    		        
-    		        if (deltaY<=0) deltaY = 0 ;
-    		        if (deltaY>(5*niveauxC3+5*niveauxC2+5*niveauxC1)) deltaY = 5*niveauxC3+5*niveauxC2+5*niveauxC1 ;        
-    		        
-    		        if (deltaY2<=0) deltaY2 = 0 ;
-    		        if (deltaY2>(5*niveauxC3+5*niveauxC2+5*niveauxC1)) deltaY2 = 5*niveauxC3+5*niveauxC2+5*niveauxC1 ;    
-    		        
-    		        
-    		        //Déplacement des deux joueurs
-    		        
-    				StdDraw.setPenColor(StdDraw.RED);
-    				double h1 = 5+5*niveauxC3+5*niveauxC2+5*niveauxC1;
-    				
-    				StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
-    		        StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
-    		        
-    		        StdDraw.show(50);
-    		        
-    		        }
-    			} }     	
+        }
+	}
+}     	
