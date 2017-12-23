@@ -21,20 +21,13 @@ public class Niveau extends Titre{
     
 	public static void Graphique() throws Exception {	
 		
-        double deltaY=0;
-        double deltaY2=0;
-        int positionJ1 = 0;
-        int positionJ2 = 0;
-	    boolean bool = true;
-	    boolean boolMove1 = true;
-	    boolean boolMove2 = true;
-	    boolean boolMove3 = true;
+        int oxygene = 10;  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT, uniquement utilisé comme condition
 	    
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         
-        while(true){	
+        while(true) { // Affichage global
 
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");  //Génération graphique du niveau
     				
@@ -65,6 +58,18 @@ public class Niveau extends Titre{
     					StdDraw.picture(X_MAX/2, 5+5*i, "coffre.png", 7, 7);
     				}
     				
-        }
+    				while(oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
+    					
+    					if (Plongeur.Ordre() == 1) {
+    			        	StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20, 20); // Indicateur de tour
+    					}
+    					
+    					if (Plongeur.Ordre() == 2) {
+    						StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 15, 15); // Indicateur de tour
+    					}					
+    					
+    				}
+    				
+        } // While affichage global
 	}
 }     	
