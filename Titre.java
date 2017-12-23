@@ -29,32 +29,40 @@ public class Titre extends Main{
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
-        AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
-        Sound2 Explosion = new Sound2("explosion.wav");
+        Sound2 Explosion = new Sound2("explosion2.wav");
+        
         
         while(true){	
+        	
+        	StdDraw.picture(X_MAX/2, Y_MAX/2, "Avertissement.png");
 
+        	
+        	try {
+				Thread.sleep(4000);   }             
+			catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();  }
+        	
     		if (compteurlancement<1) {
     			for (int i = Y_MAX; i> 20; i=i-5) { //Chute de la bouteille
     			
     			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg"); 
     		    StdDraw.picture(X_MAX/2, i,"bouteille.png",50,50);
     		    
-    		    	if (i<= 25) {StdDraw.picture(X_MAX/2, i,"explosion.gif");
-
+    		    	if (i<= 25) { 
+	
+    		    	StdDraw.picture(X_MAX/2, i,"explosion.gif");
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350, 350);	
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240); }
     		    	StdDraw.show(20);}
-    			
+					Explosion.PlaySound(); // Explosion son
+    				
     				try {
-    					Thread.sleep(1000);   }             
+    					Thread.sleep(800);   }             
     				catch(InterruptedException ex) {
     					Thread.currentThread().interrupt();  }
     				
-    				Explosion.PlaySound(); // Musique
-
     				for (int i=0; i <=50; i = i +5) {  // Explosions + Titre
     					
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350, 350);
@@ -69,9 +77,10 @@ public class Titre extends Main{
     				StdDraw.show(10); 
     				StdDraw.picture(3*X_MAX/4, Y_MAX/4,"explosion.gif", 350, 350);
     				StdDraw.show(10); }
+    				
     				menuTheme.PlaySoundC();
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380, 240);
-    				StdDraw.show(3000);
+    				StdDraw.show(2000);
     				
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");  // Ecran titre
     				StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380, 240);

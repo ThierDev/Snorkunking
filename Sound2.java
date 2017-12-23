@@ -16,10 +16,16 @@ public class Sound2 {
 			        this.klip = AudioSystem.getClip();
 			    }
 			    
+			    public void LoadSound()
+			    throws Exception 
+			    {
+			    	klip.open(AudioSystem.getAudioInputStream(this.content));
+			    }
+			    
 			    public void PlaySoundC()
 			    throws Exception
 			    {
-			        klip.open(AudioSystem.getAudioInputStream(this.content));
+			    	klip.open(AudioSystem.getAudioInputStream(this.content));
 			        klip.loop(Clip.LOOP_CONTINUOUSLY);
 			    }
 			    

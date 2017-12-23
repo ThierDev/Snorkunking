@@ -23,17 +23,20 @@ public class Niveau extends Titre{
 		
         double deltaY=0;
         double deltaY2=0;
+        int positionJ1 = 0;
+        int positionJ2 = 0;
 	    
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
-        AudioInputStream in = AudioSystem.getAudioInputStream(new File("GuileTheme.wav"));
-        Sound2 menuTheme = new Sound2("GuileTheme.wav");
         
         while(true){	
 
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");
-
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");  //Génération graphique du niveau
+    				
+    				StdDraw.picture(0.05*X_MAX, 0.9*Y_MAX, "bob.png", 15, 15);
+    		        StdDraw.picture(X_MAX-0.05*X_MAX, 0.9*Y_MAX, "patrick.png", 18, 18);
+    				
     				StdDraw.setPenColor(StdDraw.BLUE);
     		        StdDraw.rectangle(X_MAX/2,(5+5*niveauxC3+5*niveauxC2+5*niveauxC1),X_MAX/2-0.05*X_MAX,2.5);
     				
@@ -58,22 +61,47 @@ public class Niveau extends Titre{
     					StdDraw.picture(X_MAX/2, 5+5*i, "coffre.png", 7, 7);
     				}
     				
+    		        //Sélection du joueur
+    		        
+    		        if (positionJ1>positionJ2) {
+    		        	
+    		        }
+    		        
+    		        if (positionJ1<positionJ2) {
+    		        	
+    		        }
+    				
+    		        if (positionJ1==positionJ2) {
+    		        	
+    		        }
     				
     				
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
-    		            deltaY= deltaY+5;
+    				//Détection des entrées clavier
+    				
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {  
+    		            deltaY= deltaY+5;	//Modification graphique de la position
+    		            positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
     		        }
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
     		            deltaY= deltaY-5;
+    		            positionJ1 = positionJ1 - 1;
+    		        }
+    		        
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
+    		            deltaY= deltaY+5;
     		        }
     		        
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
     		            deltaY2= deltaY2+5;
+    		            positionJ2 = positionJ2 + 1;
     		        }
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
     		            deltaY2= deltaY2-5;
+    		            positionJ2 = positionJ2 - 1;
     		        }
     				
+    		        //Blocage du déplacement en haut et en bas des niveaux
+    		        
     		        if (deltaY<=0) deltaY = 0 ;
     		        if (deltaY>(5*niveauxC3+5*niveauxC2+5*niveauxC1)) deltaY = 5*niveauxC3+5*niveauxC2+5*niveauxC1 ;        
     		        
@@ -81,6 +109,7 @@ public class Niveau extends Titre{
     		        if (deltaY2>(5*niveauxC3+5*niveauxC2+5*niveauxC1)) deltaY2 = 5*niveauxC3+5*niveauxC2+5*niveauxC1 ;    
     		        
     		        
+    		        //Déplacement des deux joueurs
     		        
     				StdDraw.setPenColor(StdDraw.RED);
     				double h1 = 5+5*niveauxC3+5*niveauxC2+5*niveauxC1;
