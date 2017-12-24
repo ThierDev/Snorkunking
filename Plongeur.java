@@ -12,12 +12,12 @@ public class Plongeur extends Niveau{
 	        //Sélection du joueur
 	        
 	        if (positionJ1>positionJ2) { // Tour de J1 car plus profond
-	        	Plongeur.Deplacement(1);
+	        	System.out.println("J1 Ordre checked");
 	        	return 1;
 	        }
 	        
 	        if (positionJ1<positionJ2) { // Tour de J2 car plus profond
-	        	Plongeur.Deplacement(2);
+	        	System.out.println("J2 Ordre checked");
 	        	return 2;
 	        }
 			
@@ -27,31 +27,29 @@ public class Plongeur extends Niveau{
 	        	System.out.println("randTour = " + randTour);
 	        		    
 	        	if (randTour<=5) { // Tour J1    
-	        		Plongeur.Deplacement(3);    
+	        		System.out.println("J1 Ordre checked");    
 	        		return 1;
 	        	}
 	    		        	
 	        	if (randTour>5) { // Tour J2
-	        		Plongeur.Deplacement(4);    
+	        		System.out.println("J2 Ordre checked");    
 	        		return 2;
 	        	}	        		
 	        }
-	        return 0;
+	        return 0; //Pour valider la méthode, sinon elle donne une erreur
 	}
 
 	
-	public static void Deplacement(int cas) {
+	public static int Deplacement(int cas) {
 			
-	        double deltaY=0;
-	        double deltaY2=0;
 	        int positionJ1 = 0;
 	        int positionJ2 = 0;
 		    boolean bool = true;
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
-		    boolean boolMove3 = true;
-		    
-			double h1 = 5+5*niveauxC3+5*niveauxC2+5*niveauxC1;
+			
+			StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
+			StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
 			
 	        //Blocage du déplacement en haut et en bas des niveaux
 	        
@@ -61,14 +59,14 @@ public class Plongeur extends Niveau{
 	        if (deltaY2<=0) deltaY2 = 0 ;
 	        if (deltaY2>(5*niveauxC3+5*niveauxC2+5*niveauxC1)) deltaY2 = 5*niveauxC3+5*niveauxC2+5*niveauxC1 ;  
 			
-			 while(bool==true) { // Boucle de déplacement, permet de créer des tours de jeu
+			while(bool==true) { // Boucle de déplacement, permet de créer des tours de jeu
 			        
-		        	System.out.println("Move While checked");
+				System.out.println("Move While checked");
 		        
 		        //Sélection du joueur
 		        
-		        if (positionJ1>positionJ2) { // Tour de J1 car plus profond
-		        System.out.println("J1 lower checked");
+		        if (cas == 1) { // Tour de J1 car plus profond
+		        System.out.println("J1 turn checked");
 		        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
@@ -76,134 +74,64 @@ public class Plongeur extends Niveau{
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {  
 		        			System.out.println("touche BAS");
-	 		            deltaY= deltaY+5;	//Modification graphique de la position
-	 		            positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
-	 		        }
-	 		        if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-	 		        	System.out.println("touche HAUT");
-	 		            deltaY= deltaY-5;
-	 		            positionJ1 = positionJ1 - 1;
-	 		        }
+		        			deltaY= deltaY+5;	//Modification graphique de la position
+		        			positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
+		        			boolMove1 = false;
+		        		}
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
+		        			System.out.println("touche HAUT");
+		        			deltaY= deltaY-5;
+		        			positionJ1 = positionJ1 - 1;
+		        			boolMove1 = false;
+		        		}
 	 		        
-	 		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-	 		   
-	 		        }
-	 		        
-	 		        //Déplacement du joueur
-	 		      
-	 		        StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
-	 		        StdDraw.show(50);
-	 		        
-	 		        boolMove1 = false; // Sortie de la boucle de limitation de mouvement
-	 		        bool = false; // Fin du tour, on sort du while de déplacement
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
+		        			
+		        			boolMove1 = false;
 		        		}
 		        	}
+	
+		        		oxygene = oxygene - 1;
+		        		bool = false; // Fin du tour, on sort du while de déplacement
+		        		
+		        		return deltaY;
+		        }
 		        
-		        if (positionJ1<positionJ2) { // Tour de J2 car plus profond
-		        System.out.println("J2 lower checked");
+		        if (cas == 2) { // Tour de J2 car plus profond
+		        	System.out.println("J2 turn checked");
 
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		// Détection de la touche pressée
 		        		
-	 		        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
-	 		        	System.out.println("touche S");
-	 		            deltaY2= deltaY2+5;
-	 		            positionJ2 = positionJ2 + 1;
-	 		        }
-	 		        if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
-	 		        	System.out.println("touche Z");
-	 		            deltaY2= deltaY2-5;
-	 		            positionJ2 = positionJ2 - 1;
-	 		        }
-	 		        
-	 		        if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
-
-	 		        }
-	 		        
-	 		        //Déplacement du joueur
-	 		        StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
-	 		        StdDraw.show(50);
-	 		        
-	 		        boolMove2 = false; // Sortie de la boucle de limitation de mouvement
-	 		        bool = false; // Fin du tour, on sort du while de déplacement
-		        			}
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+		        			System.out.println("touche S");
+		        			deltaY2= deltaY2+5;
+		        			positionJ2 = positionJ2 + 1;
+		        			boolMove2 = false;
 		        		}
-				
-		        		if (positionJ1==positionJ2) {
-		        		System.out.println("Equal levels checked");
-		        		    int randTour = 1 + randomGenerator.nextInt(9);
-		        		    System.out.println("randTour = " + randTour);
-		        		    
-		        		    if (randTour<=5) { // Tour J1
-		        		    System.out.println("Equal levels J1 turn checked");
-
-		    		        	while(boolMove3) { // Condition pour dire qu'on ne peut faire qu'une action
-		    		        		
-		    		        		// Détection de la touche pressée
-		    		        		
-		    		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {  
-		    		        			System.out.println("touche BAS");
-		    	    		            deltaY= deltaY+5;	//Modification graphique de la position
-		    	    		            positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
-		    	    		            
-			    	    		        boolMove3 = false; // Sortie de la boucle de limitation de mouvement
-			    	    		        bool = false; // Fin du tour, on sort du while de déplacement
-		    	    		        }
-		    	    		        if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-		    	    		        	System.out.println("touche HAUT");
-		    	    		            deltaY= deltaY-5;
-		    	    		            positionJ1 = positionJ1 - 1;
-		    	    		        }
-		    	    		        
-		    	    		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-		    	    		   
-		    	    		        }
-		    	    		        
-		    		        	}
-		    	    		        //Déplacement du joueur
-		    	    		       
-		    		        	    StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
-		    	    		        StdDraw.show(50);
-
-		    		        		
-		        		    	}
-		    		        	
-		    		        	if (randTour>5) { // Tour J2
-		    		        	System.out.println("Equal levels J2 turn checked");
-
-		        		        	while(StdDraw.isKeyPressed(KeyEvent.KEY_RELEASED) == false) { // Condition pour dire qu'on ne peut faire qu'une action
-		        		        		
-		        		        		// Détection de la touche pressée
-		        		        		
-		        	    		        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
-		        	    		        	System.out.println("touche S");
-		        	    		            deltaY2= deltaY2+5;
-		        	    		            positionJ2 = positionJ2 + 1;
-		        	    		        }
-		        	    		        if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
-		        	    		        	System.out.println("touche Z");
-		        	    		            deltaY2= deltaY2-5;
-		        	    		            positionJ2 = positionJ2 - 1;
-		        	    		        }
-		        	    		        
-		        	    		        if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
-
-		        	    		        }
-		        		        	}
-		        	    		        //Déplacement du joueur
-		        		             	StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
-		        	    		        
-		        	    		        StdDraw.show(50);
-		        		        		
-		    		        	}
-		        			
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
+		        			System.out.println("touche Z");
+		        			deltaY2= deltaY2-5;
+		        			positionJ2 = positionJ2 - 1;
+		        			boolMove2 = false;
 		        		}
+	 		        
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+
+		        			boolMove2 = false;
+		        		}
+		        	}
+		        		
+		        		oxygene = oxygene - 1;
+		        		bool = false; // Fin du tour, on sort du while de déplacement
+		        		
+		        		return deltaY2;
+		        }
 				
-		 } // While de déplacement
+			} // While de déplacement
 			
-			 bool = true;
-			 
-		}
-	
+			 bool = true;		
+			 return 0; //Pour valider la méthode, sinon elle donne une erreur
+	}
 }
