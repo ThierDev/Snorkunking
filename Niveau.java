@@ -27,10 +27,10 @@ public class Niveau extends Titre{
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         
-        while(true) { // Affichage global
+        while(oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
 
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");  //Génération graphique du niveau
-    				
+    				StdDraw.show();
     				StdDraw.picture(0.05*X_MAX, 0.9*Y_MAX, "bob.png", 15, 15);
     		        StdDraw.picture(X_MAX-0.05*X_MAX, 0.9*Y_MAX, "patrick.png", 18, 18);
     				
@@ -58,17 +58,19 @@ public class Niveau extends Titre{
     					StdDraw.picture(X_MAX/2, 5+5*i, "coffre.png", 7, 7);
     				}
     				
-    				while(oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
-    					
-    					if (Plongeur.Ordre() == 1) {
-    			        	StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20, 20); // Indicateur de tour
-    					}
-    					
-    					if (Plongeur.Ordre() == 2) {
-    						StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 15, 15); // Indicateur de tour
-    					}					
-    					
+    				StdDraw.show(20);
+    				
+    				int Ordre = Plongeur.Ordre();
+    				if (Ordre == 1) {
+    			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20, 20); // Indicateur de tour
+    			        StdDraw.show(20);
     				}
+    					
+    				if (Ordre == 2) {
+    					StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 15, 15); // Indicateur de tour
+    					StdDraw.show(20);
+    				}	
+				
     				
         } // While affichage global
 	}
