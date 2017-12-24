@@ -48,9 +48,6 @@ public class Plongeur extends Niveau{
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-			StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
-			StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
-			
 	        //Blocage du déplacement en haut et en bas des niveaux
 	        
 	        if (deltaY<=0) deltaY = 0 ;

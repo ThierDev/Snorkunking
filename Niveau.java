@@ -28,13 +28,15 @@ public class Niveau extends Titre{
     
 	public static void Graphique() throws Exception {		
 	    
+		int compteur = 0;
+		
 		StdDraw.setCanvasSize(1280,720);
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         
         while(oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
 
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"water.gif");  //Génération graphique du niveau
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg");  // Je suis revenu au jpg parce que le gif était super chiant à afficher durant les boucles
     				StdDraw.picture(0.05*X_MAX, 0.9*Y_MAX, "bob.png", 15, 15);
     		        StdDraw.picture(X_MAX-0.05*X_MAX, 0.9*Y_MAX, "patrick.png", 18, 18);
     				
@@ -45,7 +47,7 @@ public class Niveau extends Titre{
     		        
     		        for (int i = 0; i < niveauxC1; i++) {
     					StdDraw.rectangle(X_MAX/2,(5+5*niveauxC3+5*niveauxC2+5*i),X_MAX/2-0.05*X_MAX,2.5);
-    					StdDraw.picture(X_MAX/2, 5*niveauxC3+5*niveauxC2+5*i, "coffre.png", 7, 7);
+    					StdDraw.picture(X_MAX/2, 5+5*niveauxC3+5*niveauxC2+5*i, "coffre.png", 7, 7);
     		        }
     		        
     		        StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);
@@ -63,15 +65,19 @@ public class Niveau extends Titre{
     				}
     				
     				StdDraw.show(50);
+
+    				StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
+    				StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
     				
     				int Ordre = Plongeur.Ordre();  // On récupère l'info de qui va jouer
     				if (Ordre == 1) { // J1 va jouer
-    			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20, 20); // Indicateur de tour
+    			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 17, 17); // Indicateur de tour
     			        StdDraw.show();
     			        System.out.println("Return Ordre vers Niveau J1 checked");
     			        deltaY = Plongeur.Deplacement(1); // Appelle la méthode de déplacement pour le J1
-		        		StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
-		        		StdDraw.show();
+    	        		StdDraw.picture(X_MAX-0.12*X_MAX, h1-deltaY+4.2,"patrick.png", 12, 12);
+    	        		StdDraw.show();
+    	        		
     				}
     					
     				if (Ordre == 2) { // J2 va jouer
@@ -79,14 +85,17 @@ public class Niveau extends Titre{
     					StdDraw.show();
     					System.out.println("Return Ordre vers Niveau J2 checked");
     					deltaY2 = Plongeur.Deplacement(2); // Appelle la méthode de déplacement pour le J2
-		        		StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
-		        		StdDraw.show();
-    				}	
-
+    	        		StdDraw.picture(0.12*X_MAX, h1-deltaY2+4.5,"bob.png", 10, 10);
+    	        		StdDraw.show();
+    	        		
+    				}
+    				
     				System.out.println("Oxygène restant : " + oxygene);
+    				System.out.println("");
+    				System.out.println("------------------------------------");
+    				System.out.println("");
     				
         } // While affichage global
-        
 		System.exit(0); // BETA - Fin de programme actuelle pour éviter des boucles indésirables
 	}
 }     	
