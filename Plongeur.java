@@ -1,13 +1,15 @@
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Plongeur extends Niveau{
 
+    public static int positionJ1 = 0;
+    public static int positionJ2 = 0;
+	
 	public static int Ordre() {
-		
-        int positionJ1 = 0;
-        int positionJ2 = 0;
 	        
 	        //Sélection du joueur
 	        
@@ -42,8 +44,6 @@ public class Plongeur extends Niveau{
 	
 	public static int Deplacement(int cas) {
 			
-	        int positionJ1 = 0;
-	        int positionJ2 = 0;
 		    boolean bool = true;
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
@@ -69,26 +69,29 @@ public class Plongeur extends Niveau{
 		        		
 		        		// Détection de la touche pressée
 		        		
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {  
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) { 
+		        			Plongeur.Stop(); // Stop pour éviter de compter deux fois le mouvement
+		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
 		        			deltaY= deltaY+5;	//Modification graphique de la position
 		        			positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
-		        			boolMove1 = false;
+		        			System.out.println("Position J1 : " + positionJ1);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
+		        			Plongeur.Stop();
+		        			boolMove1 = false;
 		        			System.out.println("touche HAUT");
 		        			deltaY= deltaY-5;
 		        			positionJ1 = positionJ1 - 1;
-		        			boolMove1 = false;
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-		        			
+		        			Plongeur.Stop();
 		        			boolMove1 = false;
 		        		}
 		        	}
 	
-		        		oxygene = oxygene - 1;
+		        		Oxygene = Oxygene - 1;
 		        		bool = false; // Fin du tour, on sort du while de déplacement
 		        		
 		        		return deltaY;
@@ -102,25 +105,28 @@ public class Plongeur extends Niveau{
 		        		// Détection de la touche pressée
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+		        			Plongeur.Stop();
+		        			boolMove2 = false;
 		        			System.out.println("touche S");
 		        			deltaY2= deltaY2+5;
 		        			positionJ2 = positionJ2 + 1;
-		        			boolMove2 = false;
+		        			System.out.println("Position J2 : " + positionJ2);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
+		        			Plongeur.Stop();
+		        			boolMove2 = false;
 		        			System.out.println("touche Z");
 		        			deltaY2= deltaY2-5;
 		        			positionJ2 = positionJ2 - 1;
-		        			boolMove2 = false;
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
-
+		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        		}
 		        	}
 		        		
-		        		oxygene = oxygene - 1;
+		        		Oxygene = Oxygene - 1;
 		        		bool = false; // Fin du tour, on sort du while de déplacement
 		        		
 		        		return deltaY2;
@@ -131,4 +137,25 @@ public class Plongeur extends Niveau{
 			 bool = true;		
 			 return 0; //Pour valider la méthode, sinon elle donne une erreur
 	}
+	
+	public static List<String> SysOxygene() { //Permet l'affichage de l'ogygène dans la console pour les tests
+		
+		List<String> OxygeneDisp = new ArrayList<String>();
+		
+		OxygeneDisp.add("Oxygène restant : " + Oxygene);
+		OxygeneDisp.add("");
+		OxygeneDisp.add("------------------------------------");
+		OxygeneDisp.add("");
+		return OxygeneDisp;
+	}
+	
+	public static void Stop() {
+		
+		try {
+			Thread.sleep(50);   }             
+		catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();  }
+		
+	}
+	
 }

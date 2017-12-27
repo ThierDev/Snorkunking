@@ -118,7 +118,7 @@ public class Titre extends Main{
     		         
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
     		        	menuTheme.Stop();
-    		        	Niveau.Graphique();} // Detection choix mode de jeu
+    		        	Niveau.DispDeplacement();} // Detection choix mode de jeu
     			} }     	
         
         	}
