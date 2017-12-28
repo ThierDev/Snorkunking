@@ -1,18 +1,6 @@
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
-import java.io.*;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioInputStream.*;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.util.Scanner;
-import java.io.*;
-import javax.sound.sampled.AudioInputStream.*;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class Titre extends Main{
 
@@ -22,11 +10,12 @@ public class Titre extends Main{
 	
 	
 	public int index;
-	public static int X_MAX=(int)(640*SW);
-	public static int Y_MAX=(int)(360*SH);
+	public static int X_MAX=(int)(1280*SW);
+	public static int Y_MAX=(int)(720*SH);
 	public static double WIDTH=0.5f;
 	
 	public static void Launch() throws Exception {	
+		
 		System.out.println(SW);
 		int compteurlancement = 0;
 		Boolean bool1 = false;
@@ -37,7 +26,6 @@ public class Titre extends Main{
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
         Sound2 Explosion = new Sound2("explosion2.wav");
         Sound2 pop = new Sound2("pop.wav");
-        
         
         while(true){	
         	
