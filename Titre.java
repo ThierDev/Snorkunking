@@ -16,15 +16,15 @@ import javax.sound.sampled.Clip;
 
 public class Titre extends Main{
 
-	
-	static double SW = Scaling.scalingFactor()[0];
-	static double SH = Scaling.scalingFactor()[1];
+	static Scaling scaling =new Scaling();
+	public static double SW = scaling.scalingFactor()[0];
+	public static double SH = scaling.scalingFactor()[1];
 	
 	
 	public int index;
-	public final static int X_MAX=(int)(640*SW);
-	public final static int Y_MAX=(int)(360*SH);
-	public final static double WIDTH=0.5f;
+	public static int X_MAX=(int)(640*SW);
+	public static int Y_MAX=(int)(360*SH);
+	public static double WIDTH=0.5f;
 	
 	public static void Launch() throws Exception {	
 		System.out.println(SW);

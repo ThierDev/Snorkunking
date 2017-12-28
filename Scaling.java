@@ -1,5 +1,6 @@
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.List;
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -10,10 +11,10 @@ public class Scaling{
 	public final static int Y_MAX=9;
 	public final static float WIDTH=0.5f;*/
 
-	public static void main(String[]args) throws Exception{
+	public void main(String[]args) throws Exception{
 		
 		
-	
+	printList(scalingFactor());
 
 		
 		/*StdDraw.setCanvasSize((int) ,(int) scalingFactorHeight*720/2);
@@ -34,7 +35,7 @@ public class Scaling{
 		} */
 
 	}
-	public static int[] screenResolution() {
+	public int[] screenResolution() {
 		// Classe qui récupère les infos de l'ordi
 		//import java.awt.GraphicsDevice;
 		//import java.awt.GraphicsEnvironment;
@@ -43,11 +44,12 @@ public class Scaling{
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		wh[0] = gd.getDisplayMode().getWidth(); // width resolution 
 		wh[1] = gd.getDisplayMode().getHeight();//length resolution
+		System.out.println(wh[0]);
 		
 		return wh;
 				
 	}
-	public static String aspectRatio(int w,int h) {
+	public String aspectRatio(int w,int h) {
 		
 		
 		if (w/h == 16/9) {
@@ -66,7 +68,7 @@ public class Scaling{
 		
 		
 	}
-	public static double[] scalingFactor(){
+	public double[] scalingFactor(){
 		
 		int width=screenResolution()[0];
 		int height = screenResolution()[1];
@@ -79,7 +81,7 @@ public class Scaling{
 			scalingWH[0] = ((double) width/1280); // la moitié de la résolution 
 			scalingWH[1] = ((double) height/720);
 			
-			
+			System.out.println(scalingWH[0]);
 			return scalingWH;
 			
 		}
@@ -91,4 +93,13 @@ public class Scaling{
 		
 		
 	}
+
+public static void printList(double[] list) {
+	for (int d=0; d<list.length;d++) {
+		if (d==list.length) {
+			System.out.println(list[d]);
+		}
+		System.out.println(list[d]);
+	}
+}
 }
