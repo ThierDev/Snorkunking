@@ -16,9 +16,9 @@ import javax.sound.sampled.Clip;
 
 public class Titre extends Main{
 
-	
-	public static double SW = Scaling.scalingFactor()[0];
-	public static double SH = Scaling.scalingFactor()[1];
+	static Scaling scaling =new Scaling();
+	public static double SW = scaling.scalingFactor()[0];
+	public static double SH = scaling.scalingFactor()[1];
 	
 	
 	public int index;

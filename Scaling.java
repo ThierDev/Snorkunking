@@ -11,10 +11,10 @@ public class Scaling{
 	public final static int Y_MAX=9;
 	public final static float WIDTH=0.5f;*/
 
-	public static void main(String[]args) throws Exception{
+	public void main(String[]args) throws Exception{
 		
 		
-	
+	printList(scalingFactor());
 
 		
 		/*StdDraw.setCanvasSize((int) ,(int) scalingFactorHeight*720/2);
@@ -35,7 +35,7 @@ public class Scaling{
 		} */
 
 	}
-	public static int[] screenResolution() {
+	public int[] screenResolution() {
 		// Classe qui récupère les infos de l'ordi
 		//import java.awt.GraphicsDevice;
 		//import java.awt.GraphicsEnvironment;
@@ -49,7 +49,7 @@ public class Scaling{
 		return wh;
 				
 	}
-	public static String aspectRatio(int w,int h) {
+	public String aspectRatio(int w,int h) {
 		
 		
 		if (w/h == 16/9) {
@@ -68,7 +68,7 @@ public class Scaling{
 		
 		
 	}
-	public static double[] scalingFactor(){
+	public double[] scalingFactor(){
 		
 		int width=screenResolution()[0];
 		int height = screenResolution()[1];
