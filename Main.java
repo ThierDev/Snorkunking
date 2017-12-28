@@ -1,5 +1,5 @@
 
-public class Main {
+public class Main extends Scaling{
 
 	public static void main(String[] args) 
 		throws Exception {
