@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -8,4 +9,10 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="C:/Users/thier/Documents/GitHub/SnorkUnking/stdlib-package.jar"/>
 	<classpathentry kind="output" path=""/>
+=======
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Documents/GitHub/SnorkUnking/StdLib_L&amp;L_Mod.jar"/>
+	<classpathentry kind="output" path="bin"/>
+>>>>>>> parent of 1d6d9db... error
 </classpath>
