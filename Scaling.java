@@ -13,7 +13,7 @@ public class Scaling{
 	public static void main(String[]args) throws Exception{
 		
 		
-	scalingFactor();
+	
 
 		
 		/*StdDraw.setCanvasSize((int) ,(int) scalingFactorHeight*720/2);
@@ -76,8 +76,8 @@ public class Scaling{
 		if(aspectRatio(width,height).equals("16x9")) {
 			
 			// The game original resolution is 1280/720 (we decided this) we will scale for other resolution accordingly.
-			scalingWH[0] = ((double) width/1280)/2; // la moitié de la résolution 
-			scalingWH[1] = ((double) height/720)/2;
+			scalingWH[0] = ((double) width/1280); // la moitié de la résolution 
+			scalingWH[1] = ((double) height/720);
 			
 			
 			return scalingWH;

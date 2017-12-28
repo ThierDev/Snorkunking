@@ -20,6 +20,7 @@ public class Titre extends Main{
 	static double SW = Scaling.scalingFactor()[0];
 	static double SH = Scaling.scalingFactor()[1];
 	
+	
 	public int index;
 	public final static int X_MAX=(int)(640*SW);
 	public final static int Y_MAX=(int)(360*SH);
@@ -35,6 +36,7 @@ public class Titre extends Main{
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
         Sound2 Explosion = new Sound2("explosion2.wav");
+        Sound2 pop = new Sound2("pop.wav");
         
         
         while(true){	
@@ -99,6 +101,8 @@ public class Titre extends Main{
     				while(bool1 == false) {
     					
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
+    		        	
+    		        	
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
         				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
@@ -107,9 +111,12 @@ public class Titre extends Main{
         				StdDraw.setPenColor(StdDraw.WHITE);
         				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
         				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"2 JOUEURS");
-        				StdDraw.show();}
+        				StdDraw.show();
+        				}
     		        
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
+    		        	
+    		        	
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
         				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
@@ -118,7 +125,8 @@ public class Titre extends Main{
         				StdDraw.setPenColor(StdDraw.WHITE);
         				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
         				StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"1 JOUEUR");
-        				StdDraw.show();}
+        				StdDraw.show();
+        				}
     		         
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
     		        	menuTheme.Stop();
