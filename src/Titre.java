@@ -10,8 +10,8 @@ public class Titre extends Main{
 	
 	
 	public int index;
-	public static int X_MAX=(int)(1280*SW);
-	public static int Y_MAX=(int)(720*SH);
+	public static int X_MAX=(int)(640*SW);
+	public static int Y_MAX=(int)(360*SH);
 	public static double WIDTH=0.5f;
 	
 	public static void Launch() throws Exception {	
@@ -38,18 +38,19 @@ public class Titre extends Main{
 				Thread.currentThread().interrupt();  }
         	
     		if (compteurlancement<1) {
-    			for (int i = Y_MAX; i> 20; i=(int) (i-5)) { //Chute de la bouteille
+    			for (int i = Y_MAX; i> 20; i=(int) (i-5*SH)) { //Chute de la bouteille
     			
     			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH); 
     		    StdDraw.picture(X_MAX/2, i,"bouteille.png",50*SW,50*SH);
     		    
     		    	if (i<= (int)(25*SW)) { 
-	
-    		    	StdDraw.picture(X_MAX/2, i,"explosion.gif");
+
+        		    StdDraw.picture(X_MAX/2, i,"explode.gif");
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);
-    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350*SW, 350*SH);	
+    		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"explode.gif", 350*SW, 350*SH);	
     		    	StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH); }
-    		    	StdDraw.show((int)(20/SH));}
+    		    	StdDraw.show(20);}
+    			
 					Explosion.PlaySound(); // Explosion son
     				
     				try {
@@ -59,17 +60,17 @@ public class Titre extends Main{
     				
     				for (int i=0; i <50; i = (int)(i +5)) {  // Explosions + Titre
     					
-    				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350*SW, 350*SH);
+    				StdDraw.picture(X_MAX/2, Y_MAX/2,"explode.gif", 350*SW, 350*SH);
     				StdDraw.show(10/(int)(SH)); 
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
     				StdDraw.show(10/(int)(SH));
-    				StdDraw.picture(X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
+    				StdDraw.picture(X_MAX/4, 3*Y_MAX/4,"explode.gif", 350*SW, 350*SH);
     				StdDraw.show(10/(int)(SH)); 
-    				StdDraw.picture(X_MAX/4, Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
+    				StdDraw.picture(X_MAX/4, Y_MAX/4,"explode.gif", 350*SW, 350*SH);
     				StdDraw.show(10/(int)(SH)); 
-    				StdDraw.picture(3*X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
+    				StdDraw.picture(3*X_MAX/4, 3*Y_MAX/4,"explode.gif", 350*SW, 350*SH);
     				StdDraw.show(10/(int)(SH)); 
-    				StdDraw.picture(3*X_MAX/4, Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
+    				StdDraw.picture(3*X_MAX/4, Y_MAX/4,"explode.gif", 350*SW, 350*SH);
     				StdDraw.show(10/(int)(SH)); }
     				
     				menuTheme.PlaySoundC();
