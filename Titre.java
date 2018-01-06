@@ -15,11 +15,13 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Titre extends Main{
-
 	
+	
+	public boolean activScaling=true;
 	public static double SW = Scaling.scalingFactor()[0];
 	public static double SH = Scaling.scalingFactor()[1];
 	
+
 	
 	public int index;
 	public static int X_MAX=(int)(640*SW);
