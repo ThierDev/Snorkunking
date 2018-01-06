@@ -24,8 +24,8 @@ public class Titre extends Main{
 
 	
 	public int index;
-	public static int X_MAX=(int)(640*SW);
-	public static int Y_MAX=(int)(360*SH);
+	public static int X_MAX=(int)(1280*SW);
+	public static int Y_MAX=(int)(720*SH);
 	public static double WIDTH=0.5f;
 	
 	public static void Launch() throws Exception {	

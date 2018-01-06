@@ -1,6 +1,7 @@
 import java.awt.Font;
 import java.util.List;
 import java.util.Random;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Niveau extends Titre{
