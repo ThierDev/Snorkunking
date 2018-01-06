@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/thier/Documents/GitHub/SnorkUnking-Mk2/stdlib-package.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thier/Documents/GitHub/SnorkUnking/stdlib-package.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
