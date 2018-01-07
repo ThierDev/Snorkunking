@@ -23,7 +23,7 @@ public class NiveauC extends Main{
     }
     public double positionYCenterNiveau(){
 
-        return (NiveauHeight + position*NiveauHeight);
+        return (NiveauHeight +((totalNiveau-position)*NiveauHeight));
     }
     public void drawNiveau(){
         setPenColors(ColorArg);

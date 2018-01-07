@@ -15,6 +15,8 @@ public class Coffre{
         else if(NiveauType == 2){this.Tresor = 5 +randomGenerator.nextInt(8-5); }
         else if(NiveauType==3){this.Tresor = 10 + randomGenerator.nextInt(12-10);}
     }
+
+    
 		
 	
 }
