@@ -51,10 +51,10 @@ public class Plongeur extends Niveau{
 	        //Blocage du déplacement en haut et en bas des niveaux
 	        
 	        if (deltaY<=0) deltaY = 0 ;
-	        if (deltaY>(15*niveauxC3+15*niveauxC2+15*niveauxC1)) deltaY = 15*niveauxC3+15*niveauxC2+15*niveauxC1 ;        
+	        if (deltaY>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;        
 	        
 	        if (deltaY2<=0) deltaY2 = 0 ;
-	        if (deltaY2>(15*niveauxC3+15*niveauxC2+15*niveauxC1)) deltaY2 = 15*niveauxC3+15*niveauxC2+15*niveauxC1 ;  
+	        if (deltaY2>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY2 = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;  
 			
 			while(bool==true) { // Boucle de déplacement, permet de créer des tours de jeu
 			        
@@ -73,7 +73,7 @@ public class Plongeur extends Niveau{
 		        			Plongeur.Stop(); // Stop pour éviter de compter deux fois le mouvement
 		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
-		        			deltaY= deltaY+15;	//Modification graphique de la position
+		        			deltaY= deltaY+13;	//Modification graphique de la position
 		        			positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
 		        			System.out.println("Position J1 : " + positionJ1);
 		        		}
@@ -81,7 +81,7 @@ public class Plongeur extends Niveau{
 		        			Plongeur.Stop();
 		        			boolMove1 = false;
 		        			System.out.println("touche HAUT");
-		        			deltaY= deltaY-15;
+		        			deltaY= deltaY-13;
 		        			positionJ1 = positionJ1 - 1;
 		        		}
 	 		        
@@ -108,7 +108,7 @@ public class Plongeur extends Niveau{
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche S");
-		        			deltaY2= deltaY2+15;
+		        			deltaY2= deltaY2+13;
 		        			positionJ2 = positionJ2 + 1;
 		        			System.out.println("Position J2 : " + positionJ2);
 		        		}
@@ -116,7 +116,7 @@ public class Plongeur extends Niveau{
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche Z");
-		        			deltaY2= deltaY2-15;
+		        			deltaY2= deltaY2-13;
 		        			positionJ2 = positionJ2 - 1;
 		        		}
 	 		        

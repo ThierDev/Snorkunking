@@ -15,27 +15,15 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Titre extends Main{
-	
-	
-	public boolean activScaling=true;
-	public static double SW = Scaling.scalingFactor()[0];
-	public static double SH = Scaling.scalingFactor()[1];
-	
-
-	
+		
 	public int index;
-	public static int X_MAX=(int)(640*SW);
-	public static int Y_MAX=(int)(360*SH);
-	public static double WIDTH=0.5f;
+	
 	
 	public static void Launch() throws Exception {	
 		System.out.println(SW);
 		int compteurlancement = 0;
 		Boolean bool1 = false;
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
-		StdDraw.setCanvasSize((int)(1280*SW),(int)(720*SH));
-		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
-		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
         Sound2 Explosion = new Sound2("explosion2.wav");
         Sound2 pop = new Sound2("pop.wav");
@@ -132,7 +120,9 @@ public class Titre extends Main{
     		         
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
     		        	menuTheme.Stop();
-    		        	Niveau.DispDeplacement();} // Detection choix mode de jeu
+    		        	
+    		        	//Niveau.DispDeplacement();
+    		        	} // Detection choix mode de jeu
     			} }     	
         
         	}
