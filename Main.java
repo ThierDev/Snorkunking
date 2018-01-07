@@ -19,6 +19,6 @@ public class Main extends Scaling{
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
 		//Titre.Launch();
-		Partie.BackgroundGraphics();
+		Niveau.DispDeplacement();
 	}
 }
