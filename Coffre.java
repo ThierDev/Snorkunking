@@ -1,6 +1,7 @@
+import edu.princeton.cs.introcs.StdDraw;
 import java.util.Random;
 
-public class Coffre{
+public class Coffre {
 
     //public int NiveauType;
     public int Tresor;
@@ -16,7 +17,14 @@ public class Coffre{
         else if(NiveauType==3){this.Tresor = 10 + randomGenerator.nextInt(12-10);}
     }
 
-    
+    public void showCoffre(double a, double b, double c, double d){
+
+       StdDraw.picture(a,b, "coffre.png",c ,d); 
+
+    }
+    public int getTresor(){
+        return Tresor;
+    }
 		
 	
 }

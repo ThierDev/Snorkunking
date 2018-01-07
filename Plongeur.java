@@ -42,13 +42,13 @@ public class Plongeur extends Partie{
 	}
 
 	
-	public static int Deplacement(int cas) {
+	public static double Deplacement(int cas) {
 			
 		    boolean bool = true;
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-	        //Blocage du d�placement en haut et en bas des niveaux
+	        //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
 	        
 	        if (deltaY<=0) deltaY = 0 ;
 	        if (deltaY>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;        
@@ -73,7 +73,7 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop(); // Stop pour �viter de compter deux fois le mouvement
 		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
-		        			deltaY= deltaY+13;	//Modification graphique de la position
+		        			deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
 		        			positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
 		        			System.out.println("Position J1 : " + positionJ1);
 		        		}
@@ -81,7 +81,7 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop();
 		        			boolMove1 = false;
 		        			System.out.println("touche HAUT");
-		        			deltaY= deltaY-13;
+		        			deltaY=(deltaY-hauteurNiveau*SH);
 		        			positionJ1 = positionJ1 - 1;
 		        		}
 	 		        
@@ -108,7 +108,7 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche S");
-		        			deltaY2= deltaY2+13;
+		        			deltaY2= (deltaY2+hauteurNiveau*SH);
 		        			positionJ2 = positionJ2 + 1;
 		        			System.out.println("Position J2 : " + positionJ2);
 		        		}
@@ -116,7 +116,7 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche Z");
-		        			deltaY2= deltaY2-13;
+		        			deltaY2= (deltaY2-hauteurNiveau*SHs);
 		        			positionJ2 = positionJ2 - 1;
 		        		}
 	 		        
