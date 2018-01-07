@@ -4,14 +4,14 @@ import java.util.List;
 
 import edu.princeton.cs.introcs.StdDraw;
 
-public class Plongeur extends Niveau{
+public class Plongeur extends Partie{
 
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
 	
 	public static int Ordre() {
 	        
-	        //Sélection du joueur
+	        //Sï¿½lection du joueur
 	        
 	        if (positionJ1>positionJ2) { // Tour de J1 car plus profond
 	        	System.out.println("J1 Ordre checked");
@@ -38,7 +38,7 @@ public class Plongeur extends Niveau{
 	        		return 2;
 	        	}	        		
 	        }
-	        return 0; //Pour valider la méthode, sinon elle donne une erreur
+	        return 0; //Pour valider la mï¿½thode, sinon elle donne une erreur
 	}
 
 	
@@ -48,7 +48,7 @@ public class Plongeur extends Niveau{
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-	        //Blocage du déplacement en haut et en bas des niveaux
+	        //Blocage du dï¿½placement en haut et en bas des niveaux
 	        
 	        if (deltaY<=0) deltaY = 0 ;
 	        if (deltaY>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;        
@@ -56,21 +56,21 @@ public class Plongeur extends Niveau{
 	        if (deltaY2<=0) deltaY2 = 0 ;
 	        if (deltaY2>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY2 = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;  
 			
-			while(bool==true) { // Boucle de déplacement, permet de créer des tours de jeu
+			while(bool==true) { // Boucle de dï¿½placement, permet de crï¿½er des tours de jeu
 			        
 				System.out.println("Move While checked");
 		        
-		        //Sélection du joueur
+		        //Sï¿½lection du joueur
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
 		        System.out.println("J1 turn checked");
 		        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
-		        		// Détection de la touche pressée
+		        		// Dï¿½tection de la touche pressï¿½e
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) { 
-		        			Plongeur.Stop(); // Stop pour éviter de compter deux fois le mouvement
+		        			Plongeur.Stop(); // Stop pour ï¿½viter de compter deux fois le mouvement
 		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
 		        			deltaY= deltaY+13;	//Modification graphique de la position
@@ -92,7 +92,7 @@ public class Plongeur extends Niveau{
 		        	}
 	
 		        		Oxygene = Oxygene - 1;
-		        		bool = false; // Fin du tour, on sort du while de déplacement
+		        		bool = false; // Fin du tour, on sort du while de dï¿½placement
 		        		
 		        		return deltaY;
 		        }
@@ -102,7 +102,7 @@ public class Plongeur extends Niveau{
 
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
-		        		// Détection de la touche pressée
+		        		// Dï¿½tection de la touche pressï¿½e
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 		        			Plongeur.Stop();
@@ -127,22 +127,22 @@ public class Plongeur extends Niveau{
 		        	}
 		        		
 		        		Oxygene = Oxygene - 1;
-		        		bool = false; // Fin du tour, on sort du while de déplacement
+		        		bool = false; // Fin du tour, on sort du while de dï¿½placement
 		        		
 		        		return deltaY2;
 		        }
 				
-			} // While de déplacement
+			} // While de dï¿½placement
 			
 			 bool = true;		
-			 return 0; //Pour valider la méthode, sinon elle donne une erreur
+			 return 0; //Pour valider la mï¿½thode, sinon elle donne une erreur
 	}
 	
-	public static List<String> SysOxygene() { //Permet l'affichage de l'ogygène dans la console pour les tests
+	public static List<String> SysOxygene() { //Permet l'affichage de l'ogygï¿½ne dans la console pour les tests
 		
 		List<String> OxygeneDisp = new ArrayList<String>();
 		
-		OxygeneDisp.add("Oxygène restant : " + Oxygene);
+		OxygeneDisp.add("Oxygï¿½ne restant : " + Oxygene);
 		OxygeneDisp.add("");
 		OxygeneDisp.add("------------------------------------");
 		OxygeneDisp.add("");
