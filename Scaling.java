@@ -50,8 +50,8 @@ public class Scaling{
 		if(aspectRatio(width,height).equals("16x9")) {
 			
 			// The game original resolution is 1280/720 (we decided this) we will scale for other resolution accordingly.
-			scalingWH[0] = (((double) width/1280)/1); // la moitié de la résolution 
-			scalingWH[1] = (((double) height/720)/1.1);
+			scalingWH[0] = 1;//(((double) width/1280)/1); // la moitié de la résolution 
+			scalingWH[1] = 1;//(((double) height/720)/1.1);
 			
 			System.out.println(scalingWH[0]);
 			return scalingWH;
