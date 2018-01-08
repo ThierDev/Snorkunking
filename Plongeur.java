@@ -116,7 +116,7 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche Z");
-		        			deltaY2= (deltaY2-hauteurNiveau*SHs);
+		        			deltaY2= (deltaY2-hauteurNiveau*SH);
 		        			positionJ2 = positionJ2 - 1;
 		        		}
 	 		        

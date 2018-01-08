@@ -20,7 +20,7 @@ public class NiveauC extends Main{
         }
         this.position = position;
         this.totalNiveau=totalNiveau;
-        this.NiveauHeight = 220/totalNiveau;
+        this.NiveauHeight = 280/totalNiveau;
         coffreN = new Coffre(typeNiveau);
         
         
