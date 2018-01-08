@@ -51,7 +51,7 @@ public class Scaling{
 			
 			// The game original resolution is 1280/720 (we decided this) we will scale for other resolution accordingly.
 			scalingWH[0] = (((double) width/1280)/1); // la moitié de la résolution 
-			scalingWH[1] = (((double) height/720)/1.2);
+			scalingWH[1] = (((double) height/720)/1.1);
 			
 			System.out.println(scalingWH[0]);
 			return scalingWH;

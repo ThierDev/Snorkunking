@@ -120,9 +120,10 @@ public class Plongeur extends Partie{
 		        			positionJ2 = positionJ2 - 1;
 		        		}
 	 		        
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
+		        			
 		        		}
 		        	}
 		        		
@@ -142,7 +143,7 @@ public class Plongeur extends Partie{
 		
 		List<String> OxygeneDisp = new ArrayList<String>();
 		
-		OxygeneDisp.add("Oxyg�ne restant : " + Oxygene);
+		OxygeneDisp.add("Oxygene restant : " + Oxygene);
 		OxygeneDisp.add("");
 		OxygeneDisp.add("------------------------------------");
 		OxygeneDisp.add("");

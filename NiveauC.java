@@ -6,9 +6,11 @@ public class NiveauC extends Main{
     public int totalNiveau;
     public double NiveauHeight;
     public Coffre coffreN;
-     
-
+    
     public NiveauC(int typeNiveau,int position,int totalNiveau){ 
+        if (typeNiveau==0){
+            this.ColorArg = "Princeton Orange";
+        }
         if (typeNiveau==1){
             this.ColorArg = "Green";
         }
@@ -23,9 +25,9 @@ public class NiveauC extends Main{
         this.NiveauHeight = 280/totalNiveau;
         coffreN = new Coffre(typeNiveau);
         
+        }
         
-        
-    }
+    
     public double positionYCenterNiveau(){
 
         return (2*NiveauHeight +((totalNiveau-position)*NiveauHeight));
@@ -36,8 +38,10 @@ public class NiveauC extends Main{
         StdDraw.rectangle(X_MAX/2,Y*SH,X_MAX/2-0.1*X_MAX,NiveauHeight*SH);
         coffreN.showCoffre(X_MAX/2,(Y-NiveauHeight/2)*SH,10*SW,NiveauHeight*SH);
     }
+    
     public void setPenColors(String argString){
-        if(argString.equals("Red")){StdDraw.setPenColor(StdDraw.RED);}
+        if(argString.equals("Princeton Orange")){StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);}
+        else if(argString.equals("Red")){StdDraw.setPenColor(StdDraw.RED);}
         else if(argString.equals("Blue")){StdDraw.setPenColor(StdDraw.BLUE);}
         else if(argString.equals("Yellow")){StdDraw.setPenColor(StdDraw.YELLOW);}
         else if(argString.equals("Green")){StdDraw.setPenColor(StdDraw.GREEN);}
