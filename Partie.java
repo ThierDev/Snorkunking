@@ -23,6 +23,10 @@ public class Partie extends Main{
 	public int index;  
     public static double deltaY = 0;
     public static double deltaY2 = 0;
+
+    public static int keyPressed = 0;
+    public static int J1Coffre = 0;
+    public static int J2Coffre = 0;
     
 	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1) + 0.1;
 	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1);
@@ -68,12 +72,12 @@ public class Partie extends Main{
     		        StdDraw.setPenColor(StdDraw.RED);
     		        StdDraw.text(0.05*X_MAX, 0.78*Y_MAX, "Score");
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
-    				
+    		        
 					//createNiveau();			 
 					 for (int i=0;i<totNiveau123;i++){
 						 nList.get(i).drawNiveau();
 						}
-
+					 
         }
      				
      				
@@ -95,7 +99,7 @@ public class Partie extends Main{
     				
     				// Affichage des personnages avant les premiers deplacements
     				
-    				deplacementPerso();
+    				actionPerso();
     				
     				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
     				if (Ordre == 1) { // J1 va jouer en premier
@@ -111,11 +115,13 @@ public class Partie extends Main{
     			        
     			        // Affichage des joueurs aprï¿½s deplacement de J1 
     			        
-    			        deplacementPerso();
+    			        actionPerso();
 
     			        // Mise a jour de la barre d'oxygene	
     	        		
     			        Partie.DispOxygene();	
+    			        
+    			        Partie.DispCoffreLateral();
     	        		
     	        		StdDraw.show();
     	        		
@@ -130,10 +136,12 @@ public class Partie extends Main{
     			        
     			        BackgroundGraphics();
     			        
-    			        deplacementPerso();
+    			        actionPerso();
 
     			        Partie.DispOxygene();
     	        		
+    			        Partie.DispCoffreLateral();
+    			        
     	        		StdDraw.show();
     	        		
     	        		printList(Plongeur.SysOxygene()); 	        		
@@ -146,13 +154,15 @@ public class Partie extends Main{
     	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
     			        System.out.println("Return Ordre vers Niveau J2 checked");
-    			        deltaY2 = Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
+    			        deltaY2 = Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
 
     			        BackgroundGraphics();
     			        
-    			        deplacementPerso();
+    			        actionPerso();
 
     			        Partie.DispOxygene();
+    			        
+    			        Partie.DispCoffreLateral();
     	        		
     	        		StdDraw.show();
     	        		
@@ -163,14 +173,16 @@ public class Partie extends Main{
     			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
     			        System.out.println("Return Ordre vers Niveau J1 checked");
-    			        deltaY = Plongeur.Deplacement(1); // Appelle la mï¿½thode de dï¿½placement pour le J1
+    			        deltaY = Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
     			        
     			        BackgroundGraphics();
     			        
-    			        deplacementPerso();
+    			        actionPerso();
 
     			        Partie.DispOxygene();
-    	        		
+
+    			        Partie.DispCoffreLateral();
+    			        
     	        		StdDraw.show();
     	        		
     	        		printList(Plongeur.SysOxygene());
@@ -180,7 +192,7 @@ public class Partie extends Main{
         } // While affichage global
 		System.exit(0); // BETA - Fin de programme actuelle pour ï¿½viter des boucles indï¿½sirables
 	}
-	public static void deplacementPerso(){
+	public static void actionPerso(){
 		StdDraw.picture(X_MAX-0.25*X_MAX, h1-deltaY+hauteurNiveau,"patrick.png", 12*SW, 12*SH);
     	StdDraw.picture(0.25*X_MAX, h1-deltaY2+hauteurNiveau,"bob.png", 12*SW, 12*SH);
 	}
@@ -196,6 +208,13 @@ public class Partie extends Main{
 			StdDraw.text(X_MAX/2, 0.945*Y_MAX, PourcentageOxy + " %");
 			System.out.println("Pourcentage : " + PourcentageOxy);
 		
+	}
+	
+	public static void DispCoffreLateral() {
+		 // Affichage latéral des coffres
+        
+        for (int i = 0; i < J1Coffre; i++) { StdDraw.picture(0.95*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
+        for (int i = 0; i < J2Coffre; i++) { StdDraw.picture(0.05*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
 	}
 	
 	public static void printList(List<String> list) {

@@ -26,7 +26,8 @@ public class NiveauC extends Main{
         this.position = position;
         this.totalNiveau=totalNiveau;
         this.NiveauHeight = 280/totalNiveau;
-        coffreN = new Coffre(typeNiveau);
+    	int xCoffre = 70 + randomGenerator.nextInt(504-1);
+        coffreN = new Coffre(typeNiveau, xCoffre);
         
         }
         
@@ -36,11 +37,10 @@ public class NiveauC extends Main{
         return (2*NiveauHeight +((totalNiveau-position)*NiveauHeight));
     }
     public void drawNiveau(){
-    	int X_Coffre = 64 + randomGenerator.nextInt(508-1);
         setPenColors(ColorArg);
         double Y=positionYCenterNiveau();
         StdDraw.rectangle(X_MAX/2,Y*SH,0.4*X_MAX,NiveauHeight*SH);
-        coffreN.showCoffre(X_Coffre,(Y-NiveauHeight/2)*SH,10*SW,NiveauHeight*SH);
+        coffreN.showCoffre(coffreN.xCoffre,(Y-NiveauHeight/2)*SH,11*SW,NiveauHeight*SH);
     }
     
     public void setPenColors(String argString){

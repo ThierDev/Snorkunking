@@ -8,10 +8,10 @@ public class Plongeur extends Partie{
 
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
-	
+    
 	public static int Ordre() {
 	        
-	        //S�lection du joueur
+	        // Selection du joueur
 	        
 	        if (positionJ1>positionJ2) { // Tour de J1 car plus profond
 	        	System.out.println("J1 Ordre checked");
@@ -38,7 +38,7 @@ public class Plongeur extends Partie{
 	        		return 2;
 	        	}	        		
 	        }
-	        return 0; //Pour valider la m�thode, sinon elle donne une erreur
+	        return 0; //Pour valider la methode, sinon elle donne une erreur
 	}
 
 	
@@ -56,21 +56,21 @@ public class Plongeur extends Partie{
 	        if (deltaY2<=0) deltaY2 = 0 ;
 	        if (deltaY2>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY2 = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;  
 			
-			while(bool==true) { // Boucle de d�placement, permet de cr�er des tours de jeu
+			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeu
 			        
 				System.out.println("Move While checked");
 		        
-		        //S�lection du joueur
+		        //Selection du joueur
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
 		        System.out.println("J1 turn checked");
 		        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
-		        		// D�tection de la touche press�e
+		        		// Detection de la touche pressee
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) { 
-		        			Plongeur.Stop(); // Stop pour �viter de compter deux fois le mouvement
+		        			Plongeur.Stop(); // Stop pour eviter de compter deux fois le mouvement
 		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
 		        			deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
@@ -88,6 +88,8 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
 		        			Plongeur.Stop();
 		        			boolMove1 = false;
+		        			keyPressed = 1;
+		        			J1Coffre = J1Coffre + 1;
 		        		}
 		        	}
 	
@@ -102,7 +104,7 @@ public class Plongeur extends Partie{
 
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
-		        		// D�tection de la touche press�e
+		        		// Detection de la touche pressee
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 		        			Plongeur.Stop();
@@ -123,7 +125,8 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
 		        			Plongeur.Stop();
 		        			boolMove2 = false;
-		        			
+		        			keyPressed = 2;
+		        			J2Coffre = J2Coffre + 1;
 		        		}
 		        	}
 		        		
@@ -133,10 +136,10 @@ public class Plongeur extends Partie{
 		        		return deltaY2;
 		        }
 				
-			} // While de d�placement
+			} // While de deplacement
 			
 			 bool = true;		
-			 return 0; //Pour valider la m�thode, sinon elle donne une erreur
+			 return 0; //Pour valider la methode, sinon elle donne une erreur
 	}
 	
 	public static List<String> SysOxygene() { //Permet l'affichage de l'ogyg�ne dans la console pour les tests
