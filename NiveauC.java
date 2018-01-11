@@ -9,10 +9,17 @@ public class NiveauC extends Main{
     public double NiveauHeight;
     public Coffre coffreN;
     Random randomGenerator = new Random();
+    public boolean[] presenceJoueur1 = {false};
+    public boolean[] presenceJoueur2 = {false};
+    
+// par convention presenceJoueur[0] = true si bob;  false si patrick/ presenceJoeur[1]=true or false dépendant si le joueur est effectivement présent
+    
     
     public NiveauC(int typeNiveau,int position,int totalNiveau){ 
         if (typeNiveau==0){
             this.ColorArg = "Princeton Orange";
+            presenceJoueur1[0]=true;
+            presenceJoueur2[0]=true;
         }
         if (typeNiveau==1){
             this.ColorArg = "Green";
@@ -41,6 +48,18 @@ public class NiveauC extends Main{
         double Y=positionYCenterNiveau();
         StdDraw.rectangle(X_MAX/2,Y*SH,0.4*X_MAX,NiveauHeight*SH);
         coffreN.showCoffre(coffreN.xCoffre,(Y-NiveauHeight/2)*SH,11*SW,NiveauHeight*SH);
+        drawJoueur();
+    }
+    
+    public void drawJoueur() {
+    	double Y=positionYCenterNiveau() + NiveauHeight/2;
+    	
+    	if (presenceJoueur2[0]==true) {
+    		StdDraw.picture(0.25*X_MAX,Y*SH ,"bob.png", 12*SW, 12*SH);
+    	}
+    	else if (presenceJoueur1[0]==true) {
+    	StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", 12*SW, 12*SH);}
+    	
     }
     
     public void setPenColors(String argString){

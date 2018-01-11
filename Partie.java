@@ -14,10 +14,11 @@ public class Partie extends Main{
 	public static int niveauxC2 = 6 + randomGenerator.nextInt(9-6);
 	public static int niveauxC3 = 3+ randomGenerator.nextInt(6-3);
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
-	public static double hauteurNiveau = 250/totNiveau123;
+	public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
 	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
     
+	
 	public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
 	
 	public int index;  
@@ -99,7 +100,7 @@ public class Partie extends Main{
     				
     				// Affichage des personnages avant les premiers deplacements
     				
-    				actionPerso();
+    				//actionPerso();
     				
     				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
     				if (Ordre == 1) { // J1 va jouer en premier
@@ -115,7 +116,7 @@ public class Partie extends Main{
     			        
     			        // Affichage des joueurs aprï¿½s deplacement de J1 
     			        
-    			        actionPerso();
+    			        //actionPerso();
 
     			        // Mise a jour de la barre d'oxygene	
     	        		
@@ -136,7 +137,7 @@ public class Partie extends Main{
     			        
     			        BackgroundGraphics();
     			        
-    			        actionPerso();
+    			        //actionPerso();
 
     			        Partie.DispOxygene();
     	        		
@@ -158,7 +159,7 @@ public class Partie extends Main{
 
     			        BackgroundGraphics();
     			        
-    			        actionPerso();
+    			        //actionPerso();
 
     			        Partie.DispOxygene();
     			        
@@ -177,7 +178,7 @@ public class Partie extends Main{
     			        
     			        BackgroundGraphics();
     			        
-    			        actionPerso();
+    			        //actionPerso();
 
     			        Partie.DispOxygene();
 
@@ -213,8 +214,8 @@ public class Partie extends Main{
 	public static void DispCoffreLateral() {
 		 // Affichage latéral des coffres
         
-        for (int i = 0; i < J1Coffre; i++) { StdDraw.picture(0.95*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
-        for (int i = 0; i < J2Coffre; i++) { StdDraw.picture(0.05*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
+        for (int i = 0; i < J1Coffre; i=i+10) { StdDraw.picture(0.95*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
+        for (int i = 0; i < J2Coffre; i=i+10) { StdDraw.picture(0.05*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
 	}
 	
 	public static void printList(List<String> list) {

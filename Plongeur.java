@@ -9,6 +9,7 @@ public class Plongeur extends Partie{
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
     
+    
 	public static int Ordre() {
 	        
 	        // Selection du joueur
@@ -48,13 +49,7 @@ public class Plongeur extends Partie{
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-	        //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
-	        
-	        if (deltaY<=0) deltaY = 0 ;
-	        if (deltaY>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;        
-	        
-	        if (deltaY2<=0) deltaY2 = 0 ;
-	        if (deltaY2>(13*niveauxC3+13*niveauxC2+13*niveauxC1)) deltaY2 = 13*niveauxC3+13*niveauxC2+13*niveauxC1 ;  
+	         
 			
 			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeu
 			        
@@ -74,15 +69,29 @@ public class Plongeur extends Partie{
 		        			boolMove1 = false;
 		        			System.out.println("touche BAS");
 		        			deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
-		        			positionJ1 = positionJ1 + 1;	//Modification fonctionnelle de la position
+		        			nList.get(positionJ1).presenceJoueur1[0] = false;
+		        			
+		        			positionJ1 = positionJ1 + 1;
+		        			noBorderEscape();
+		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			
+		        			//presenceJoueur[1]=true;
+		        				//Modification fonctionnelle de la position
 		        			System.out.println("Position J1 : " + positionJ1);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
 		        			Plongeur.Stop();
 		        			boolMove1 = false;
 		        			System.out.println("touche HAUT");
+		        			nList.get(positionJ1).presenceJoueur1[0] = false;
+		        			
 		        			deltaY=(deltaY-hauteurNiveau*SH);
 		        			positionJ1 = positionJ1 - 1;
+		        			noBorderEscape(); 
+		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
@@ -111,7 +120,11 @@ public class Plongeur extends Partie{
 		        			boolMove2 = false;
 		        			System.out.println("touche S");
 		        			deltaY2= (deltaY2+hauteurNiveau*SH);
+		        			nList.get(positionJ2).presenceJoueur2[0] = false;
 		        			positionJ2 = positionJ2 + 1;
+		        			noBorderEscape();
+		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			System.out.println("Position J2 : " + positionJ2);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
@@ -119,7 +132,11 @@ public class Plongeur extends Partie{
 		        			boolMove2 = false;
 		        			System.out.println("touche Z");
 		        			deltaY2= (deltaY2-hauteurNiveau*SH);
+		        			nList.get(positionJ2).presenceJoueur2[0] = false;
 		        			positionJ2 = positionJ2 - 1;
+		        			noBorderEscape();
+		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
@@ -160,6 +177,15 @@ public class Plongeur extends Partie{
 		catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();  }
 		
+	}
+	public static void noBorderEscape() {
+		 //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
+        
+        if (positionJ1<=0) positionJ1 = 0 ;
+        if (positionJ1>(niveauxC3+niveauxC2+niveauxC1)) positionJ1 = niveauxC3+niveauxC2+niveauxC1 ;        
+        
+        if (positionJ2<=0) positionJ2 = 0 ;
+        if (positionJ2>(niveauxC3+niveauxC2+niveauxC1)) positionJ2 = niveauxC3+niveauxC2+niveauxC1 ;
 	}
 	
 }
