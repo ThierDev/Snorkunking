@@ -57,7 +57,7 @@ public class NiveauC extends Main{
     	if (presenceJoueur2[0]==true) {
     		StdDraw.picture(0.25*X_MAX,Y*SH ,"bob.png", 12*SW, 12*SH);
     	}
-    	else if (presenceJoueur1[0]==true) {
+    	if (presenceJoueur1[0]==true) {
     	StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", 12*SW, 12*SH);}
     	
     }
@@ -73,5 +73,9 @@ public class NiveauC extends Main{
     
     public int getTresor(){
         return coffreN.getTresor();
+    }
+    
+    public void changeStatus(int joueur) {
+    	coffreN.takeCoffre(joueur);
     }
 }

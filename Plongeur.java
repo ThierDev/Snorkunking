@@ -15,27 +15,27 @@ public class Plongeur extends Partie{
 	        // Selection du joueur
 	        
 	        if (positionJ1>positionJ2) { // Tour de J1 car plus profond
-	        	System.out.println("J1 Ordre checked");
+	        	//System.out.println("J1 Ordre checked");
 	        	return 1;
 	        }
 	        
 	        if (positionJ1<positionJ2) { // Tour de J2 car plus profond
-	        	System.out.println("J2 Ordre checked");
+	        	//.out.println("J2 Ordre checked");
 	        	return 2;
 	        }
 			
 	        if (positionJ1==positionJ2) {
-	        	System.out.println("Equal levels checked");
+	        	//System.out.println("Equal levels checked");
 	        	int randTour = 1 + randomGenerator.nextInt(9);
-	        	System.out.println("randTour = " + randTour);
+	        	//System.out.println("randTour = " + randTour);
 	        		    
 	        	if (randTour<=5) { // Tour J1    
-	        		System.out.println("J1 Ordre checked");    
+	        		//System.out.println("J1 Ordre checked");    
 	        		return 1;
 	        	}
 	    		        	
 	        	if (randTour>5) { // Tour J2
-	        		System.out.println("J2 Ordre checked");    
+	        		//System.out.println("J2 Ordre checked");    
 	        		return 2;
 	        	}	        		
 	        }
@@ -51,16 +51,13 @@ public class Plongeur extends Partie{
 			
 	         
 			
-			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeu
-			        
-				System.out.println("Move While checked");
-		        
-		        //Selection du joueur
+			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeux
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
 		        System.out.println("J1 turn checked");
 		        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
+		        		
 		        		
 		        		// Detection de la touche pressee
 		        		
@@ -81,7 +78,7 @@ public class Plongeur extends Partie{
 		        			System.out.println("Position J1 : " + positionJ1);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-		        			Plongeur.Stop();
+		        			Stop();
 		        			boolMove1 = false;
 		        			System.out.println("touche HAUT");
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
@@ -95,10 +92,10 @@ public class Plongeur extends Partie{
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-		        			Plongeur.Stop();
+		        			Stop();
 		        			boolMove1 = false;
-		        			keyPressed = 1;
 		        			J1Coffre = J1Coffre + 1;
+		        			nList.get(positionJ1-1).changeStatus(1);
 		        		}
 		        	}
 	
@@ -110,13 +107,14 @@ public class Plongeur extends Partie{
 		        
 		        if (cas == 2) { // Tour de J2 car plus profond
 		        	System.out.println("J2 turn checked");
-
+		        	
+		        	
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		// Detection de la touche pressee
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
-		        			Plongeur.Stop();
+		        			Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche S");
 		        			deltaY2= (deltaY2+hauteurNiveau*SH);
@@ -125,10 +123,10 @@ public class Plongeur extends Partie{
 		        			noBorderEscape();
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
-		        			System.out.println("Position J2 : " + positionJ2);
+		        			//System.out.println("Position J2 : " + positionJ2);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
-		        			Plongeur.Stop();
+		        			Stop();
 		        			boolMove2 = false;
 		        			System.out.println("touche Z");
 		        			deltaY2= (deltaY2-hauteurNiveau*SH);
@@ -140,10 +138,11 @@ public class Plongeur extends Partie{
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
-		        			Plongeur.Stop();
+		        			Stop();
 		        			boolMove2 = false;
-		        			keyPressed = 2;
 		        			J2Coffre = J2Coffre + 1;
+		        			nList.get(positionJ2-1).changeStatus(2);
+		        			
 		        		}
 		        	}
 		        		
@@ -173,7 +172,7 @@ public class Plongeur extends Partie{
 	public static void Stop() {
 		
 		try {
-			Thread.sleep(50);   }             
+			Thread.sleep(200);   }             
 		catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();  }
 		
@@ -182,10 +181,10 @@ public class Plongeur extends Partie{
 		 //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
         
         if (positionJ1<=0) positionJ1 = 0 ;
-        if (positionJ1>(niveauxC3+niveauxC2+niveauxC1)) positionJ1 = niveauxC3+niveauxC2+niveauxC1 ;        
+        if (positionJ1>(niveauxC3+niveauxC2+niveauxC1)) positionJ1 = niveauxC3+niveauxC2+niveauxC1 +1;        
         
         if (positionJ2<=0) positionJ2 = 0 ;
-        if (positionJ2>(niveauxC3+niveauxC2+niveauxC1)) positionJ2 = niveauxC3+niveauxC2+niveauxC1 ;
+        if (positionJ2>(niveauxC3+niveauxC2+niveauxC1)) positionJ2 = niveauxC3+niveauxC2+niveauxC1 +1 ;
 	}
 	
 }

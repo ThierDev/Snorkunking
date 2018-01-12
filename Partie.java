@@ -16,7 +16,7 @@ public class Partie extends Main{
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
 	public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
-	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
+	public static int Oxygene = 3*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
     
 	
 	public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
@@ -25,7 +25,7 @@ public class Partie extends Main{
     public static double deltaY = 0;
     public static double deltaY2 = 0;
 
-    public static int keyPressed = 0;
+    
     public static int J1Coffre = 0;
     public static int J2Coffre = 0;
     
@@ -36,19 +36,14 @@ public class Partie extends Main{
 	public static void createNiveau(){	
 		
 		nList.add(new NiveauC(0,0,totNiveau123));
-		System.out.println("here " +0);
-		
 		for (int i = 1; i < niveauxC1 + 1; i++) {
 			nList.add(new NiveauC(1,i,totNiveau123));
-			System.out.println("here " +i);
 		}
-		for (int i=niveauxC1 + 2;i<=niveauxC1+niveauxC2 + 1;i++){
+		for (int i=niveauxC1 + 1;i<=niveauxC1+niveauxC2+1;i++){
 			nList.add(new NiveauC(2,i,totNiveau123));
-			System.out.println("here2 "+i);
 		}
 		for (int i=niveauxC2+niveauxC1 + 2;i<=niveauxC1+niveauxC2+niveauxC3 + 1;i++){
 			nList.add(new NiveauC(3,i,totNiveau123));
-			System.out.println("here3 " +i);
 		}
 
 	}
@@ -59,7 +54,6 @@ public class Partie extends Main{
 					Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
 					Font FontPourcent = new Font("Arial", Font.PLAIN, (int)(20*SW));
 							
-    				  // Je suis revenu au jpg parce que le gif �tait super chiant a afficher durant les boucles
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);
     				
     				// Indicateurs dans les coins pour dire qui va jouer
