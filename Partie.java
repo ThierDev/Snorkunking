@@ -36,15 +36,18 @@ public class Partie extends Main{
 	public static void createNiveau(){	
 		
 		nList.add(new NiveauC(0,0,totNiveau123));
-		for (int i = 1; i < niveauxC1 + 1; i++) {
+		for (int i = 1; i <= niveauxC1; i++) {
 			nList.add(new NiveauC(1,i,totNiveau123));
 		}
-		for (int i=niveauxC1 + 1;i<=niveauxC1+niveauxC2+1;i++){
+		for (int i=niveauxC1 + 1;i<=niveauxC1+niveauxC2;i++){
 			nList.add(new NiveauC(2,i,totNiveau123));
 		}
-		for (int i=niveauxC2+niveauxC1 + 2;i<=niveauxC1+niveauxC2+niveauxC3 + 1;i++){
+		for (int i=niveauxC2+niveauxC1+1;i<=niveauxC1+niveauxC2+niveauxC3;i++){
 			nList.add(new NiveauC(3,i,totNiveau123));
 		}
+		System.out.println("totalniveau "+ totNiveau123);
+
+		System.out.println("nlisttaille "+nList.size());
 
 	}
    
@@ -69,7 +72,7 @@ public class Partie extends Main{
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
     		        
 					//createNiveau();			 
-					 for (int i=0;i<totNiveau123;i++){
+					 for (int i=0;i<totNiveau123-1;i++){
 						 nList.get(i).drawNiveau();
 						}
 					 

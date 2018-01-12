@@ -16,7 +16,7 @@ public class Scaling{
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		wh[0] = gd.getDisplayMode().getWidth(); // width resolution 
 		wh[1] = gd.getDisplayMode().getHeight();//length resolution
-		System.out.println(wh[0]);
+		//System.out.println(wh[0]);
 		
 		return wh;
 				
@@ -53,7 +53,7 @@ public class Scaling{
 			scalingWH[0] = 1;//(((double) width/1280)/1); // la moitié de la résolution 
 			scalingWH[1] = 1;//(((double) height/720)/1.1);
 			
-			System.out.println(scalingWH[0]);
+			//System.out.println(scalingWH[0]);
 			return scalingWH;
 			
 		}

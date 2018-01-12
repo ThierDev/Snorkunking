@@ -91,11 +91,11 @@ public class Plongeur extends Partie{
 		        			
 		        		}
 	 		        
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && nList.get(positionJ1).coffreN.presence){
 		        			Stop();
 		        			boolMove1 = false;
 		        			J1Coffre = J1Coffre + 1;
-		        			nList.get(positionJ1-1).changeStatus(1);
+		        			nList.get(positionJ1).changeStatus(1);
 		        		}
 		        	}
 	
@@ -132,16 +132,17 @@ public class Plongeur extends Partie{
 		        			deltaY2= (deltaY2-hauteurNiveau*SH);
 		        			nList.get(positionJ2).presenceJoueur2[0] = false;
 		        			positionJ2 = positionJ2 - 1;
+		        			System.out.println("position j1" + positionJ2);
 		        			noBorderEscape();
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        		}
 	 		        
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).coffreN.presence ) {
 		        			Stop();
 		        			boolMove2 = false;
 		        			J2Coffre = J2Coffre + 1;
-		        			nList.get(positionJ2-1).changeStatus(2);
+		        			nList.get(positionJ2).changeStatus(2);
 		        			
 		        		}
 		        	}
@@ -181,10 +182,18 @@ public class Plongeur extends Partie{
 		 //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
         
         if (positionJ1<=0) positionJ1 = 0 ;
-        if (positionJ1>(niveauxC3+niveauxC2+niveauxC1)) positionJ1 = niveauxC3+niveauxC2+niveauxC1 +1;        
+        if (positionJ1>=(totNiveau123)) {
+        	System.out.println("i'm here j1");
+        	positionJ1 -= 1;
+        	
+        }
         
         if (positionJ2<=0) positionJ2 = 0 ;
-        if (positionJ2>(niveauxC3+niveauxC2+niveauxC1)) positionJ2 = niveauxC3+niveauxC2+niveauxC1 +1 ;
+        if (positionJ2>=(totNiveau123)) {
+        	System.out.println("i'm here j2");
+        	positionJ2 -= 1 ;
+        	
+        }
 	}
 	
 }

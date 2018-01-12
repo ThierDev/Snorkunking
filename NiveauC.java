@@ -40,8 +40,9 @@ public class NiveauC extends Main{
         
     
     public double positionYCenterNiveau(){
-
-        return (2*NiveauHeight +((totalNiveau-position)*NiveauHeight));
+    	
+        return (NiveauHeight +((totalNiveau+1-position)*NiveauHeight));
+        
     }
     public void drawNiveau(){
         setPenColors(ColorArg);
@@ -52,9 +53,11 @@ public class NiveauC extends Main{
     }
     
     public void drawJoueur() {
-    	double Y=positionYCenterNiveau() + NiveauHeight/2;
+    	double Y=positionYCenterNiveau() - NiveauHeight/2;
+    	
     	
     	if (presenceJoueur2[0]==true) {
+    		System.out.println("Je suis en position "+position);
     		StdDraw.picture(0.25*X_MAX,Y*SH ,"bob.png", 12*SW, 12*SH);
     	}
     	if (presenceJoueur1[0]==true) {
