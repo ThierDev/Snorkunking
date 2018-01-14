@@ -13,6 +13,7 @@ public class Coffre {
     
         //this.NiveauType = NiveauType;
         Random randomGenerator = new Random();
+        this.presence =true;
         if(NiveauType==0) {this.presence = false;}
         if (NiveauType == 1){this.Tresor = 1+ randomGenerator.nextInt(3-1);}
         else if(NiveauType == 2){this.Tresor = 5 +randomGenerator.nextInt(8-5); }
@@ -20,9 +21,9 @@ public class Coffre {
     	this.xCoffre = xCoffre;
     }
 
-    public void showCoffre(double a, double b, double c, double d){
+    public void showCoffre(double b, double c, double d){
     	if (presence == true ){
-       StdDraw.picture(a,b, "coffre.png",c ,d); 
+       StdDraw.picture(xCoffre,b, "coffre.png",c ,d); 
     	} 
     }
     

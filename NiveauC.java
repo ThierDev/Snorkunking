@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ public class NiveauC extends Main{
     public int totalNiveau;
     public double NiveauHeight;
     public Coffre coffreN;
-    public List<Coffre> coffreList;
+    public List<Coffre> coffreList = new ArrayList<Coffre>(); // cette liste ne contient que 1 element hors dernier niveau
     public int typeNiveau;
     Random randomGenerator = new Random();
     public boolean[] presenceJoueur1 = {false};
@@ -19,7 +20,7 @@ public class NiveauC extends Main{
     
     
     public NiveauC(int typeNiveau,int position,int totalNiveau){ 
-        if (typeNiveau==0 && position==0){
+        if (typeNiveau==0){
             this.ColorArg = "Princeton Orange";
             this.presenceJoueur1[0]=true;
             this.presenceJoueur2[0]=true;
@@ -43,9 +44,14 @@ public class NiveauC extends Main{
         this.totalNiveau=totalNiveau;
         this.NiveauHeight = 280/totalNiveau;
         
+     // 
+      	int xCoffre = 70 + randomGenerator.nextInt(504-1); 
+      	coffreList.add(new Coffre(typeNiveau,xCoffre));
         
-        int xCoffre = 70 + randomGenerator.nextInt(504-1);
-        coffreN = new Coffre(typeNiveau, xCoffre);
+        
+        
+        
+        
         
         
         
@@ -54,7 +60,7 @@ public class NiveauC extends Main{
     
     public double positionYCenterNiveau(){
     	
-        return (2*NiveauHeight +((totalNiveau-position)*NiveauHeight));
+        return (NiveauHeight +((totalNiveau-position)*NiveauHeight));
         
     }
     public void drawNiveau(){
@@ -62,7 +68,8 @@ public class NiveauC extends Main{
         setPenColors(ColorArg);
         double Y=positionYCenterNiveau();
         drawJoueur();
-        coffreN.showCoffre(coffreN.xCoffre,(Y)*SH,11*SW,NiveauHeight*SH);
+        drawCoffre();
+        
         
         StdDraw.rectangle(X_MAX/2,Y*SH,0.4*X_MAX,NiveauHeight/2*SH);
         
@@ -83,6 +90,16 @@ public class NiveauC extends Main{
 		
     	
     }
+    public void drawCoffre() {
+    	double Y=positionYCenterNiveau();
+    	// on distingue systématiquement le dernier niveau qui peut contenir plusieurs coffres
+    	
+    	for (int i=0;i<coffreList.size();i++) {
+    			coffreList.get(i).showCoffre((Y)*SH,11*SW,NiveauHeight*SH);
+    		}
+    	}
+    	
+    
     
     public void setPenColors(String argString){
         if(argString.equals("Princeton Orange")){StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);}
@@ -93,11 +110,21 @@ public class NiveauC extends Main{
         else {StdDraw.setPenColor();}
     }
     
-    public int getTresor(){
-        return coffreN.getTresor();
+    public int getTresor(int status){
+        	int tempTresor = 0;
+    		for (int i=0;i<coffreList.size();i++) {
+    			if (coffreList.get(i).status == status) {tempTresor += coffreList.get(i).getTresor();}	
+    		}
+    		return tempTresor;
     }
-    
     public void changeStatus(int joueur) {
-    	coffreN.takeCoffre(joueur);
+    	
+    	for (int i=0;i<coffreList.size();i++) {
+			coffreList.get(i).takeCoffre(joueur); 	
+		}
+    }
+    public boolean checkPresenceCoffre() {
+    	
+    	return coffreList.get(0).presence;
     }
 }

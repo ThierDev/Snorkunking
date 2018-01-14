@@ -1,4 +1,5 @@
 import java.awt.Font;
+import java.util.Random;
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -11,6 +12,11 @@ public class Main extends Scaling{
 	public static int Y_MAX=(int)(360*SH);
 	public static double WIDTH=0.5f;
 	
+	static Random randomGenerator = new Random();
+	public static int niveauxC1 = 9 + randomGenerator.nextInt(12-9);
+	public static int niveauxC2 = 6 + randomGenerator.nextInt(9-6);
+	public static int niveauxC3 = 3+ randomGenerator.nextInt(6-3);
+	
 	public static void main(String[] args) 
 		throws Exception {
 		
@@ -19,6 +25,8 @@ public class Main extends Scaling{
 		StdDraw.setXscale(-WIDTH,X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH,Y_MAX+WIDTH);
 		//Titre.Launch();
+		
+		Partie.createNiveau();
 		Partie.DispDeplacement();
 		
 	}

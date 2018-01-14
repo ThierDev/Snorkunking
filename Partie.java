@@ -9,21 +9,17 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Partie extends Main{
 	
-	static Random randomGenerator = new Random();
-	public static int niveauxC1 = 9 + randomGenerator.nextInt(12-9);
-	public static int niveauxC2 = 6 + randomGenerator.nextInt(9-6);
-	public static int niveauxC3 = 3+ randomGenerator.nextInt(6-3);
+	
+	
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
 	//public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
-	public static int Oxygene = 3*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
+	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
     
 	
-	//public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
+	 //public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
 	
-	public int index;  
-    public static double deltaY = 0;
-    public static double deltaY2 = 0;
+ 
 
     public static int J1Score=0;
     public static int J2Score=0;
@@ -75,10 +71,14 @@ public class Partie extends Main{
     		        StdDraw.text(0.05*X_MAX, 0.78*Y_MAX, "Score");
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
     		        
+    		        StdDraw.setPenColor(StdDraw.WHITE);
+    		        StdDraw.filledRectangle(X_MAX/2, 0.90*Y_MAX,25*SW, 7*SH);
+    		        StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);
+    				StdDraw.text(X_MAX/2, 0.895*Y_MAX, "Round" + (nbPartie+1));
     		        
     		        
 					//createNiveau();			 
-					 for (int i=totNiveau123-1;i>=0;i--){
+					 for (int i=0;i<nList.size();i++){
 						 nList.get(i).drawNiveau();
 						}
 					 
@@ -87,169 +87,96 @@ public class Partie extends Main{
      				
      public static void DispDeplacement() {
     	 
-		 
-		 
-		 createNiveau();
-		 
-    	 BackgroundGraphics();
-    	 sumScore();
     	 
-    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
-     				
-     				// Affichage barre d'oxygene
-     				
-     				Partie.DispOxygene();
-    				
-    				StdDraw.show(50);
-    				
-    				// Affichage des personnages avant les premiers deplacements
-    				
-    				//actionPerso();
-    				
-    				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
-    				if (Ordre == 1) { // J1 va jouer en premier
-    					
-    					// Tour J1
-    					StdDraw.setPenColor(StdDraw.RED);
-    			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
-    			        StdDraw.show();
-    			        
-    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
-    			        
-    			        BackgroundGraphics(); // Efface l'image pour le fond de base mais pas les joueurs
-    			        
-    			      
-
-    			        // Mise a jour de la barre d'oxygene	
-    	        		
-    			        Partie.DispOxygene();	
-    			        Partie.DispCoffreLateral();
-    			        sumScore();
-
-
-    	        		
-    	        		StdDraw.show();
-    	        		
-    	        		//printList(Plongeur.SysOxygene());
-    	        		
-    	        		// Tour J2
-    	        		
-    	        		StdDraw.setPenColor(StdDraw.RED);
-    	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
-    			        StdDraw.show();
-    			        
-    			        Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
-    			        
-    			        BackgroundGraphics();
-    			        
-    			        //actionPerso();
-
-    			        Partie.DispOxygene();
-    			        Partie.DispCoffreLateral();
-    			        sumScore();
-    	        		
-    			      
-    			        
-    	        		StdDraw.show();
-    	        		
-    	        		//printList(Plongeur.SysOxygene()); 	        		
-    				}
-    					
-    				if (Ordre == 2) { // J2 va jouer en premier
-    	        		
-    	        		// Tour J2
-    					StdDraw.setPenColor(StdDraw.RED);
-    	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
-    			        StdDraw.show();
-    			        
-    			        Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
-
-    			        BackgroundGraphics();
-    			        
-    			        //actionPerso();
-
-    			        Partie.DispOxygene();
-    			        Partie.DispCoffreLateral();
-    			        sumScore();
-    			        
-    			      
-    	        		
-    	        		StdDraw.show();
-    	        		
-    	        		//printList(Plongeur.SysOxygene());
-    	        		
-    	        		// Tour J1
-    	        		StdDraw.setPenColor(StdDraw.RED);
-    			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
-    			        StdDraw.show();
-    			        
-    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
-    			        
-    			        BackgroundGraphics();
-    			        
-    			        //actionPerso();
-
-    			        Partie.DispOxygene();
-    			        Partie.DispCoffreLateral();
-    			        sumScore();
-
-    			  
-    			        
-    	        		StdDraw.show();
-    	        		
-    	        		//printList(Plongeur.SysOxygene());
-    	        		
-    				} 
-    				
-        } //while affichage global 
+    	 while(nbPartie<3) {
+    		 Oxygene = 2*(nList.size()-1);
+    		 BackgroundGraphics();
+    		 
+        	 sumScore();
     	 
-    nextPartie();
+	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
+	     				
+	     				// Affichage barre d'oxygene
+	     				
+	     				Plongeur.DispOxygene();
+	    				
+	    				StdDraw.show(50);
+	    				
+	    				// Affichage des personnages avant les premiers deplacements
+	    				
+	    				//actionPerso();
+	    				
+	    				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
+	    				if (Ordre == 1) { // J1 va jouer en premier
+	    					
+	    					// Tour J1
+ 			        
+	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1		        
+	    					sumScore();   	        		
+	    	        		StdDraw.show();
+
+	    	        		 //Tour J2	        
+	    			        Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
+	    			        sumScore();  
+	    	        		StdDraw.show();
+	    	        		
+	    	        		//printList(Plongeur.SysOxygene()); 	        		
+	    				}
+	    					
+	    				if (Ordre == 2) { // J2 va jouer en premier
+	    	        		
+	    	        		// Tour J2
+	    					
+	    			        
+	    			        Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
+	    			        
+	    			        	    			        
+	    			        sumScore();
+	    			        
+	    			      
+	    	        		
+	    	        		StdDraw.show();
+	    	        		
+	    	        		
+	    	        		// Tour J1
+	    	        		
+	    			        
+	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
+	    			     
+	    			        
+	    			        sumScore();
+	  			  
+	    			        
+	    	        		StdDraw.show(); 
+	    	        		
+	    	        		//printList(Plongeur.SysOxygene());
+	    	        		
+	    				} 
+    				
+	    	 } //while affichage oxygène
+	    	 System.out.println("je suis ici");
+	    	 nextPartie();
+    	 
+    	 }
 	}
 
 	
-	public static void DispOxygene() {
-		
-			StdDraw.setPenColor(StdDraw.BLACK);
-			StdDraw.rectangle(X_MAX/2, 0.95*Y_MAX, BordureOxy*SW, 7.1*SH);
-			StdDraw.setPenColor(StdDraw.BLUE);
-			StdDraw.filledRectangle(X_MAX/2, 0.95*Y_MAX, 5*Oxygene*SW, 7*SH);
-			StdDraw.setPenColor(StdDraw.WHITE);
-			PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);
-			StdDraw.text(X_MAX/2, 0.945*Y_MAX, PourcentageOxy + " %");
-			//System.out.println("Pourcentage : " + PourcentageOxy);
-		
-	}
-	public static void DispCoffreLateral() {
-		 // Affichage lateral des coffres
-       
-       for (double i = 0; i < J1Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.95*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
-       for (double i = 0; i < J2Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.05*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
-	}
 	
 	
-	public static void printList(List<String> list) {
-		for (int d=0; d<list.size();d++) {
-			if (d==list.size()) {
-				System.out.println(list.get(d));
-			}
-			System.out.println(list.get(d));
-		}
-	}
 	
 	public static void sumScore() {
 		int tempJ1Score = 0;
 		int tempJ2Score = 0; 
-		for(int i=0;i<totNiveau123-1;i++) {
-			if(nList.get(i).coffreN.status==1) {
-				tempJ1Score += nList.get(i).coffreN.getTresor();
-			}
-			if(nList.get(i).coffreN.status==2) {
-				tempJ2Score+= nList.get(i).coffreN.getTresor();
-			}
+		for(int i=0;i<nList.size()-1;i++) {
+			tempJ1Score += nList.get(i).getTresor(1);
+			tempJ2Score += nList.get(i).getTresor(2);
+			
 			
 		}
 		J1Score = tempJ1Score;
 		J2Score = tempJ2Score;
+		
+		// print the scores
 		Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
 		StdDraw.setFont(FontScore);
         StdDraw.setPenColor(StdDraw.WHITE);
@@ -260,24 +187,80 @@ public class Partie extends Main{
         StdDraw.text(0.95*X_MAX, 0.74*Y_MAX, Integer.toString(J1Score));
 	}
 	public static void nextPartie() {
+		
+		
 		nbPartie += 1 ;
-		if(Plongeur.positionJ1==0 && Plongeur.positionJ2==0) {
-			
-		}
-		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2!=0) {
+		J1Coffre = 0;
+		J2Coffre = 0;
+		
+		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status !=0) {
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
+				}
+				
+			}
+			J1Score = 0;
 			J2Score = 0;
+		}
+		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 !=0 ) {
+			J2Score = 0;
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status==2) {
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				}
+				
+			}
+			
 		}
 		else if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2==0) {
 			J1Score = 0;
-		}
-		
-		
-		for(int i=0;i<totNiveau123-1;i++) {
-			if(nList.get(i).coffreN.status==1 || nList.get(i).coffreN.status==2) {
-				nList.remove(i);
+			
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status==1) {
+					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				}
+				
 			}
 		}
 		
 		
-	}
-}   
+		for(int i=0;i<nList.size();i++) { // on enleve tout les niveau ou il n'y a plus de coffre
+			if(nList.get(i).coffreList.get(0).status ==1 || nList.get(i).coffreList.get(0).status ==2) {
+				System.out.println("im destroying level "+ i + "color "+nList.get(i).typeNiveau);
+				nList.remove(i);
+			}
+			
+		}
+		
+		updateNiveauInfo();
+		
+		
+		
+		
+	} // fin de nextPartie
+	
+	public static void updateNiveauInfo() {
+		
+	
+		for(int i=0;i<nList.size();i++) {
+			nList.get(i).position =i;
+			nList.get(i).totalNiveau =nList.size();
+			nList.get(i).presenceJoueur1[0]=false;
+			nList.get(i).presenceJoueur2[0]=false;
+			
+			if (i!=0) nList.get(i).coffreList.get(0).presence = true;
+			
+
+			
+		}
+		Plongeur.positionJ1 = 0;
+		Plongeur.positionJ2 = 0;
+		nList.get(0).presenceJoueur1[0]=true;
+		nList.get(0).presenceJoueur2[0]=true;
+		
+		
+}
+}

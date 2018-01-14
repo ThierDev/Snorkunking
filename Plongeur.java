@@ -8,6 +8,7 @@ public class Plongeur extends Partie{
 
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
+   
     
     
 	public static int Ordre() {
@@ -41,28 +42,27 @@ public class Plongeur extends Partie{
 	        }
 	        return 0; //Pour valider la methode, sinon elle donne une erreur
 	}
+	
+	
 
 	
-	public static double Deplacement(int cas) {
+	public static void Deplacement(int cas) {
 			
 		    boolean bool = true;
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-		    System.out.println((nList.get(nList.size()-1).getTresor()));
-		    System.out.println("Position Patrick " + positionJ2);
-		    System.out.println("Position Bob " + positionJ2);
+		    
 			
 			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeux
 				
 				// Creation d'un bouton submit, il n'est valable que quand les deux joueur accepte de changer de partie.
-				if (StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE) && positionJ1==0 && positionJ2==0) {
-					
-					
-				}
+				
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
-		        		        	
+		        	StdDraw.setPenColor(StdDraw.RED);
+			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+			        StdDraw.show();	        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		
@@ -80,6 +80,7 @@ public class Plongeur extends Partie{
 		        			
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			Oxygene = Oxygene - 1 -J1Coffre;
 		        			
 		        			
 		        		}
@@ -95,20 +96,29 @@ public class Plongeur extends Partie{
 		        			
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
+		        			Oxygene = Oxygene - 1 -J1Coffre;
 		        			
 		        		}
 	 		        
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && nList.get(positionJ1).coffreN.presence){
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && nList.get(positionJ1).checkPresenceCoffre()){
 		        			Stop();
 		        			boolMove1 = false;
 		        			J1Coffre = J1Coffre + 1;
 		        			nList.get(positionJ1).changeStatus(1);
-		        			System.out.println(nList.get(positionJ1).getTresor());
+		        			Oxygene = Oxygene - 1;
+		        			
 		        			
 		        		}
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && positionJ1==0 && positionJ2==0) {
+							bool=false;
+							boolMove1 = false;
+							Partie.Oxygene = 0;
+							break;
+						}
+		        		
 		        	}
 	
-		        		Oxygene = Oxygene - 1;
+		        		
 		        		bool = false; // Fin du tour, on sort du while de d�placement
 		        		
 		        		
@@ -116,7 +126,9 @@ public class Plongeur extends Partie{
 		        
 		        if (cas == 2) { // Tour de J2 car plus profond
 		        	//System.out.println("J2 turn checked");
-		        	
+		        	StdDraw.setPenColor(StdDraw.RED);
+	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+			        StdDraw.show();
 		        	
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
@@ -133,6 +145,7 @@ public class Plongeur extends Partie{
 		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			Oxygene = Oxygene - 1 -J2Coffre;
 		        			//System.out.println("Position J2 : " + positionJ2);
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
@@ -146,41 +159,65 @@ public class Plongeur extends Partie{
 		        			noBorderEscape();
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			Oxygene = Oxygene - 1 -J2Coffre;
 		        			
 		        			
 		        		}
 	 		        
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).coffreN.presence ) {
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).checkPresenceCoffre() ) {
 		        			Stop();
 		        			boolMove2 = false;
 		        			J2Coffre = J2Coffre + 1;
 		        			nList.get(positionJ2).changeStatus(2);
+		        			Oxygene = Oxygene - 1;
 		        			
 		        		}
+		        		if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && positionJ1==0 && positionJ2==0) {
+							bool=false;
+							boolMove2 = false;
+							Oxygene = 0;
+							
+							
+						}
+		        		
 		        	}
 		        		
-		        		Oxygene = Oxygene - 1;
+		        		
 		        		bool = false; // Fin du tour, on sort du while de d�placement
 		        		
 		        		
 		        }
-				
+		        if (Oxygene>0) {
+		        	BackgroundGraphics();
+    				DispOxygene();
+    				DispCoffreLateral();
+    				
+    			}
 			} // While de deplacement
 			
-			 bool = true;		
-			 return 0; //Pour valider la methode, sinon elle donne une erreur
+			
+			 
+			 
 	}
+	public static void DispOxygene() {
+		
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.rectangle(X_MAX/2, 0.95*Y_MAX, BordureOxy*SW, 7.1*SH);
+		StdDraw.setPenColor(StdDraw.BLUE);
+		StdDraw.filledRectangle(X_MAX/2, 0.95*Y_MAX,5*Oxygene*SW, 7*SH);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);
+		StdDraw.text(X_MAX/2, 0.945*Y_MAX, PourcentageOxy + " %");
+		//System.out.println("Pourcentage : " + PourcentageOxy);
 	
-	public static List<String> SysOxygene() { //Permet l'affichage de l'ogyg�ne dans la console pour les tests
-		
-		List<String> OxygeneDisp = new ArrayList<String>();
-		
-		OxygeneDisp.add("Oxygene restant : " + Oxygene);
-		OxygeneDisp.add("");
-		OxygeneDisp.add("------------------------------------");
-		OxygeneDisp.add("");
-		return OxygeneDisp;
+}
+	public static void DispCoffreLateral() {
+		 // Affichage lateral des coffres
+      
+      for (double i = 0; i < J1Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.95*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
+      for (double i = 0; i < J2Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.05*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
 	}
+
 	
 	public static void Stop() {
 		
@@ -194,14 +231,14 @@ public class Plongeur extends Partie{
 		 //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
         
         if (positionJ1<=0) positionJ1 = 0 ;
-        if (positionJ1>=(totNiveau123)) {
+        if (positionJ1>=(nList.size())) {
         	
         	positionJ1 =nList.size()-1;
         	
         }
         
         if (positionJ2<=0) positionJ2 = 0 ;
-        if (positionJ2>=(totNiveau123)) {
+        if (positionJ2>=(nList.size())) {
         	positionJ2 = nList.size()-1 ;
         	
         }
