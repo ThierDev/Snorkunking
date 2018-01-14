@@ -14,20 +14,23 @@ public class Partie extends Main{
 	public static int niveauxC2 = 6 + randomGenerator.nextInt(9-6);
 	public static int niveauxC3 = 3+ randomGenerator.nextInt(6-3);
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
-	public static double hauteurNiveau = 280/(totNiveau123-1);
+	//public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
 	public static int Oxygene = 3*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
     
 	
-	public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
+	//public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
 	
 	public int index;  
     public static double deltaY = 0;
     public static double deltaY2 = 0;
 
-    
+    public static int J1Score=0;
+    public static int J2Score=0;
     public static int J1Coffre = 0;
     public static int J2Coffre = 0;
+    
+    public static int nbPartie = 0;
     
 	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1) + 0.1;
 	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1);
@@ -36,6 +39,7 @@ public class Partie extends Main{
 	public static void createNiveau(){	
 		
 		nList.add(new NiveauC(0,0,totNiveau123));
+		
 		for (int i = 1; i <= niveauxC1; i++) {
 			nList.add(new NiveauC(1,i,totNiveau123));
 		}
@@ -71,8 +75,10 @@ public class Partie extends Main{
     		        StdDraw.text(0.05*X_MAX, 0.78*Y_MAX, "Score");
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
     		        
+    		        
+    		        
 					//createNiveau();			 
-					 for (int i=0;i<totNiveau123-1;i++){
+					 for (int i=totNiveau123-1;i>=0;i--){
 						 nList.get(i).drawNiveau();
 						}
 					 
@@ -81,11 +87,12 @@ public class Partie extends Main{
      				
      public static void DispDeplacement() {
     	 
-		 //Niveau.WindowInit();
+		 
 		 
 		 createNiveau();
 		 
     	 BackgroundGraphics();
+    	 sumScore();
     	 
     	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
      				
@@ -106,43 +113,46 @@ public class Partie extends Main{
     					StdDraw.setPenColor(StdDraw.RED);
     			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
-    			        System.out.println("Return Ordre vers Niveau J1 checked");
-    			        deltaY = Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
+    			        
+    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
     			        
     			        BackgroundGraphics(); // Efface l'image pour le fond de base mais pas les joueurs
     			        
-    			        // Affichage des joueurs aprï¿½s deplacement de J1 
-    			        
-    			        //actionPerso();
+    			      
 
     			        // Mise a jour de la barre d'oxygene	
     	        		
     			        Partie.DispOxygene();	
-    			        
     			        Partie.DispCoffreLateral();
+    			        sumScore();
+
+
     	        		
     	        		StdDraw.show();
     	        		
-    	        		printList(Plongeur.SysOxygene());
+    	        		//printList(Plongeur.SysOxygene());
     	        		
     	        		// Tour J2
+    	        		
     	        		StdDraw.setPenColor(StdDraw.RED);
     	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
-    			        System.out.println("Return Ordre vers Niveau J2 checked");
-    			        deltaY2 = Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
+    			        
+    			        Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
     			        
     			        BackgroundGraphics();
     			        
     			        //actionPerso();
 
     			        Partie.DispOxygene();
-    	        		
     			        Partie.DispCoffreLateral();
+    			        sumScore();
+    	        		
+    			      
     			        
     	        		StdDraw.show();
     	        		
-    	        		printList(Plongeur.SysOxygene()); 	        		
+    	        		//printList(Plongeur.SysOxygene()); 	        		
     				}
     					
     				if (Ordre == 2) { // J2 va jouer en premier
@@ -151,49 +161,51 @@ public class Partie extends Main{
     					StdDraw.setPenColor(StdDraw.RED);
     	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
-    			        System.out.println("Return Ordre vers Niveau J2 checked");
-    			        deltaY2 = Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
+    			        
+    			        Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
 
     			        BackgroundGraphics();
     			        
     			        //actionPerso();
 
     			        Partie.DispOxygene();
-    			        
     			        Partie.DispCoffreLateral();
+    			        sumScore();
+    			        
+    			      
     	        		
     	        		StdDraw.show();
     	        		
-    	        		printList(Plongeur.SysOxygene());
+    	        		//printList(Plongeur.SysOxygene());
     	        		
     	        		// Tour J1
     	        		StdDraw.setPenColor(StdDraw.RED);
     			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
     			        StdDraw.show();
-    			        System.out.println("Return Ordre vers Niveau J1 checked");
-    			        deltaY = Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
+    			        
+    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
     			        
     			        BackgroundGraphics();
     			        
     			        //actionPerso();
 
     			        Partie.DispOxygene();
-
     			        Partie.DispCoffreLateral();
+    			        sumScore();
+
+    			  
     			        
     	        		StdDraw.show();
     	        		
-    	        		printList(Plongeur.SysOxygene());
+    	        		//printList(Plongeur.SysOxygene());
     	        		
     				} 
     				
-        } // While affichage global
-		System.exit(0); // BETA - Fin de programme actuelle pour ï¿½viter des boucles indï¿½sirables
+        } //while affichage global 
+    	 
+    nextPartie();
 	}
-	public static void actionPerso(){
-		StdDraw.picture(X_MAX-0.25*X_MAX, h1-deltaY+hauteurNiveau,"patrick.png", 12*SW, 12*SH);
-    	StdDraw.picture(0.25*X_MAX, h1-deltaY2+hauteurNiveau,"bob.png", 12*SW, 12*SH);
-	}
+
 	
 	public static void DispOxygene() {
 		
@@ -204,16 +216,16 @@ public class Partie extends Main{
 			StdDraw.setPenColor(StdDraw.WHITE);
 			PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);
 			StdDraw.text(X_MAX/2, 0.945*Y_MAX, PourcentageOxy + " %");
-			System.out.println("Pourcentage : " + PourcentageOxy);
+			//System.out.println("Pourcentage : " + PourcentageOxy);
 		
 	}
-	
 	public static void DispCoffreLateral() {
-		 // Affichage latéral des coffres
-        
-        for (int i = 0; i < J1Coffre; i=i+10) { StdDraw.picture(0.95*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
-        for (int i = 0; i < J2Coffre; i=i+10) { StdDraw.picture(0.05*X_MAX, 0.7*Y_MAX + 10 + i, "coffre.png", 30*SW, 27*SH); }
+		 // Affichage lateral des coffres
+       
+       for (double i = 0; i < J1Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.95*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
+       for (double i = 0; i < J2Coffre*22*SW; i=(i+22)*SW) { StdDraw.picture(0.05*X_MAX, (0.68*Y_MAX - i)*SW, "coffre.png", 30*SW, 27*SH); }
 	}
+	
 	
 	public static void printList(List<String> list) {
 		for (int d=0; d<list.size();d++) {
@@ -222,5 +234,50 @@ public class Partie extends Main{
 			}
 			System.out.println(list.get(d));
 		}
+	}
+	
+	public static void sumScore() {
+		int tempJ1Score = 0;
+		int tempJ2Score = 0; 
+		for(int i=0;i<totNiveau123-1;i++) {
+			if(nList.get(i).coffreN.status==1) {
+				tempJ1Score += nList.get(i).coffreN.getTresor();
+			}
+			if(nList.get(i).coffreN.status==2) {
+				tempJ2Score+= nList.get(i).coffreN.getTresor();
+			}
+			
+		}
+		J1Score = tempJ1Score;
+		J2Score = tempJ2Score;
+		Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
+		StdDraw.setFont(FontScore);
+        StdDraw.setPenColor(StdDraw.WHITE);
+		StdDraw.filledRectangle(0.05*X_MAX, 0.74*Y_MAX,20*SW,7*SH);
+		StdDraw.filledRectangle(0.95*X_MAX, 0.74*Y_MAX,20*SW,7*SH);
+		StdDraw.setPenColor(StdDraw.RED);
+		StdDraw.text(0.05*X_MAX, 0.74*Y_MAX, Integer.toString(J2Score));
+        StdDraw.text(0.95*X_MAX, 0.74*Y_MAX, Integer.toString(J1Score));
+	}
+	public static void nextPartie() {
+		nbPartie += 1 ;
+		if(Plongeur.positionJ1==0 && Plongeur.positionJ2==0) {
+			
+		}
+		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2!=0) {
+			J2Score = 0;
+		}
+		else if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2==0) {
+			J1Score = 0;
+		}
+		
+		
+		for(int i=0;i<totNiveau123-1;i++) {
+			if(nList.get(i).coffreN.status==1 || nList.get(i).coffreN.status==2) {
+				nList.remove(i);
+			}
+		}
+		
+		
 	}
 }   

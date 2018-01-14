@@ -49,13 +49,20 @@ public class Plongeur extends Partie{
 		    boolean boolMove1 = true;
 		    boolean boolMove2 = true;
 			
-	         
+		    System.out.println((nList.get(nList.size()-1).getTresor()));
+		    System.out.println("Position Patrick " + positionJ2);
+		    System.out.println("Position Bob " + positionJ2);
 			
 			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeux
+				
+				// Creation d'un bouton submit, il n'est valable que quand les deux joueur accepte de changer de partie.
+				if (StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE) && positionJ1==0 && positionJ2==0) {
+					
+					
+				}
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
-		        System.out.println("J1 turn checked");
-		        	
+		        		        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		
@@ -64,28 +71,28 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) { 
 		        			Plongeur.Stop(); // Stop pour eviter de compter deux fois le mouvement
 		        			boolMove1 = false;
-		        			System.out.println("touche BAS");
-		        			deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
+		        			//System.out.println("touche BAS");
+		        			//deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
 		        			
 		        			positionJ1 = positionJ1 + 1;
 		        			noBorderEscape();
+		        			
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			
-		        			//presenceJoueur[1]=true;
-		        				//Modification fonctionnelle de la position
-		        			System.out.println("Position J1 : " + positionJ1);
+		        			
 		        		}
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
 		        			Stop();
 		        			boolMove1 = false;
-		        			System.out.println("touche HAUT");
+		        			//System.out.println("touche HAUT");
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
 		        			
-		        			deltaY=(deltaY-hauteurNiveau*SH);
+		        			//deltaY=(deltaY-hauteurNiveau*SH);
 		        			positionJ1 = positionJ1 - 1;
 		        			noBorderEscape(); 
+		        			
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			
@@ -96,17 +103,19 @@ public class Plongeur extends Partie{
 		        			boolMove1 = false;
 		        			J1Coffre = J1Coffre + 1;
 		        			nList.get(positionJ1).changeStatus(1);
+		        			System.out.println(nList.get(positionJ1).getTresor());
+		        			
 		        		}
 		        	}
 	
 		        		Oxygene = Oxygene - 1;
 		        		bool = false; // Fin du tour, on sort du while de d�placement
 		        		
-		        		return deltaY;
+		        		
 		        }
 		        
 		        if (cas == 2) { // Tour de J2 car plus profond
-		        	System.out.println("J2 turn checked");
+		        	//System.out.println("J2 turn checked");
 		        	
 		        	
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
@@ -116,11 +125,12 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 		        			Stop();
 		        			boolMove2 = false;
-		        			System.out.println("touche S");
-		        			deltaY2= (deltaY2+hauteurNiveau*SH);
+		        			//System.out.println("touche S");
+		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = false;
 		        			positionJ2 = positionJ2 + 1;
 		        			noBorderEscape();
+		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			//System.out.println("Position J2 : " + positionJ2);
@@ -128,14 +138,16 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
 		        			Stop();
 		        			boolMove2 = false;
-		        			System.out.println("touche Z");
-		        			deltaY2= (deltaY2-hauteurNiveau*SH);
+		        			//System.out.println("touche Z");
+		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = false;
 		        			positionJ2 = positionJ2 - 1;
-		        			System.out.println("position j1" + positionJ2);
+		        			
 		        			noBorderEscape();
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			
+		        			
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).coffreN.presence ) {
@@ -150,7 +162,7 @@ public class Plongeur extends Partie{
 		        		Oxygene = Oxygene - 1;
 		        		bool = false; // Fin du tour, on sort du while de d�placement
 		        		
-		        		return deltaY2;
+		        		
 		        }
 				
 			} // While de deplacement
@@ -183,15 +195,14 @@ public class Plongeur extends Partie{
         
         if (positionJ1<=0) positionJ1 = 0 ;
         if (positionJ1>=(totNiveau123)) {
-        	System.out.println("i'm here j1");
-        	positionJ1 -= 1;
+        	
+        	positionJ1 =nList.size()-1;
         	
         }
         
         if (positionJ2<=0) positionJ2 = 0 ;
         if (positionJ2>=(totNiveau123)) {
-        	System.out.println("i'm here j2");
-        	positionJ2 -= 1 ;
+        	positionJ2 = nList.size()-1 ;
         	
         }
 	}
