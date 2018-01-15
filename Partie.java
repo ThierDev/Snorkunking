@@ -25,6 +25,8 @@ public class Partie extends Main{
     public static int J2Score=0;
     public static int J1Coffre = 0;
     public static int J2Coffre = 0;
+	public static int tempJ1Score = 0;
+	public static int tempJ2Score = 0; 
     
     public static int nbPartie = 0;
     
@@ -91,8 +93,7 @@ public class Partie extends Main{
     	 while(nbPartie<3) {
     		 Oxygene = 2*(totNiveau123);
     		 BackgroundGraphics();
-        	 sumScore();
-        	 
+        	 displayScore();
     	 
 	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
 	     				
@@ -104,20 +105,18 @@ public class Partie extends Main{
 	    				
 	    				// Affichage des personnages avant les premiers deplacements
 	    				
-	    				//actionPerso();
-	    				
 	    				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
 	    				if (Ordre == 1) { // J1 va jouer en premier
 	    					
 	    					// Tour J1
  			        
-	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1		        
-	    					sumScore();   	        		
+	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
+	    			        
 	    	        		StdDraw.show();
 
 	    	        		 //Tour J2	        
-	    			        Plongeur.Deplacement(2); // Appelle la mï¿½thode de dï¿½placement pour le J2
-	    			        sumScore();  
+	    			        Plongeur.Deplacement(2); // Appelle la methode de dï¿½placement pour le J2
+	    			        
 	    	        		StdDraw.show();
 	    	        		
 	    	        		//printList(Plongeur.SysOxygene()); 	        		
@@ -130,22 +129,11 @@ public class Partie extends Main{
 	    			        
 	    			        Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
 	    			        
-	    			        	    			        
-	    			        sumScore();
-	    			        
-	    			      
-	    	        		
 	    	        		StdDraw.show();
-	    	        		
-	    	        		
+	    	        			
 	    	        		// Tour J1
-	    	        		
-	    			        
+	    	        		      
 	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
-	    			     
-	    			        
-	    			        sumScore();
-	  			  
 	    			        
 	    	        		StdDraw.show(); 
 	    	        		
@@ -159,21 +147,19 @@ public class Partie extends Main{
     	 
     	 }
 	}
-
-	
-	
 	
 	
 	public static void sumScore() {
-		int tempJ1Score = 0;
-		int tempJ2Score = 0; 
+
 		for(int i=0;i<nList.size()-1;i++) {
 			tempJ1Score += nList.get(i).getTresor(1);
 			tempJ2Score += nList.get(i).getTresor(2);
 			
 		}
-		J1Score = tempJ1Score;
-		J2Score = tempJ2Score;
+	}
+		
+
+	public static void displayScore() {
 		
 		// print the scores
 		Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
@@ -182,35 +168,42 @@ public class Partie extends Main{
 		StdDraw.filledRectangle(0.05*X_MAX, 0.74*Y_MAX,20*SW,7*SH);
 		StdDraw.filledRectangle(0.95*X_MAX, 0.74*Y_MAX,20*SW,7*SH);
 		StdDraw.setPenColor(StdDraw.RED);
-		StdDraw.text(0.05*X_MAX, 0.74*Y_MAX, Integer.toString(J2Score));
-        StdDraw.text(0.95*X_MAX, 0.74*Y_MAX, Integer.toString(J1Score));
+		StdDraw.text(0.05*X_MAX, 0.735*Y_MAX, Integer.toString(J2Score));
+        StdDraw.text(0.95*X_MAX, 0.735*Y_MAX, Integer.toString(J1Score));
+        
 	}
+	
 	public static void nextPartie() {
-		
 		
 		nbPartie += 1 ;
 		
-		
 		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
-			for(int i=0;i<nList.size();i++) {
-				if(nList.get(i).coffreList.get(0).status !=0) {
-					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
+			for(int i=1;i<nList.size()-2;i++) {
+				System.out.print(nList.get(i).coffreList.get(0).presence + " ");
+				System.out.println("cas !=0 i : " + i);
+				if(nList.get(i).coffreList.get(0).presence == false) {
+					nList.get(i).coffreList.get(0).NiveauType = 3;
+					nList.get(i).coffreList.get(0).presence = true;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+					nList.remove(i);
+					i -=1 ;
 					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 				}
 				
 			}
-			J1Score = 0;
-			J2Score = 0;
+			
+			tempJ1Score = 0;
+			tempJ2Score = 0;
+			
 		}
 		
-		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 ==0 ) {
-			for(int i=0;i<nList.size();i++) {
-				if(nList.get(i).coffreList.get(0).status==2) {
+		/*else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 ==0 ) {
+			for(int i=1;i<nList.size();i++) {
+				
+				if(nList.get(i).coffreList.get(0).presence == false) {
 					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
+					if (i!=0) nList.get(i).coffreList.get(0).presence = true;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
 				
 					System.out.println("im destroying level "+ i + " in case status 2 " + " color "+nList.get(i).typeNiveau);
@@ -218,63 +211,12 @@ public class Partie extends Main{
 					System.out.println("Level Destroy - nList size :" + nList.size());
 				}
 				
-				
-				if(nList.get(i).coffreList.get(0).status==1) {
-					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
-					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
-					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
-				
-					System.out.println("im destroying level "+ i + " in case status 1" + i + " color "+nList.get(i).typeNiveau);
-					nList.remove(i);
-					System.out.println("Level Destroy - nList size :" + nList.size());
-				}
-				
 			}
 			
-		}
+		}*/
 		
-		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 !=0 ) {
-			J2Score = 0;
-			for(int i=0;i<nList.size();i++) {
-				if(nList.get(i).coffreList.get(0).status==2) {
-					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
-					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
-
-				}
-				
-			}
-			
-		}
-		
-		else if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2==0) {
-			J1Score = 0;
-			
-			for(int i=0;i<nList.size();i++) {
-				if(nList.get(i).coffreList.get(0).status==1) {
-					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
-					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
-					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
-				}
-				
-			}
-		}
-		
-		
-		for(int i=0;i<nList.size();i++) { // on enleve tout les niveau ou il n'y a plus de coffre
-			if(nList.get(i).coffreList.get(0).status ==1 || nList.get(i).coffreList.get(0).status ==2) {
-				System.out.println("im destroying level "+ i + " color "+nList.get(i).typeNiveau);
-				nList.remove(i);
-				System.out.println("Level Destroy - nList size :" + nList.size());
-			}
-			
-		}
 		
 		updateNiveauInfo();
-		
-		
 		
 		
 	} // fin de nextPartie
@@ -291,9 +233,8 @@ public class Partie extends Main{
 			//if (i!=0) nList.get(i).coffreList.get(0).presence = true;
 			//if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 			
-
-			
 		}
+		
 		Plongeur.positionJ1 = 0;
 		Plongeur.positionJ2 = 0;
 		J1Coffre = 0;

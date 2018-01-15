@@ -9,8 +9,6 @@ public class Plongeur extends Partie{
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
    
-    
-    
 	public static int Ordre() {
 	        
 	        // Selection du joueur
@@ -61,7 +59,9 @@ public class Plongeur extends Partie{
 		        
 		        if (cas == 1) { // Tour de J1 car plus profond
 		        	StdDraw.setPenColor(StdDraw.RED);
+		        	StdDraw.setPenRadius(0.008);
 			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+			        StdDraw.setPenRadius(0.002);
 			        StdDraw.show();	        	
 		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
@@ -127,7 +127,9 @@ public class Plongeur extends Partie{
 		        if (cas == 2) { // Tour de J2 car plus profond
 		        	//System.out.println("J2 turn checked");
 		        	StdDraw.setPenColor(StdDraw.RED);
+		        	StdDraw.setPenRadius(0.008);
 	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+	        		StdDraw.setPenRadius(0.002);
 			        StdDraw.show();
 		        	
 		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
@@ -190,6 +192,7 @@ public class Plongeur extends Partie{
 		        if (Oxygene>0) {
 		        	BackgroundGraphics();
     				DispOxygene();
+    				displayScore();
     				DispCoffreLateral();
     				
     			}
@@ -200,6 +203,8 @@ public class Plongeur extends Partie{
 			 
 	}
 	public static void DispOxygene() {
+		
+		if (Oxygene < 0 ) Oxygene = 0;
 		
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.rectangle(X_MAX/2, 0.95*Y_MAX, BordureOxy*SW, 7.1*SH);
@@ -242,6 +247,44 @@ public class Plongeur extends Partie{
         	positionJ2 = nList.size()-1 ;
         	
         }
+	}
+	
+	public static void surfaceTest() {
+		if (positionJ1 == 0) {
+			J1Score = J1Score + tempJ1Score;
+			System.out.println("Surface J1");
+			J1Coffre = 0;
+			
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status==1) {
+					nList.get(i).coffreList.get(0).status = 0;	
+				}
+			}
+			
+			BackgroundGraphics();
+			DispOxygene();
+			Partie.sumScore();
+			Partie.displayScore(); 
+			DispCoffreLateral();
+		}
+		
+		if (positionJ2 == 0) {
+			J2Score = J2Score + tempJ2Score;
+			System.out.println("Surface J2");
+			J2Coffre = 0;
+			
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status==2) {
+					nList.get(i).coffreList.get(0).status = 0;	
+				}
+			}
+			
+			BackgroundGraphics();
+			DispOxygene();
+			Partie.sumScore();
+			Partie.displayScore();
+			DispCoffreLateral();
+		}
 	}
 	
 }

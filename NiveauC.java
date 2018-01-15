@@ -128,7 +128,7 @@ public class NiveauC extends Main{
 	public void statusDisplay() {
 		double Y=positionYCenterNiveau();
     	for (int i=0;i<coffreList.size();i++) {
-			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).status); 	
+			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).presence); 	
 		}
 	}
 	
