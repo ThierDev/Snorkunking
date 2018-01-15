@@ -101,6 +101,10 @@ public class Plongeur extends Partie{
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			Oxygene = Oxygene - 1 -J1Coffre;
+		        			
+		        			System.out.println("Surface Test J1");
+		        			System.out.println("Nombre de trésors sur soi : " + tempJ1Score);
+		        			
 		        			Plongeur.surfaceTest();
 		        			
 		        		}
@@ -167,8 +171,10 @@ public class Plongeur extends Partie{
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			Oxygene = Oxygene - 1 -J2Coffre;
 		        			
-		        			Plongeur.surfaceTest();
+		        			System.out.println("Surface Test J2");
+		        			System.out.println("Nombre de trésors sur soi : " + tempJ2Score);
 		        			
+		        			Plongeur.surfaceTest();
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).checkPresenceCoffre() ) {
@@ -245,7 +251,6 @@ public class Plongeur extends Partie{
 	public static void surfaceTest() {
 		if (positionJ1 == 0) {
 			J1Score = J1Score + tempJ1Score;
-			System.out.println("Surface J1");
 			J1Coffre = 0;
 			
 			for(int i=0;i<nList.size();i++) {
@@ -263,7 +268,6 @@ public class Plongeur extends Partie{
 		
 		if (positionJ2 == 0) {
 			J2Score = J2Score + tempJ2Score;
-			System.out.println("Surface J2");
 			J2Coffre = 0;
 			
 			for(int i=0;i<nList.size();i++) {

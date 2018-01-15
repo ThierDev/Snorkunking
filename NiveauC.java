@@ -44,11 +44,11 @@ public class NiveauC extends Main{
         this.position = position;
         this.typeNiveau = typeNiveau;
         this.totalNiveau=totalNiveau;
-        this.NiveauHeight = 280/totalNiveau;
+        this.NiveauHeight = 290/totalNiveau;
         this.debugPos = Integer.toString(position);
         
      // 
-      	int xCoffre = 70 + randomGenerator.nextInt(504-1); 
+      	int xCoffre = 70 + randomGenerator.nextInt(502-1); 
       	coffreList.add(new Coffre(typeNiveau,xCoffre));
         
         }

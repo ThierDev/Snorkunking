@@ -14,13 +14,8 @@ public class Partie extends Main{
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
 	//public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
-	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1);  // VERSION BETA, PAS DE CLASSE DE GESTION DE l'OXYGENE POUR LE MOMENT
-    
+	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1); 
 	
-	 //public static double h1 = (hauteurNiveau*niveauxC3+hauteurNiveau*niveauxC2+hauteurNiveau*niveauxC1)*SH;
-	
- 
-
     public static int J1Score=0;
     public static int J2Score=0;
     public static int J1Coffre = 0;
@@ -31,7 +26,7 @@ public class Partie extends Main{
     public static int nbPartie = 0;
     
 	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1) + 0.1;
-	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1);
+	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1+1);
 	static double PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);  // Affichage du pourcentage d'oxygene
 	
 	public static void createNiveau(){	
@@ -47,10 +42,8 @@ public class Partie extends Main{
 		for (int i=niveauxC2+niveauxC1+1;i<=niveauxC1+niveauxC2+niveauxC3;i++){
 			nList.add(new NiveauC(3,i,totNiveau123));
 		}
-		System.out.println("totalniveau "+ totNiveau123);
-
-		System.out.println("nlisttaille "+nList.size());
-
+		
+		System.out.println("Nombre de niveaux : "+ totNiveau123);
 	}
    
     
@@ -144,9 +137,9 @@ public class Partie extends Main{
 		nbPartie += 1 ;
 		
 		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
-			for(int i=1;i<nList.size()-2;i++) {
-				System.out.print(nList.get(i).coffreList.get(0).presence + " ");
-				System.out.println("cas !=0 i : " + i);
+			System.out.println("cas !=0 J1 & J2 i : ");
+			for(int i=1;i<=nList.size()-2;i++) {
+				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
 				if(nList.get(i).coffreList.get(0).presence == false) {
 					nList.get(i).coffreList.get(0).NiveauType = 3;
 					nList.get(i).coffreList.get(0).presence = true;
@@ -163,8 +156,9 @@ public class Partie extends Main{
 		}
 		
 		else {
-			for(int i=1;i<nList.size();i++) {
-				
+			System.out.println("cas !=0 J1 | J2 i : ");
+			for(int i=1;i<=nList.size();i++) {
+				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
 				if(nList.get(i).coffreList.get(0).presence == false) {
 					nList.get(i).coffreList.get(0).NiveauType =3;
 					if (i!=0) nList.get(i).coffreList.get(0).presence = true;
