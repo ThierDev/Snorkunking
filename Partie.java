@@ -89,9 +89,8 @@ public class Partie extends Main{
     	 
     	 
     	 while(nbPartie<3) {
-    		 Oxygene = 2*(nList.size()-1);
+    		 Oxygene = 2*(nList.size());
     		 BackgroundGraphics();
-    		 
         	 sumScore();
     	 
 	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
@@ -190,12 +189,13 @@ public class Partie extends Main{
 		
 		
 		nbPartie += 1 ;
-		J1Coffre = 0;
-		J2Coffre = 0;
+		
 		
 		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status !=0) {
+					nList.get(i).coffreList.get(0).NiveauType =3;
+					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
 					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
 				}
@@ -208,6 +208,8 @@ public class Partie extends Main{
 			J2Score = 0;
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status==2) {
+					nList.get(i).coffreList.get(0).NiveauType =3;
+					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
 				}
 				
@@ -220,6 +222,8 @@ public class Partie extends Main{
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status==1) {
 					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					nList.get(i).coffreList.get(0).NiveauType =3;
+					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
 				}
 				
@@ -251,7 +255,8 @@ public class Partie extends Main{
 			nList.get(i).presenceJoueur1[0]=false;
 			nList.get(i).presenceJoueur2[0]=false;
 			
-			if (i!=0) nList.get(i).coffreList.get(0).presence = true;
+			//if (i!=0) nList.get(i).coffreList.get(0).presence = true;
+			//if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 			
 
 			

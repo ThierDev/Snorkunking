@@ -9,7 +9,7 @@ public class NiveauC extends Main{
     public int position;
     public int totalNiveau;
     public double NiveauHeight;
-    public Coffre coffreN;
+    //public Coffre coffreN;
     public List<Coffre> coffreList = new ArrayList<Coffre>(); // cette liste ne contient que 1 element hors dernier niveau
     public int typeNiveau;
     Random randomGenerator = new Random();
@@ -117,10 +117,10 @@ public class NiveauC extends Main{
     		}
     		return tempTresor;
     }
-    public void changeStatus(int joueur) {
+    public void changeStatus(int status) {
     	
     	for (int i=0;i<coffreList.size();i++) {
-			coffreList.get(i).takeCoffre(joueur); 	
+			coffreList.get(i).takeCoffre(status); 	
 		}
     }
     public boolean checkPresenceCoffre() {

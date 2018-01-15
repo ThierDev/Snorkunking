@@ -3,8 +3,9 @@ import java.util.Random;
 
 public class Coffre {
 
-    //public int NiveauType;
+    public int NiveauType;
     public int Tresor;
+    
     public int xCoffre;
     boolean presence = true;
     int status = 0; // 0 si le coffre n'est prit par aucun joueur, 1 j1 , 2j2 
@@ -19,11 +20,13 @@ public class Coffre {
         else if(NiveauType == 2){this.Tresor = 5 +randomGenerator.nextInt(8-5); }
         else if(NiveauType==3){this.Tresor = 10 + randomGenerator.nextInt(12-10);}
     	this.xCoffre = xCoffre;
+    	this.NiveauType = NiveauType;
     }
 
     public void showCoffre(double b, double c, double d){
     	if (presence == true ){
-       StdDraw.picture(xCoffre,b, "coffre.png",c ,d); 
+       StdDraw.picture(xCoffre,b, "coffre.png",c ,d);
+       StdDraw.square(xCoffre, b, c);
     	} 
     }
     
