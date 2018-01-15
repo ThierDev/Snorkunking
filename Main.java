@@ -12,6 +12,8 @@ public class Main extends Scaling{
 	public static int Y_MAX=(int)(360*SH);
 	public static double WIDTH=0.5f;
 	
+	public static int debug1 = 1;
+	
 	static Random randomGenerator = new Random();
 	public static int niveauxC1 = 9 + randomGenerator.nextInt(12-9);
 	public static int niveauxC2 = 6 + randomGenerator.nextInt(9-6);

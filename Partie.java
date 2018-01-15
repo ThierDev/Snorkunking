@@ -74,7 +74,7 @@ public class Partie extends Main{
     		        StdDraw.setPenColor(StdDraw.WHITE);
     		        StdDraw.filledRectangle(X_MAX/2, 0.90*Y_MAX,25*SW, 7*SH);
     		        StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);
-    				StdDraw.text(X_MAX/2, 0.895*Y_MAX, "Round" + (nbPartie+1));
+    				StdDraw.text(X_MAX/2, 0.895*Y_MAX, "Round " + (nbPartie+1));
     		        
     		        
 					//createNiveau();			 
@@ -89,9 +89,10 @@ public class Partie extends Main{
     	 
     	 
     	 while(nbPartie<3) {
-    		 Oxygene = 2*(nList.size());
+    		 Oxygene = 2*(totNiveau123);
     		 BackgroundGraphics();
         	 sumScore();
+        	 
     	 
 	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
 	     				
@@ -153,7 +154,7 @@ public class Partie extends Main{
 	    				} 
     				
 	    	 } //while affichage oxygène
-	    	 System.out.println("je suis ici");
+	    	 System.out.println("Fin phase : " + (nbPartie + 1));
 	    	 nextPartie();
     	 
     	 }
@@ -169,7 +170,6 @@ public class Partie extends Main{
 		for(int i=0;i<nList.size()-1;i++) {
 			tempJ1Score += nList.get(i).getTresor(1);
 			tempJ2Score += nList.get(i).getTresor(2);
-			
 			
 		}
 		J1Score = tempJ1Score;
@@ -197,13 +197,43 @@ public class Partie extends Main{
 					nList.get(i).coffreList.get(0).NiveauType =3;
 					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
-					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 				}
 				
 			}
 			J1Score = 0;
 			J2Score = 0;
 		}
+		
+		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 ==0 ) {
+			for(int i=0;i<nList.size();i++) {
+				if(nList.get(i).coffreList.get(0).status==2) {
+					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					nList.get(i).coffreList.get(0).NiveauType =3;
+					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				
+					System.out.println("im destroying level "+ i + " in case status 2 " + " color "+nList.get(i).typeNiveau);
+					nList.remove(i);
+					System.out.println("Level Destroy - nList size :" + nList.size());
+				}
+				
+				
+				if(nList.get(i).coffreList.get(0).status==1) {
+					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					nList.get(i).coffreList.get(0).NiveauType =3;
+					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				
+					System.out.println("im destroying level "+ i + " in case status 1" + i + " color "+nList.get(i).typeNiveau);
+					nList.remove(i);
+					System.out.println("Level Destroy - nList size :" + nList.size());
+				}
+				
+			}
+			
+		}
+		
 		else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 !=0 ) {
 			J2Score = 0;
 			for(int i=0;i<nList.size();i++) {
@@ -211,17 +241,19 @@ public class Partie extends Main{
 					nList.get(i).coffreList.get(0).NiveauType =3;
 					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+
 				}
 				
 			}
 			
 		}
+		
 		else if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2==0) {
 			J1Score = 0;
 			
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status==1) {
-					System.out.println("adding coffre"+ i + "in "+(nList.get(nList.size()-1).coffreList.size()-1));
+					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 					nList.get(i).coffreList.get(0).NiveauType =3;
 					if (i!=0) nList.get(i).coffreList.get(0).status = 0;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
@@ -233,8 +265,9 @@ public class Partie extends Main{
 		
 		for(int i=0;i<nList.size();i++) { // on enleve tout les niveau ou il n'y a plus de coffre
 			if(nList.get(i).coffreList.get(0).status ==1 || nList.get(i).coffreList.get(0).status ==2) {
-				System.out.println("im destroying level "+ i + "color "+nList.get(i).typeNiveau);
+				System.out.println("im destroying level "+ i + " color "+nList.get(i).typeNiveau);
 				nList.remove(i);
+				System.out.println("Level Destroy - nList size :" + nList.size());
 			}
 			
 		}
@@ -263,9 +296,22 @@ public class Partie extends Main{
 		}
 		Plongeur.positionJ1 = 0;
 		Plongeur.positionJ2 = 0;
+		J1Coffre = 0;
+		J2Coffre = 0;
 		nList.get(0).presenceJoueur1[0]=true;
 		nList.get(0).presenceJoueur2[0]=true;
 		
 		
 }
+	
+	public static void printList(List<NiveauC> list) {
+		for (int d=0; d<list.size();d++) {
+			if (d==list.size()) {
+				System.out.println(list.get(d));
+			}
+			System.out.println(list.get(d));
+		}
+	}
+	
+	
 }

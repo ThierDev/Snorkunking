@@ -16,6 +16,8 @@ public class NiveauC extends Main{
     public boolean[] presenceJoueur1 = {false};
     public boolean[] presenceJoueur2 = {false};
     
+    private String debugPos = "";
+    
 // par convention presenceJoueur[0] = true si bob;  false si patrick/ presenceJoeur[1]=true or false dépendant si le joueur est effectivement présent
     
     
@@ -43,17 +45,11 @@ public class NiveauC extends Main{
         this.typeNiveau = typeNiveau;
         this.totalNiveau=totalNiveau;
         this.NiveauHeight = 280/totalNiveau;
+        this.debugPos = Integer.toString(position);
         
      // 
       	int xCoffre = 70 + randomGenerator.nextInt(504-1); 
       	coffreList.add(new Coffre(typeNiveau,xCoffre));
-        
-        
-        
-        
-        
-        
-        
         
         }
         
@@ -69,7 +65,6 @@ public class NiveauC extends Main{
         double Y=positionYCenterNiveau();
         drawJoueur();
         drawCoffre();
-        
         
         StdDraw.rectangle(X_MAX/2,Y*SH,0.4*X_MAX,NiveauHeight/2*SH);
         
@@ -87,7 +82,8 @@ public class NiveauC extends Main{
     		
     		StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", 12*SW, 12*SH);}
     	
-		
+		statusDisplay(); //Pour le debug
+		levelIndexDisplay(); //debug
     	
     }
     public void drawCoffre() {
@@ -123,8 +119,25 @@ public class NiveauC extends Main{
 			coffreList.get(i).takeCoffre(status); 	
 		}
     }
+    
     public boolean checkPresenceCoffre() {
     	
     	return coffreList.get(0).presence;
     }
+    
+	public void statusDisplay() {
+		double Y=positionYCenterNiveau();
+    	for (int i=0;i<coffreList.size();i++) {
+			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).status); 	
+		}
+	}
+	
+	public void levelIndexDisplay() {
+		double Y=positionYCenterNiveau();
+
+    	for (int i=0;i<coffreList.size();i++) {
+			StdDraw.text(0.14*X_MAX, (Y)*SH, "" + debugPos); 	
+		}
+	}
+	
 }
