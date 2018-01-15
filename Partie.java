@@ -83,12 +83,10 @@ public class Partie extends Main{
 					 for (int i=0;i<nList.size();i++){
 						 nList.get(i).drawNiveau();
 						}
-					 
         }
      				
      				
      public static void DispDeplacement() {
-    	 
     	 
     	 while(nbPartie<3) {
     		 Oxygene = 2*(totNiveau123);
@@ -97,51 +95,19 @@ public class Partie extends Main{
     	 
 	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
 	     				
-	     				// Affichage barre d'oxygene
+	     			// Affichage barre d'oxygene
 	     				
-	     				Plongeur.DispOxygene();
-	    				
-	    				StdDraw.show(50);
-	    				
-	    				// Affichage des personnages avant les premiers deplacements
-	    				
-	    				int Ordre = Plongeur.Ordre();  // On recupere l'info de qui va jouer
-	    				if (Ordre == 1) { // J1 va jouer en premier
-	    					
-	    					// Tour J1
- 			        
-	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
-	    			        
-	    	        		StdDraw.show();
+	     			Plongeur.DispOxygene();
+	    			
+	    			StdDraw.show(50);
+	    				        
+	    			Plongeur.Deplacement(); // Appelle la methode de deplacement
+	    			      
+	    			StdDraw.show();
 
-	    	        		 //Tour J2	        
-	    			        Plongeur.Deplacement(2); // Appelle la methode de dï¿½placement pour le J2
-	    			        
-	    	        		StdDraw.show();
-	    	        		
-	    	        		//printList(Plongeur.SysOxygene()); 	        		
-	    				}
-	    					
-	    				if (Ordre == 2) { // J2 va jouer en premier
-	    	        		
-	    	        		// Tour J2
-	    					
-	    			        
-	    			        Plongeur.Deplacement(2); // Appelle la methode de deplacement pour le J2
-	    			        
-	    	        		StdDraw.show();
-	    	        			
-	    	        		// Tour J1
-	    	        		      
-	    			        Plongeur.Deplacement(1); // Appelle la methode de deplacement pour le J1
-	    			        
-	    	        		StdDraw.show(); 
-	    	        		
-	    	        		//printList(Plongeur.SysOxygene());
-	    	        		
-	    				} 
-    				
+
 	    	 } //while affichage oxygène
+	    	 
 	    	 System.out.println("Fin phase : " + (nbPartie + 1));
 	    	 nextPartie();
     	 
@@ -187,7 +153,6 @@ public class Partie extends Main{
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
 					nList.remove(i);
 					i -=1 ;
-					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 				}
 				
 			}
@@ -197,42 +162,36 @@ public class Partie extends Main{
 			
 		}
 		
-		/*else if(Plongeur.positionJ1==0 && Plongeur.positionJ2 ==0 ) {
+		else {
 			for(int i=1;i<nList.size();i++) {
 				
 				if(nList.get(i).coffreList.get(0).presence == false) {
-					System.out.println("adding coffre "+ i + " in "+(nList.get(nList.size()-1).coffreList.size()-1));
 					nList.get(i).coffreList.get(0).NiveauType =3;
 					if (i!=0) nList.get(i).coffreList.get(0).presence = true;
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
-				
-					System.out.println("im destroying level "+ i + " in case status 2 " + " color "+nList.get(i).typeNiveau);
 					nList.remove(i);
-					System.out.println("Level Destroy - nList size :" + nList.size());
+					i -=1 ;
 				}
 				
 			}
 			
-		}*/
-		
+			tempJ1Score = 0;
+			tempJ2Score = 0;
+			
+		}
 		
 		updateNiveauInfo();
-		
 		
 	} // fin de nextPartie
 	
 	public static void updateNiveauInfo() {
 		
-	
 		for(int i=0;i<nList.size();i++) {
 			nList.get(i).position =i;
 			nList.get(i).totalNiveau =nList.size();
 			nList.get(i).presenceJoueur1[0]=false;
 			nList.get(i).presenceJoueur2[0]=false;
-			
-			//if (i!=0) nList.get(i).coffreList.get(0).presence = true;
-			//if (i!=0) nList.get(i).coffreList.get(0).status = 0;
-			
+				
 		}
 		
 		Plongeur.positionJ1 = 0;
@@ -242,8 +201,7 @@ public class Partie extends Main{
 		nList.get(0).presenceJoueur1[0]=true;
 		nList.get(0).presenceJoueur2[0]=true;
 		
-		
-}
+	}
 	
 	public static void printList(List<NiveauC> list) {
 		for (int d=0; d<list.size();d++) {
@@ -252,7 +210,5 @@ public class Partie extends Main{
 			}
 			System.out.println(list.get(d));
 		}
-	}
-	
-	
+	}		
 }

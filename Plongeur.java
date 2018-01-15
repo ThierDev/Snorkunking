@@ -8,6 +8,10 @@ public class Plongeur extends Partie{
 
     public static int positionJ1 = 0;
     public static int positionJ2 = 0;
+    
+    public static boolean boolMove1 = true;
+    public static boolean boolMove2 = true;
+	public static int cas;
    
 	public static int Ordre() {
 	        
@@ -42,35 +46,34 @@ public class Plongeur extends Partie{
 	}
 	
 	
-
 	
-	public static void Deplacement(int cas) {
+	public static void Deplacement() {
 			
-		    boolean bool = true;
-		    boolean boolMove1 = true;
-		    boolean boolMove2 = true;
+		cas = Ordre();
+		if (boolMove1 == false && boolMove2 == false) {		
+			boolMove1 = true;
+			boolMove2 = true;		
+		}
 			
-		    
 			
-			while(bool==true) { // Boucle de deplacement, permet de creer des tours de jeux
+			while(boolMove1 == true || boolMove2 == true) { // Boucle de deplacement, permet de creer des tours de jeux	
 				
-				// Creation d'un bouton submit, il n'est valable que quand les deux joueur accepte de changer de partie.
-				
-		        
-		        if (cas == 1) { // Tour de J1 car plus profond
+		        if (cas == 1) { // Tour de J1
+		        	
 		        	StdDraw.setPenColor(StdDraw.RED);
 		        	StdDraw.setPenRadius(0.008);
 			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
 			        StdDraw.setPenRadius(0.002);
-			        StdDraw.show();	        	
-		        	while(boolMove1) { // Condition pour dire qu'on ne peut faire qu'une action
-		        		
+			        StdDraw.show();	    
+			       
+		        	while(boolMove1 == true) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		// Detection de la touche pressee
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) { 
 		        			Plongeur.Stop(); // Stop pour eviter de compter deux fois le mouvement
 		        			boolMove1 = false;
+		        			cas=2;
 		        			//System.out.println("touche BAS");
 		        			//deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
@@ -87,6 +90,7 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
 		        			Stop();
 		        			boolMove1 = false;
+		        			cas=2;
 		        			//System.out.println("touche HAUT");
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
 		        			
@@ -97,48 +101,47 @@ public class Plongeur extends Partie{
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
 		        			Oxygene = Oxygene - 1 -J1Coffre;
+		        			Plongeur.surfaceTest();
 		        			
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && nList.get(positionJ1).checkPresenceCoffre()){
 		        			Stop();
 		        			boolMove1 = false;
+		        			cas=2;
 		        			J1Coffre = J1Coffre + 1;
 		        			nList.get(positionJ1).changeStatus(1);
 		        			Oxygene = Oxygene - 1;
-		        			
-		        			
 		        		}
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && positionJ1==0 && positionJ2==0) {
-							bool=false;
-							boolMove1 = false;
-							Partie.Oxygene = 0;
-							break;
-						}
-		        		
+		        		  		
 		        	}
-	
-		        		
-		        		bool = false; // Fin du tour, on sort du while de d�placement
-		        		
-		        		
+		        	
+			        if (Oxygene>0) {
+			        	BackgroundGraphics();
+	    				DispOxygene();
+	    				displayScore();
+	    				DispCoffreLateral();
+	    				
+	    			}
+		        	
 		        }
 		        
-		        if (cas == 2) { // Tour de J2 car plus profond
-		        	//System.out.println("J2 turn checked");
+		        if (cas == 2) { // Tour de J2
+		        	
 		        	StdDraw.setPenColor(StdDraw.RED);
 		        	StdDraw.setPenRadius(0.008);
 	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
 	        		StdDraw.setPenRadius(0.002);
 			        StdDraw.show();
 		        	
-		        	while(boolMove2) { // Condition pour dire qu'on ne peut faire qu'une action
+		        	while(boolMove2 == true) { // Condition pour dire qu'on ne peut faire qu'une action
 		        		
 		        		// Detection de la touche pressee
 		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 		        			Stop();
 		        			boolMove2 = false;
+		        			cas=1;
 		        			//System.out.println("touche S");
 		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = false;
@@ -153,6 +156,7 @@ public class Plongeur extends Partie{
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_Z)) {
 		        			Stop();
 		        			boolMove2 = false;
+		        			cas=1;
 		        			//System.out.println("touche Z");
 		        			
 		        			nList.get(positionJ2).presenceJoueur2[0] = false;
@@ -163,44 +167,33 @@ public class Plongeur extends Partie{
 		        			nList.get(positionJ1).presenceJoueur1[0] = true;
 		        			Oxygene = Oxygene - 1 -J2Coffre;
 		        			
+		        			Plongeur.surfaceTest();
 		        			
 		        		}
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_D) && nList.get(positionJ2).checkPresenceCoffre() ) {
 		        			Stop();
 		        			boolMove2 = false;
+		        			cas=1;
 		        			J2Coffre = J2Coffre + 1;
 		        			nList.get(positionJ2).changeStatus(2);
 		        			Oxygene = Oxygene - 1;
 		        			
 		        		}
-		        		if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && positionJ1==0 && positionJ2==0) {
-							bool=false;
-							boolMove2 = false;
-							Oxygene = 0;
-							
-							
-						}
-		        		
+
 		        	}
-		        		
-		        		
-		        		bool = false; // Fin du tour, on sort du while de d�placement
-		        		
-		        		
-		        }
-		        if (Oxygene>0) {
-		        	BackgroundGraphics();
-    				DispOxygene();
-    				displayScore();
-    				DispCoffreLateral();
-    				
-    			}
+		        	
+			        if (Oxygene>0) {
+			        	BackgroundGraphics();
+	    				DispOxygene();
+	    				displayScore();
+	    				DispCoffreLateral();
+	    				
+	    			}
+		        }    
 			} // While de deplacement
 			
-			
-			 
-			 
+ 
 	}
 	public static void DispOxygene() {
 		

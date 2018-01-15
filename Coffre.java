@@ -26,7 +26,6 @@ public class Coffre {
     public void showCoffre(double b, double c, double d){
     	if (presence == true ){
        StdDraw.picture(xCoffre,b, "coffre.png",c ,d);
-       StdDraw.square(xCoffre, b, c);
     	} 
     }
     
