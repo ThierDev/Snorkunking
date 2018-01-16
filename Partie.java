@@ -1,4 +1,5 @@
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,11 @@ public class Partie extends Main{
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
 	//public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
-	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1); 
+	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1+1); 
+	
+	static Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
+	static Boolean bool1 = false;
+	static int endBool = 0;
 	
     public static int J1Score=0;
     public static int J2Score=0;
@@ -25,7 +30,7 @@ public class Partie extends Main{
     
     public static int nbPartie = 0;
     
-	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1) + 0.1;
+	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1+1) + 0.1;
 	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1+1);
 	static double PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);  // Affichage du pourcentage d'oxygene
 	
@@ -95,7 +100,7 @@ public class Partie extends Main{
 	    			StdDraw.show(50);
 	    				        
 	    			Plongeur.Deplacement(); // Appelle la methode de deplacement
-	    			      
+	    			
 	    			StdDraw.show();
 
 
@@ -175,6 +180,69 @@ public class Partie extends Main{
 		}
 		
 		updateNiveauInfo();
+		
+		if (nbPartie == 3) {
+			StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
+			StdDraw.show(50);
+			
+			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);  // Ecran titre
+			StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380*SW, 240*SH);
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.setFont(FontSelctionTitre);
+			StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+			StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
+			StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+			StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");	
+			StdDraw.show();
+			
+			while(bool1 == false) {
+				
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
+	        	
+	        	endBool = 0;
+	        	
+				StdDraw.setFont(FontSelctionTitre);
+	        	StdDraw.setPenColor(StdDraw.RED);
+				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+				StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
+			
+				StdDraw.setPenColor(StdDraw.WHITE);
+				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");
+				StdDraw.show();
+				}
+	        
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
+	        	
+	        	endBool = 1;
+	        	
+				StdDraw.setFont(FontSelctionTitre);
+	        	StdDraw.setPenColor(StdDraw.RED);
+				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");
+				
+				StdDraw.setPenColor(StdDraw.WHITE);
+				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
+				StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
+				StdDraw.show();
+				}
+	         
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
+	        	
+		        if (endBool == 0) {
+		        	nbPartie = 0;
+		        	Partie.createNiveau();
+		    		Partie.DispDeplacement();
+		        }
+		        
+		        if (endBool == 0) {
+		        	System.exit(0);
+		        }
+	        	
+	        	//Niveau.DispDeplacement();
+	        	} // Detection choix mode de jeu
+		}
+		}
 		
 	} // fin de nextPartie
 	

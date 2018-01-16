@@ -115,6 +115,7 @@ public class Plongeur extends Partie{
 		        			cas=2;
 		        			J1Coffre = J1Coffre + 1;
 		        			nList.get(positionJ1).changeStatus(1);
+		        			tempJ1Score = tempJ1Score + nList.get(positionJ1).getTresor(1);
 		        			Oxygene = Oxygene - 1;
 		        		}
 		        		  		
@@ -183,6 +184,7 @@ public class Plongeur extends Partie{
 		        			cas=1;
 		        			J2Coffre = J2Coffre + 1;
 		        			nList.get(positionJ2).changeStatus(2);
+		        			tempJ2Score = tempJ2Score + nList.get(positionJ2).getTresor(2);
 		        			Oxygene = Oxygene - 1;
 		        			
 		        		}
@@ -251,6 +253,7 @@ public class Plongeur extends Partie{
 	public static void surfaceTest() {
 		if (positionJ1 == 0) {
 			J1Score = J1Score + tempJ1Score;
+			tempJ1Score = 0;
 			J1Coffre = 0;
 			
 			for(int i=0;i<nList.size();i++) {
@@ -261,13 +264,13 @@ public class Plongeur extends Partie{
 			
 			BackgroundGraphics();
 			DispOxygene();
-			Partie.sumScore();
 			Partie.displayScore(); 
 			DispCoffreLateral();
 		}
 		
 		if (positionJ2 == 0) {
 			J2Score = J2Score + tempJ2Score;
+			tempJ2Score = 0;
 			J2Coffre = 0;
 			
 			for(int i=0;i<nList.size();i++) {
@@ -278,7 +281,6 @@ public class Plongeur extends Partie{
 			
 			BackgroundGraphics();
 			DispOxygene();
-			Partie.sumScore();
 			Partie.displayScore();
 			DispCoffreLateral();
 		}
