@@ -4,6 +4,9 @@ import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Main extends Scaling{
+	
+	public static boolean IAStatus = true;
+	
 	public boolean activScaling=true;
 	public static double SW = Scaling.scalingFactor()[0];
 	public static double SH = Scaling.scalingFactor()[1];

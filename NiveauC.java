@@ -83,6 +83,8 @@ public class NiveauC extends Main{
     		StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", 12*SW, 12*SH);}
     	
 		statusDisplay(); //Pour le debug
+		statusNbDisplay();
+		nbCoffreDisplay(); //debug
 		levelIndexDisplay(); //debug
     	
     }
@@ -94,8 +96,6 @@ public class NiveauC extends Main{
     			coffreList.get(i).showCoffre((Y)*SH,11*SW,NiveauHeight*SH);
     		}
     	}
-    	
-    
     
     public void setPenColors(String argString){
         if(argString.equals("Princeton Orange")){StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);}
@@ -129,6 +129,20 @@ public class NiveauC extends Main{
 		double Y=positionYCenterNiveau();
     	for (int i=0;i<coffreList.size();i++) {
 			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).presence); 	
+		}
+	}
+	
+	public void statusNbDisplay() {
+		double Y=positionYCenterNiveau();
+    	for (int i=0;i<coffreList.size();i++) {
+			StdDraw.text(0.88*X_MAX, (Y)*SH, "" + coffreList.get(i).status); 	
+		}
+	}
+	
+	public void nbCoffreDisplay() {
+		double Y=positionYCenterNiveau();
+    	for (int i=0;i<coffreList.size();i++) {
+			StdDraw.text(0.85*X_MAX, (Y)*SH, "" + coffreList.size()); 	
 		}
 	}
 	

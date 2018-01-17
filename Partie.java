@@ -10,8 +10,6 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Partie extends Main{
 	
-	
-	
 	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
 	//public static double hauteurNiveau = 280/(totNiveau123-1);
 	public static List<NiveauC> nList = new ArrayList<NiveauC>();
@@ -141,18 +139,24 @@ public class Partie extends Main{
 		
 		nbPartie += 1 ;
 		
+		if (nbPartie < 3) {
+		
 		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
 			System.out.println("cas !=0 J1 & J2 i : ");
-			for(int i=1;i<=nList.size()-2;i++) {
+			for(int i=1;i<nList.size()-2;i++) {
 				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
-				if(nList.get(i).coffreList.get(0).presence == false) {
-					nList.get(i).coffreList.get(0).NiveauType = 3;
-					nList.get(i).coffreList.get(0).presence = true;
-					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				
+				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
+					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).NiveauType = 3;
+					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).presence = true;
+					
+				}
+				
+				if(nList.get(i).coffreList.get(0).presence == false) { //Suppression niveau
 					nList.remove(i);
 					i -=1 ;
 				}
-				
 			}
 			
 			tempJ1Score = 0;
@@ -162,12 +166,17 @@ public class Partie extends Main{
 		
 		else {
 			System.out.println("cas !=0 J1 | J2 i : ");
-			for(int i=1;i<=nList.size();i++) {
+			for(int i=1;i<nList.size();i++) {
 				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
-				if(nList.get(i).coffreList.get(0).presence == false) {
-					nList.get(i).coffreList.get(0).NiveauType =3;
-					if (i!=0) nList.get(i).coffreList.get(0).presence = true;
-					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0)); /// on ajoute au dernier niveau les coffre perdu
+				
+				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
+					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
+					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).NiveauType = 3;
+					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).presence = true;
+					
+				}
+				
+				if(nList.get(i).coffreList.get(0).presence == false) { //Suppression niveau
 					nList.remove(i);
 					i -=1 ;
 				}
@@ -177,11 +186,12 @@ public class Partie extends Main{
 			tempJ1Score = 0;
 			tempJ2Score = 0;
 			
-		}
+		} }
 		
 		updateNiveauInfo();
 		
-		if (nbPartie == 3) {
+		if (nbPartie == 3) { // Ecran de score et pour rejouer
+			
 			StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
 			StdDraw.show(50);
 			
@@ -189,10 +199,16 @@ public class Partie extends Main{
 			StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380*SW, 240*SH);
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.setFont(FontSelctionTitre);
-			StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-			StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
-			StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-			StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");	
+			StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
+			StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
+			
+			StdDraw.picture(0.25*X_MAX, 0.32*Y_MAX, "bob.png", 50*SW, 50*SH);
+	        StdDraw.picture(0.75*X_MAX, 0.32*Y_MAX, "patrick.png", 50*SW, 50*SH);
+			StdDraw.text(0.35*X_MAX, 0.32*Y_MAX, Integer.toString(J2Score));
+	        StdDraw.text(0.65*X_MAX, 0.32*Y_MAX, Integer.toString(J1Score));
+			
 			StdDraw.show();
 			
 			while(bool1 == false) {
@@ -203,12 +219,12 @@ public class Partie extends Main{
 	        	
 				StdDraw.setFont(FontSelctionTitre);
 	        	StdDraw.setPenColor(StdDraw.RED);
-				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-				StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
+	        	StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+				StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
 			
 				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");
+				StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+				StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
 				StdDraw.show();
 				}
 	        
@@ -218,12 +234,12 @@ public class Partie extends Main{
 	        	
 				StdDraw.setFont(FontSelctionTitre);
 	        	StdDraw.setPenColor(StdDraw.RED);
-				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"EXIT");
+	        	StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+				StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
 				
 				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
-				StdDraw.text(X_MAX/4,Y_MAX/2-52*SH,"REPLAY");
+				StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+				StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
 				StdDraw.show();
 				}
 	         
@@ -236,10 +252,10 @@ public class Partie extends Main{
 		        }
 		        
 		        if (endBool == 0) {
-		        	System.exit(0);
+		        	Runtime.getRuntime().exit(0);
+		        	System.exit(0);		        	
 		        }
 	        	
-	        	//Niveau.DispDeplacement();
 	        	} // Detection choix mode de jeu
 		}
 		}

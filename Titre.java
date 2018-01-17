@@ -23,6 +23,8 @@ public class Titre extends Main{
 		System.out.println(SW);
 		int compteurlancement = 0;
 		Boolean bool1 = false;
+		
+		int titleSelect = 0;
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
         Sound2 Explosion = new Sound2("explosion2.wav");
@@ -92,7 +94,8 @@ public class Titre extends Main{
     					
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
     		        	
-    		        	
+    		        	IAStatus = true;
+
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);
         				StdDraw.rectangle(X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
@@ -106,6 +109,7 @@ public class Titre extends Main{
     		        
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
     		        	
+    		        	IAStatus = false;
     		        	
         				StdDraw.setFont(FontSelctionTitre);
     		        	StdDraw.setPenColor(StdDraw.RED);

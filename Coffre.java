@@ -5,7 +5,7 @@ public class Coffre {
 
     public int NiveauType;
     public int Tresor;
-    
+    Boolean dropped = false;
     public int xCoffre;
     boolean presence = true;
     int status = 0; // 0 si le coffre n'est prit par aucun joueur, 1 j1 , 2j2 
@@ -27,9 +27,7 @@ public class Coffre {
     	if (presence == true ){
        StdDraw.picture(xCoffre,b, "coffre.png",c ,d);
     	} 
-    }
-    
-    
+    } 
     
     public int getTresor(){
         return Tresor;
@@ -37,7 +35,7 @@ public class Coffre {
     
     public void takeCoffre(int status) {
     	
-    	if (presence = true){
+    	if (presence == true){
     		
     		this.status = status;
     		this.presence = false;

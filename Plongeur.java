@@ -143,6 +143,53 @@ public class Plongeur extends Partie{
 		        		
 		        		// Detection de la touche pressee
 		        		
+		        		if (IAStatus == true) {
+		        			if (Math.round(((2.5*Oxygene)/OxyIni)*100)>58) {
+		        				
+		        				if (nList.get(positionJ2).coffreList.get(0).presence == true) {
+		        					boolMove2 = false;
+				        			cas=1;
+				        			J2Coffre = J2Coffre + 1;
+				        			nList.get(positionJ2).changeStatus(2);
+				        			tempJ2Score = tempJ2Score + nList.get(positionJ2).getTresor(2);
+				        			Oxygene = Oxygene - 1;
+		        				}
+		        					
+		        				else {
+		        					
+			        			boolMove2 = false;
+			        			cas=1;
+			        			//System.out.println("touche S");
+			        			
+			        			nList.get(positionJ2).presenceJoueur2[0] = false;
+			        			positionJ2 = positionJ2 + 1;
+			        			noBorderEscape();
+			        			
+			        			nList.get(positionJ2).presenceJoueur2[0] = true;
+			        			nList.get(positionJ1).presenceJoueur1[0] = true;
+			        			Oxygene = Oxygene - 1 -J2Coffre;
+		        				}
+		        			}
+		        			
+		        			else {
+		        				
+		        				boolMove2 = false;
+		        				cas = 1;
+		        				nList.get(positionJ2).presenceJoueur2[0] = false;
+			        			positionJ2 = positionJ2 - 1;
+			        			
+			        			noBorderEscape();
+			        			nList.get(positionJ2).presenceJoueur2[0] = true;
+			        			nList.get(positionJ1).presenceJoueur1[0] = true;
+			        			Oxygene = Oxygene - 1 -J2Coffre;
+			        			
+			        			System.out.println("Surface Test J2");
+			        			System.out.println("Nombre de trésors sur soi : " + tempJ2Score);
+			        			
+			        			Plongeur.surfaceTest();
+		        			}
+		        		}
+		        		
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 		        			Stop();
 		        			boolMove2 = false;
@@ -258,7 +305,8 @@ public class Plongeur extends Partie{
 			
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status==1) {
-					nList.get(i).coffreList.get(0).status = 0;	
+					nList.get(i).coffreList.get(0).status = 0;
+					nList.get(i).coffreList.get(0).dropped = true;
 				}
 			}
 			
@@ -276,6 +324,8 @@ public class Plongeur extends Partie{
 			for(int i=0;i<nList.size();i++) {
 				if(nList.get(i).coffreList.get(0).status==2) {
 					nList.get(i).coffreList.get(0).status = 0;	
+					nList.get(i).coffreList.get(0).dropped = true;
+					
 				}
 			}
 			
