@@ -9,14 +9,18 @@ import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Partie extends Main{
+	static Random randomGenerator = new Random();
+	public static int niveauxC1;
+	public static int niveauxC2;
+	public static int niveauxC3;
 	
-	public static int totNiveau123 = niveauxC1+niveauxC2+niveauxC3 + 1;
+	public static int totNiveau123;
 	//public static double hauteurNiveau = 280/(totNiveau123-1);
-	public static List<NiveauC> nList = new ArrayList<NiveauC>();
-	public static int Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1+1); 
+	public static List<NiveauC> nList;
+	public static int Oxygene;
 	
 	static Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
-	static Boolean bool1 = false;
+	
 	static int endBool = 0;
 	
     public static int J1Score=0;
@@ -28,11 +32,28 @@ public class Partie extends Main{
     
     public static int nbPartie = 0;
     
-	static double BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1+1) + 0.1;
-	static double OxyIni = 5*(niveauxC3+niveauxC2+niveauxC1+1);
-	static double PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);  // Affichage du pourcentage d'oxygene
+	static double BordureOxy;
+	static double OxyIni;
+	static double PourcentageOxy;  // Affichage du pourcentage d'oxygene
 	
-	public static void createNiveau(){	
+
+	public static void createNiveau(){
+		
+		nList = new ArrayList<NiveauC>();
+		
+		niveauxC1 =9 + randomGenerator.nextInt(12-9);
+		niveauxC2 = 6 + randomGenerator.nextInt(9-6);
+		niveauxC3  = 3+ randomGenerator.nextInt(6-3);
+		
+		totNiveau123  = niveauxC1+niveauxC2+niveauxC3 + 1;
+		
+		Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1+1); 
+		BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1+1) + 0.1;
+		OxyIni  = 5*(niveauxC3+niveauxC2+niveauxC1+1);
+		PourcentageOxy  = Math.round(((2.5*Oxygene)/OxyIni)*100);
+		
+		
+		
 		
 		nList.add(new NiveauC(0,0,totNiveau123));
 		
@@ -53,14 +74,14 @@ public class Partie extends Main{
 	public static void BackgroundGraphics() { // L'ensemble des elements de toujours presents a l'image. J'ai inclu les coffres pour l'instant
 
 					Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
-					Font FontPourcent = new Font("Arial", Font.PLAIN, (int)(20*SW));
-							
+				
+					
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);
     				
     				// Indicateurs dans les coins pour dire qui va jouer
     				
-    				StdDraw.picture(0.05*X_MAX, 0.9*Y_MAX, "bob.png", 25*SW, 25*SH);
-    		        StdDraw.picture(X_MAX-0.05*X_MAX, 0.9*Y_MAX, "patrick.png", 25*SW, 25*SH);
+    				StdDraw.picture(0.05*X_MAX, 0.9*Y_MAX, "bob.png", 35*SW, 35*SH);
+    		        StdDraw.picture(X_MAX-0.05*X_MAX, 0.9*Y_MAX, "patrick.png", 35*SW, 35*SH);
     		        
     		        // Affichage des scores
     		        
@@ -68,11 +89,11 @@ public class Partie extends Main{
     		        StdDraw.setPenColor(StdDraw.RED);
     		        StdDraw.text(0.05*X_MAX, 0.78*Y_MAX, "Score");
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
-    		        
+    		        /*
     		        StdDraw.setPenColor(StdDraw.WHITE);
-    		        StdDraw.filledRectangle(X_MAX/2, 0.90*Y_MAX,25*SW, 7*SH);
-    		        StdDraw.setPenColor(StdDraw.PRINCETON_ORANGE);
-    				StdDraw.text(X_MAX/2, 0.895*Y_MAX, "Round " + (nbPartie+1));
+    		        StdDraw.filledRectangle(X_MAX/2, 0.90*Y_MAX,25*SW, 7*SH); */
+    		        StdDraw.setPenColor(StdDraw.BLUE);
+    				StdDraw.text(X_MAX/2, 0.95*Y_MAX, "Round " + (nbPartie+1));
     		        
     		        
 					//createNiveau();			 
@@ -82,9 +103,11 @@ public class Partie extends Main{
         }
      				
      				
-     public static void DispDeplacement() {
-    	 
+     public static void DispDeplacement() throws Exception {
+    	 Sound2 GrandBleu = new Sound2("Grand_Bleu.wav");
+    	 GrandBleu.PlaySoundC();
     	 while(nbPartie<3) {
+    		 
     		 Oxygene = 2*(totNiveau123);
     		 BackgroundGraphics();
         	 displayScore();
@@ -105,9 +128,13 @@ public class Partie extends Main{
 	    	 } //while affichage oxygène
 	    	 
 	    	 System.out.println("Fin phase : " + (nbPartie + 1));
+	    	 
 	    	 nextPartie();
     	 
     	 }
+    	 GrandBleu.Stop();
+    	 EcranNextPartie();
+    	 
 	}
 	
 	
@@ -135,7 +162,7 @@ public class Partie extends Main{
         
 	}
 	
-	public static void nextPartie() {
+	public static void nextPartie() throws Exception {
 		
 		nbPartie += 1 ;
 		
@@ -148,15 +175,18 @@ public class Partie extends Main{
 				
 				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
+					nList.remove(i);
+					i -=1 ;
 					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).NiveauType = 3;
 					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).presence = true;
 					
 				}
-				
-				if(nList.get(i).coffreList.get(0).presence == false) { //Suppression niveau
+				if(nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == true) { //Suppression niveau
 					nList.remove(i);
 					i -=1 ;
 				}
+				
+				
 			}
 			
 			tempJ1Score = 0;
@@ -172,11 +202,12 @@ public class Partie extends Main{
 				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
 					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).NiveauType = 3;
+					nList.remove(i);
+					i -=1 ;
 					nList.get(nList.size()-1).coffreList.get(nList.get(nList.size()-1).coffreList.size()-1).presence = true;
 					
 				}
-				
-				if(nList.get(i).coffreList.get(0).presence == false) { //Suppression niveau
+				if(nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == true) { //Suppression niveau
 					nList.remove(i);
 					i -=1 ;
 				}
@@ -190,75 +221,7 @@ public class Partie extends Main{
 		
 		updateNiveauInfo();
 		
-		if (nbPartie == 3) { // Ecran de score et pour rejouer
-			
-			StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
-			StdDraw.show(50);
-			
-			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);  // Ecran titre
-			StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380*SW, 240*SH);
-			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.setFont(FontSelctionTitre);
-			StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-			StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
-			StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-			StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
-			
-			StdDraw.picture(0.25*X_MAX, 0.32*Y_MAX, "bob.png", 50*SW, 50*SH);
-	        StdDraw.picture(0.75*X_MAX, 0.32*Y_MAX, "patrick.png", 50*SW, 50*SH);
-			StdDraw.text(0.35*X_MAX, 0.32*Y_MAX, Integer.toString(J2Score));
-	        StdDraw.text(0.65*X_MAX, 0.32*Y_MAX, Integer.toString(J1Score));
-			
-			StdDraw.show();
-			
-			while(bool1 == false) {
-				
-	        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
-	        	
-	        	endBool = 0;
-	        	
-				StdDraw.setFont(FontSelctionTitre);
-	        	StdDraw.setPenColor(StdDraw.RED);
-	        	StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-				StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
-			
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-				StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
-				StdDraw.show();
-				}
-	        
-	        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
-	        	
-	        	endBool = 1;
-	        	
-				StdDraw.setFont(FontSelctionTitre);
-	        	StdDraw.setPenColor(StdDraw.RED);
-	        	StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-				StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
-				
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
-				StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
-				StdDraw.show();
-				}
-	         
-	        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
-	        	
-		        if (endBool == 0) {
-		        	nbPartie = 0;
-		        	Partie.createNiveau();
-		    		Partie.DispDeplacement();
-		        }
-		        
-		        if (endBool == 0) {
-		        	Runtime.getRuntime().exit(0);
-		        	System.exit(0);		        	
-		        }
-	        	
-	        	} // Detection choix mode de jeu
-		}
-		}
+		
 		
 	} // fin de nextPartie
 	
@@ -280,6 +243,90 @@ public class Partie extends Main{
 		nList.get(0).presenceJoueur2[0]=true;
 		
 	}
+	public static void EcranNextPartie() throws Exception {
+		
+		Boolean bool1 = false;
+		StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
+		StdDraw.show(50);
+		
+		StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);  // Ecran titre
+		StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380*SW, 240*SH);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		StdDraw.setFont(FontSelctionTitre);
+		StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+		StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
+		StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+		StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
+		
+		StdDraw.picture(0.25*X_MAX, 0.32*Y_MAX, "bob.png", 50*SW, 50*SH);
+        StdDraw.picture(0.75*X_MAX, 0.32*Y_MAX, "patrick.png", 50*SW, 50*SH);
+		StdDraw.text(0.35*X_MAX, 0.32*Y_MAX, Integer.toString(J2Score));
+        StdDraw.text(0.65*X_MAX, 0.32*Y_MAX, Integer.toString(J1Score));
+		
+		StdDraw.show();
+		
+		while(bool1 == false) {
+			
+        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
+        	
+        	endBool = 0;
+        	
+			StdDraw.setFont(FontSelctionTitre);
+        	StdDraw.setPenColor(StdDraw.RED);
+        	StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
+		
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
+			StdDraw.show();
+			}
+        
+        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) { //Selection 2 JOUEURS
+        	
+        	endBool = 1;
+        	
+			StdDraw.setFont(FontSelctionTitre);
+        	StdDraw.setPenColor(StdDraw.RED);
+        	StdDraw.rectangle(3*X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(3*X_MAX/4,0.15*Y_MAX*SH - 2*SH,"EXIT");	
+			
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.rectangle(X_MAX/4,0.15*Y_MAX*SH,60*SW,20*SH);
+			StdDraw.text(X_MAX/4,0.15*Y_MAX*SH - 2*SH,"REPLAY");
+			StdDraw.show();
+			}
+         
+        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
+        	
+	        if (endBool == 0) {
+	        	nbPartie = 0;
+	        	
+	        	J1Score=0;
+	            J2Score=0;
+	        	
+	        	try {
+					Thread.sleep(400);   }             
+				catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();  }
+	        	titre = new Titre(false);
+	        	Partie.createNiveau();
+	    		Partie.DispDeplacement();
+	    			
+	        }
+	        
+	        if (endBool == 1) {
+	        	
+	        	Runtime.getRuntime().exit(0);
+	        	System.exit(0);
+	        	return;
+	        	
+	        }
+        	
+        	} // Detection choix mode de jeu
+		}
+	}
+	
 	
 	public static void printList(List<NiveauC> list) {
 		for (int d=0; d<list.size();d++) {

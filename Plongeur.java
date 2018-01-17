@@ -62,7 +62,7 @@ public class Plongeur extends Partie{
 		        	
 		        	StdDraw.setPenColor(StdDraw.RED);
 		        	StdDraw.setPenRadius(0.008);
-			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+			        StdDraw.rectangle(X_MAX-0.05*X_MAX, 0.9*Y_MAX, 25*SW, 25*SH); // Indicateur de tour
 			        StdDraw.setPenRadius(0.002);
 			        StdDraw.show();	    
 			       
@@ -135,7 +135,7 @@ public class Plongeur extends Partie{
 		        	
 		        	StdDraw.setPenColor(StdDraw.RED);
 		        	StdDraw.setPenRadius(0.008);
-	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 20*SW, 20*SH); // Indicateur de tour
+	        		StdDraw.rectangle(0.05*X_MAX, 0.9*Y_MAX, 25*SW, 25*SH); // Indicateur de tour
 	        		StdDraw.setPenRadius(0.002);
 			        StdDraw.show();
 		        	
@@ -157,17 +157,17 @@ public class Plongeur extends Partie{
 		        					
 		        				else {
 		        					
-			        			boolMove2 = false;
-			        			cas=1;
-			        			//System.out.println("touche S");
-			        			
-			        			nList.get(positionJ2).presenceJoueur2[0] = false;
-			        			positionJ2 = positionJ2 + 1;
-			        			noBorderEscape();
-			        			
-			        			nList.get(positionJ2).presenceJoueur2[0] = true;
-			        			nList.get(positionJ1).presenceJoueur1[0] = true;
-			        			Oxygene = Oxygene - 1 -J2Coffre;
+				        			boolMove2 = false;
+				        			cas=1;
+				        			//System.out.println("touche S");
+				        			
+				        			nList.get(positionJ2).presenceJoueur2[0] = false;
+				        			positionJ2 = positionJ2 + 1;
+				        			noBorderEscape();
+				        			
+				        			nList.get(positionJ2).presenceJoueur2[0] = true;
+				        			nList.get(positionJ1).presenceJoueur1[0] = true;
+				        			Oxygene = Oxygene - 1 -J2Coffre;
 		        				}
 		        			}
 		        			
@@ -255,12 +255,12 @@ public class Plongeur extends Partie{
 		if (Oxygene < 0 ) Oxygene = 0;
 		
 		StdDraw.setPenColor(StdDraw.BLACK);
-		StdDraw.rectangle(X_MAX/2, 0.95*Y_MAX, BordureOxy*SW, 7.1*SH);
+		StdDraw.rectangle(X_MAX/2, 0.895*Y_MAX, BordureOxy*SW, 7.1*SH);
 		StdDraw.setPenColor(StdDraw.BLUE);
-		StdDraw.filledRectangle(X_MAX/2, 0.95*Y_MAX,5*Oxygene*SW, 7*SH);
+		StdDraw.filledRectangle(X_MAX/2, 0.895*Y_MAX,5*Oxygene*SW, 7*SH);
 		StdDraw.setPenColor(StdDraw.WHITE);
 		PourcentageOxy = Math.round(((2.5*Oxygene)/OxyIni)*100);
-		StdDraw.text(X_MAX/2, 0.945*Y_MAX, PourcentageOxy + " %");
+		StdDraw.text(X_MAX/2, 0.890*Y_MAX, PourcentageOxy + " %");
 		//System.out.println("Pourcentage : " + PourcentageOxy);
 	
 }

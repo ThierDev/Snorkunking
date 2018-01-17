@@ -17,21 +17,31 @@ import javax.sound.sampled.Clip;
 public class Titre extends Main{
 		
 	public int index;
+	public static boolean Overall;
+	public static boolean avertissement;
+	
+	public Titre(boolean avertissement) throws Exception {
+		
+		Titre.avertissement = avertissement;
+		Titre.Overall =true;
+		Launch();
+		
+	}
 	
 	
 	public static void Launch() throws Exception {	
-		System.out.println(SW);
-		int compteurlancement = 0;
 		Boolean bool1 = false;
 		
-		int titleSelect = 0;
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
         Sound2 menuTheme = new Sound2("GuileTheme.wav");
         Sound2 Explosion = new Sound2("explosion2.wav");
-        Sound2 pop = new Sound2("pop.wav");
+       
         
         
-        while(true){	
+        while(Overall){	
+        	
+        	if(avertissement) {
+        	
         	
         	StdDraw.picture(X_MAX/2, Y_MAX/2, "Avertissement.png",640*SW,360*SH);
 
@@ -41,7 +51,7 @@ public class Titre extends Main{
 			catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();  }
         	
-    		if (compteurlancement<1) {
+    		
     			for (int i = Y_MAX; i> 20; i=(int) (i-5)) { //Chute de la bouteille
     			
     			StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH); 
@@ -57,28 +67,34 @@ public class Titre extends Main{
 					Explosion.PlaySound(); // Explosion son
     				
     				try {
-    					Thread.sleep((int) (800/SW));   }             
+    					Thread.sleep((int) (300/SW));   }             
     				catch(InterruptedException ex) {
     					Thread.currentThread().interrupt();  }
     				
     				for (int i=0; i <50; i = (int)(i +5)) {  // Explosions + Titre
     					
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"explosion.gif", 350*SW, 350*SH);
-    				StdDraw.show(10/(int)(SH)); 
+    				StdDraw.show(5/(int)(SH)); 
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
-    				StdDraw.show(10/(int)(SH));
+    				StdDraw.show(5/(int)(SH));
     				StdDraw.picture(X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
-    				StdDraw.show(10/(int)(SH)); 
+    				StdDraw.show(5/(int)(SH)); 
     				StdDraw.picture(X_MAX/4, Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
-    				StdDraw.show(10/(int)(SH)); 
+    				StdDraw.show(5/(int)(SH)); 
     				StdDraw.picture(3*X_MAX/4, 3*Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
-    				StdDraw.show(10/(int)(SH)); 
+    				StdDraw.show(5/(int)(SH)); 
     				StdDraw.picture(3*X_MAX/4, Y_MAX/4,"explosion.gif", 350*SW, 350*SH);
-    				StdDraw.show(10/(int)(SH)); }
+    				StdDraw.show(5/(int)(SH)); }
     				
-    				menuTheme.PlaySoundC();
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
-    				StdDraw.show(2000/(int)(SH));
+    				StdDraw.show(1000/(int)(SH));
+    				
+        	}
+    				
+    		
+    				menuTheme.PlaySoundC();
+    				
+    				
     				
     				StdDraw.picture(X_MAX/2, Y_MAX/2,"ocean.jpg",640*SW,360*SH);  // Ecran titre
     				StdDraw.picture(X_MAX/2, Y_MAX/2+60,"SnorkUnkingLogo.png", 380*SW, 240*SH);
@@ -89,7 +105,7 @@ public class Titre extends Main{
     				StdDraw.rectangle(3*X_MAX/4,Y_MAX/2-50*SH,60*SW,20*SH);
     				StdDraw.text(3*X_MAX/4,Y_MAX/2-52*SH,"2 JOUEURS");	
     				StdDraw.show();
-    				
+    		
     				while(bool1 == false) {
     					
     		        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) { //Selection 1 JOUEUR
@@ -122,12 +138,16 @@ public class Titre extends Main{
         				StdDraw.show();
         				}
     		         
-    		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {bool1 = true;
+    		        if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
+    		        	bool1 = true;
     		        	menuTheme.Stop();
+    		        	Explosion.Stop();
+    		        	Overall = false;
+    		        	
     		        	
     		        	//Niveau.DispDeplacement();
     		        	} // Detection choix mode de jeu
-    			} }     	
+    			}     	
         
         	}
         }

@@ -44,8 +44,8 @@ public class NiveauC extends Main{
         this.position = position;
         this.typeNiveau = typeNiveau;
         this.totalNiveau=totalNiveau;
-        this.NiveauHeight = 290/totalNiveau;
-        this.debugPos = Integer.toString(position);
+        
+        
         
      // 
       	int xCoffre = 70 + randomGenerator.nextInt(502-1); 
@@ -55,8 +55,8 @@ public class NiveauC extends Main{
         
     
     public double positionYCenterNiveau(){
-    	
-        return (NiveauHeight +((totalNiveau-position)*NiveauHeight));
+    	NiveauHeight = 280/totalNiveau;
+        return (NiveauHeight/4 +((totalNiveau-position)*NiveauHeight));
         
     }
     public void drawNiveau(){
@@ -65,7 +65,7 @@ public class NiveauC extends Main{
         double Y=positionYCenterNiveau();
         drawJoueur();
         drawCoffre();
-        
+        NiveauHeight = 280/totalNiveau;
         StdDraw.rectangle(X_MAX/2,Y*SH,0.4*X_MAX,NiveauHeight/2*SH);
         
     }
@@ -74,26 +74,28 @@ public class NiveauC extends Main{
     	double Y=positionYCenterNiveau();
     	
     	
+    	
     	if (presenceJoueur2[0]==true) {
     		
-    		StdDraw.picture(0.25*X_MAX,Y*SH ,"bob.png", 12*SW, 12*SH);
+    		StdDraw.picture(0.25*X_MAX,Y*SH ,"bob.png", NiveauHeight*SW, NiveauHeight*SH);
     	}
     	if (presenceJoueur1[0]==true) {
     		
-    		StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", 12*SW, 12*SH);}
+    		StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", NiveauHeight*SW, NiveauHeight*SH);}
     	
-		statusDisplay(); //Pour le debug
-		statusNbDisplay();
-		nbCoffreDisplay(); //debug
-		levelIndexDisplay(); //debug
+		//statusDisplay(); //Pour le debug
+		//statusNbDisplay();
+		//nbCoffreDisplay(); //debug
+		//levelIndexDisplay(); //debug
     	
     }
     public void drawCoffre() {
+    	NiveauHeight = 280/totalNiveau;
     	double Y=positionYCenterNiveau();
     	// on distingue systématiquement le dernier niveau qui peut contenir plusieurs coffres
     	
     	for (int i=0;i<coffreList.size();i++) {
-    			coffreList.get(i).showCoffre((Y)*SH,11*SW,NiveauHeight*SH);
+    			coffreList.get(i).showCoffre((Y)*SH,NiveauHeight*SW,NiveauHeight*SH);
     		}
     	}
     
@@ -125,7 +127,8 @@ public class NiveauC extends Main{
     	return coffreList.get(0).presence;
     }
     
-	public void statusDisplay() {
+	
+    /*public void statusDisplay() {
 		double Y=positionYCenterNiveau();
     	for (int i=0;i<coffreList.size();i++) {
 			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).presence); 	
@@ -152,6 +155,6 @@ public class NiveauC extends Main{
     	for (int i=0;i<coffreList.size();i++) {
 			StdDraw.text(0.14*X_MAX, (Y)*SH, "" + debugPos); 	
 		}
-	}
+	} */
 	
 }
