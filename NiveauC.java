@@ -10,15 +10,15 @@ public class NiveauC extends Main{
     public int totalNiveau;
     public double NiveauHeight;
     //public Coffre coffreN;
-    public List<Coffre> coffreList = new ArrayList<Coffre>(); // cette liste ne contient que 1 element hors dernier niveau
+    public List<Coffre> coffreList = new ArrayList<Coffre>(); // cette liste ne contient que 1 élément, mis a part pour le dernier niveau
     public int typeNiveau;
     Random randomGenerator = new Random();
+    
+    // permet de savoir si le joueur est «dans» le niveau. 
     public boolean[] presenceJoueur1 = {false};
     public boolean[] presenceJoueur2 = {false};
     
-    private String debugPos = "";
-    
-// par convention presenceJoueur[0] = true si bob;  false si patrick/ presenceJoeur[1]=true or false dépendant si le joueur est effectivement présent
+
     
     
     public NiveauC(int typeNiveau,int position,int totalNiveau){ 
@@ -48,18 +48,26 @@ public class NiveauC extends Main{
         
         
      // 
-      	int xCoffre = 70 + randomGenerator.nextInt(502-1); 
-      	coffreList.add(new Coffre(typeNiveau,xCoffre));
+      	int xCoffre = 70 + randomGenerator.nextInt(502-1); // position en x du coffre , généré aléatoirement
+      	
+      	/*
+      	 * Creation d'une liste de coffre, pour tous les niveaux sauf le dernier cette liste ne contient qu'un élément de type coffre.
+      	 * l'object coffreliste est propre à chaque niveau, chaque niveau contient «son» coffre. 
+      	 */
+      	coffreList.add(new Coffre(typeNiveau,xCoffre)); 
+      	
         
         }
         
     
-    public double positionYCenterNiveau(){
-    	NiveauHeight = 280/totalNiveau;
+    public double positionYCenterNiveau(){ // renvoie la position du niveau.
+    	
+    	NiveauHeight = 280/totalNiveau; // permet de moduler la taille des niveau en fonction du nombre de niveau. 
         return (NiveauHeight/4 +((totalNiveau-position)*NiveauHeight));
         
     }
     public void drawNiveau(){
+    	// realise l'impression des niveaux , des joueurs et des coffres qui sont aussi «dans» le niveau
     	
         setPenColors(ColorArg);
         double Y=positionYCenterNiveau();
@@ -82,14 +90,12 @@ public class NiveauC extends Main{
     	if (presenceJoueur1[0]==true) {
     		
     		StdDraw.picture(X_MAX-0.25*X_MAX,Y*SH,"patrick.png", NiveauHeight*SW, NiveauHeight*SH);}
-    	
-		//statusDisplay(); //Pour le debug
-		//statusNbDisplay();
-		//nbCoffreDisplay(); //debug
-		//levelIndexDisplay(); //debug
+ 
     	
     }
     public void drawCoffre() {
+    	
+    	
     	NiveauHeight = 280/totalNiveau;
     	double Y=positionYCenterNiveau();
     	// on distingue systématiquement le dernier niveau qui peut contenir plusieurs coffres
@@ -109,6 +115,8 @@ public class NiveauC extends Main{
     }
     
     public int getTresor(int status){
+    	
+    	// recupère la valeur des tresors à chaque niveaux si l'on est au dernier niveau, on recupère tout les trésors
         	int tempTresor = 0;
     		for (int i=0;i<coffreList.size();i++) {
     			if (coffreList.get(i).status == status) {tempTresor += coffreList.get(i).getTresor();}	
@@ -117,6 +125,8 @@ public class NiveauC extends Main{
     }
     public void changeStatus(int status) {
     	
+    	// change le status des coffres 0 si personne, 1 si le J1 a prit le coffre, 2 si j2 a prit le coffre
+    	
     	for (int i=0;i<coffreList.size();i++) {
 			coffreList.get(i).takeCoffre(status); 	
 		}
@@ -124,37 +134,12 @@ public class NiveauC extends Main{
     
     public boolean checkPresenceCoffre() {
     	
+    	// recupère la valeur du booléen présence de la classe coffre.
+    	
     	return coffreList.get(0).presence;
     }
     
 	
-    /*public void statusDisplay() {
-		double Y=positionYCenterNiveau();
-    	for (int i=0;i<coffreList.size();i++) {
-			StdDraw.text(0.11*X_MAX, (Y)*SH, "" + coffreList.get(i).presence); 	
-		}
-	}
-	
-	public void statusNbDisplay() {
-		double Y=positionYCenterNiveau();
-    	for (int i=0;i<coffreList.size();i++) {
-			StdDraw.text(0.88*X_MAX, (Y)*SH, "" + coffreList.get(i).status); 	
-		}
-	}
-	
-	public void nbCoffreDisplay() {
-		double Y=positionYCenterNiveau();
-    	for (int i=0;i<coffreList.size();i++) {
-			StdDraw.text(0.85*X_MAX, (Y)*SH, "" + coffreList.size()); 	
-		}
-	}
-	
-	public void levelIndexDisplay() {
-		double Y=positionYCenterNiveau();
 
-    	for (int i=0;i<coffreList.size();i++) {
-			StdDraw.text(0.14*X_MAX, (Y)*SH, "" + debugPos); 	
-		}
-	} */
 	
 }

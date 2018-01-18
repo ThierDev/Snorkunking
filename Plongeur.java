@@ -56,7 +56,7 @@ public class Plongeur extends Partie{
 		}
 			
 			
-			while(boolMove1 == true || boolMove2 == true) { // Boucle de deplacement, permet de creer des tours de jeux	
+			while(boolMove1 == true || boolMove2 == true) { // ne permet que 2 déplacement l'un après l'autre.
 				
 		        if (cas == 1) { // Tour de J1
 		        	
@@ -74,16 +74,15 @@ public class Plongeur extends Partie{
 		        			Plongeur.Stop(); // Stop pour eviter de compter deux fois le mouvement
 		        			boolMove1 = false;
 		        			cas=2;
-		        			//System.out.println("touche BAS");
-		        			//deltaY= (deltaY+hauteurNiveau*SH);	//Modification graphique de la position
-		        			nList.get(positionJ1).presenceJoueur1[0] = false;
 		        			
-		        			positionJ1 = positionJ1 + 1;
-		        			noBorderEscape();
+		        			nList.get(positionJ1).presenceJoueur1[0] = false; // le joueur n'est plus en haut
 		        			
-		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			positionJ1 = positionJ1 + 1; // le joueur decend d'un niveau
+		        			noBorderEscape(); // on vérifie qu'il ne vas pas trop bas/haut
+		        			
+		        			nList.get(positionJ1).presenceJoueur1[0] = true; // on l'affiche à la nouvelle position
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
-		        			Oxygene = Oxygene - 1 -J1Coffre;
+		        			Oxygene = Oxygene - 1 -J1Coffre; // on diminue l'oxygène en conséquence du mouvement.
 		        			
 		        			
 		        		}
@@ -91,32 +90,34 @@ public class Plongeur extends Partie{
 		        			Stop();
 		        			boolMove1 = false;
 		        			cas=2;
-		        			//System.out.println("touche HAUT");
+		        			// le joeur n'est plus en bas
 		        			nList.get(positionJ1).presenceJoueur1[0] = false;
 		        			
 		        			//deltaY=(deltaY-hauteurNiveau*SH);
-		        			positionJ1 = positionJ1 - 1;
-		        			noBorderEscape(); 
+		        			positionJ1 = positionJ1 - 1; // il remonte
+		        			noBorderEscape(); // on l'empeche d'aller trop haut/bas
 		        			
-		        			nList.get(positionJ1).presenceJoueur1[0] = true;
+		        			// on l'affiche un peu plus haut à la position p-1
+		        			nList.get(positionJ1).presenceJoueur1[0] = true; 
 		        			nList.get(positionJ2).presenceJoueur2[0] = true;
-		        			Oxygene = Oxygene - 1 -J1Coffre;
+		        			Oxygene = Oxygene - 1 -J1Coffre; // son niveau d'oxygène decend en conséquence.
 		        			
-		        			System.out.println("Surface Test J1");
-		        			System.out.println("Nombre de trésors sur soi : " + tempJ1Score);
+		        		
 		        			
-		        			Plongeur.surfaceTest();
+		        			Plongeur.surfaceTest(); // 0n vérifie si il n'est pas à la surface, pour déposer ou non les coffres
 		        			
 		        		}
+		        		
+		        		// si l'on appui sur enter, qu'il y'a un coffre, on peut le prendre
 	 		        
 		        		if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && nList.get(positionJ1).checkPresenceCoffre()){
 		        			Stop();
 		        			boolMove1 = false;
 		        			cas=2;
-		        			J1Coffre = J1Coffre + 1;
-		        			nList.get(positionJ1).changeStatus(1);
-		        			tempJ1Score = tempJ1Score + nList.get(positionJ1).getTresor(1);
-		        			Oxygene = Oxygene - 1;
+		        			J1Coffre = J1Coffre + 1; // il prend un coffre 
+		        			nList.get(positionJ1).changeStatus(1); // on indique que c'est le joueur 1 qui l'on prit
+		        			tempJ1Score = tempJ1Score + nList.get(positionJ1).getTresor(1); // on calcul son score temporaire
+		        			Oxygene = Oxygene - 1; // l'oxygène decend en conséquence
 		        		}
 		        		  		
 		        	}
@@ -252,6 +253,8 @@ public class Plongeur extends Partie{
 	}
 	public static void DispOxygene() {
 		
+		//actualise la barre d'oxygène
+		
 		if (Oxygene < 0 ) Oxygene = 0;
 		
 		StdDraw.setPenColor(StdDraw.BLACK);
@@ -273,7 +276,7 @@ public class Plongeur extends Partie{
 
 	
 	public static void Stop() {
-		
+		// empeche d'executer plusieures actions avec un seul appui sur une touche
 		try {
 			Thread.sleep(200);   }             
 		catch(InterruptedException ex) {
@@ -281,8 +284,8 @@ public class Plongeur extends Partie{
 		
 	}
 	public static void noBorderEscape() {
-		 //Blocage du deplacement en haut et en bas des niveaux >> a revoir par rapport a la nouvelle taille
-        
+		 //Blocage du deplacement en haut et en bas des niveaux 
+		
         if (positionJ1<=0) positionJ1 = 0 ;
         if (positionJ1>=(nList.size())) {
         	
@@ -298,6 +301,9 @@ public class Plongeur extends Partie{
 	}
 	
 	public static void surfaceTest() {
+		
+		// lorsque un des joueur est à la surface on actualise les scores et on vide ses coffres
+		
 		if (positionJ1 == 0) {
 			J1Score = J1Score + tempJ1Score;
 			tempJ1Score = 0;

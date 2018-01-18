@@ -38,6 +38,10 @@ public class Partie extends Main{
 	
 
 	public static void createNiveau(){
+		/*
+		 * Cette fonction permet de creer les niveau de départ, leur nombre varie aléatoirement.
+		 * La liste nList est de type niveau et contient l'ensemble des instances de la classe Niveau
+		 */
 		
 		nList = new ArrayList<NiveauC>();
 		
@@ -50,7 +54,7 @@ public class Partie extends Main{
 		Oxygene = 2*(niveauxC3+niveauxC2+niveauxC1+1); 
 		BordureOxy = 10*(niveauxC3+niveauxC2+niveauxC1+1) + 0.1;
 		OxyIni  = 5*(niveauxC3+niveauxC2+niveauxC1+1);
-		PourcentageOxy  = Math.round(((2.5*Oxygene)/OxyIni)*100);
+		PourcentageOxy  = Math.round(((2.5*Oxygene)/OxyIni)*100); // on ramène l'oxygène en pourcentage 
 		
 		
 		
@@ -67,11 +71,11 @@ public class Partie extends Main{
 			nList.add(new NiveauC(3,i,totNiveau123));
 		}
 		
-		System.out.println("Nombre de niveaux : "+ totNiveau123);
+		
 	}
    
     
-	public static void BackgroundGraphics() { // L'ensemble des elements de toujours presents a l'image. J'ai inclu les coffres pour l'instant
+	public static void BackgroundGraphics() { // L'ensemble des elements de toujours presents a l'image.
 
 					Font FontScore = new Font("Arial", Font.BOLD,(int) (25*SW));
 				
@@ -89,14 +93,14 @@ public class Partie extends Main{
     		        StdDraw.setPenColor(StdDraw.RED);
     		        StdDraw.text(0.05*X_MAX, 0.78*Y_MAX, "Score");
     		        StdDraw.text(0.95*X_MAX, 0.78*Y_MAX, "Score");
-    		        /*
-    		        StdDraw.setPenColor(StdDraw.WHITE);
-    		        StdDraw.filledRectangle(X_MAX/2, 0.90*Y_MAX,25*SW, 7*SH); */
+    		        
+    		        
+    		        // impression du round 1,2 ou 3.
     		        StdDraw.setPenColor(StdDraw.BLUE);
     				StdDraw.text(X_MAX/2, 0.95*Y_MAX, "Round " + (nbPartie+1));
     		        
     		        
-					//createNiveau();			 
+					// on imprime l'ensemble des niveaux.			 
 					 for (int i=0;i<nList.size();i++){
 						 nList.get(i).drawNiveau();
 						}
@@ -104,23 +108,28 @@ public class Partie extends Main{
      				
      				
      public static void DispDeplacement() throws Exception {
-    	 Sound2 GrandBleu = new Sound2("Grand_Bleu.wav");
+    	 
+    	 /*
+    	  * Fonction qui gére le nombre de partie, elle gère aussi le calcul de l'oxygène et intéragit avec les plongeurs.
+    	  * On gère aussi l'affichage du backgrounds et des scores 
+    	  */
+    	 Sound2 GrandBleu = new Sound2("Grand_Bleu.wav"); // musique lors des 3 rounds
     	 GrandBleu.PlaySoundC();
     	 while(nbPartie<3) {
     		 
     		 Oxygene = 2*(totNiveau123);
-    		 BackgroundGraphics();
-        	 displayScore();
+    		 BackgroundGraphics(); // affichage initial du background
+        	 displayScore(); // affichage initial des scores
     	 
-	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU - UNE BOUCLE = UN TOUR D'UN JOUEUR
+	    	 while(Oxygene>0) { // AFFICHAGE MANCHE DE JEU
 	     				
 	     			// Affichage barre d'oxygene
-	     				
 	     			Plongeur.DispOxygene();
 	    			
 	    			StdDraw.show(50);
 	    				        
-	    			Plongeur.Deplacement(); // Appelle la methode de deplacement
+	    			Plongeur.Deplacement(); // Appelle la methode de deplacement des plongeurs.
+	    			// ceci représente un tour de jeu, joueur 1 puis joueur 2 ou différents cas dépendant en fonction de la situation
 	    			
 	    			StdDraw.show();
 
@@ -129,16 +138,21 @@ public class Partie extends Main{
 	    	 
 	    	 System.out.println("Fin phase : " + (nbPartie + 1));
 	    	 
-	    	 nextPartie();
+	    	 nextPartie(); // on passe à la partie (round) suivante.
     	 
     	 }
-    	 GrandBleu.Stop();
-    	 EcranNextPartie();
+    	 GrandBleu.Stop();// à la fin des 3 rounds, on stop la musique
+    	 EcranNextPartie(); // on lance l'écran pour une prochaine partie. 
     	 
 	}
 	
 	
 	public static void sumScore() {
+		
+		/*
+		 * Cette fonction une fois appellé fait la somme des scores sur tous les niveaux
+		 * en utilisant la méthode getTresor de la classe Niveau
+		 */
 
 		for(int i=0;i<nList.size()-1;i++) {
 			tempJ1Score += nList.get(i).getTresor(1);
@@ -164,14 +178,25 @@ public class Partie extends Main{
 	
 	public static void nextPartie() throws Exception {
 		
+		
+		/*
+		 * Cette fonction permet le changement de partie, elle effectue plusieurs actions selon 
+		 * les différents scénarios ; plongeur en bas, à la surface etc..
+		 * 
+		 * Elle enlève les niveaux qui ont déjà été visité, pour ce faire elle .remove de la liste l'instance niveau.
+		 * 
+		 * Si un niveau est visité,que le coffre à été prit et que le joueur n'a pas remonté le coffre à la surface. 
+		 * Comme attendu le coffre tombe au dernier niveau. 
+		 * 
+		 */
 		nbPartie += 1 ;
 		
 		if (nbPartie < 3) {
 		
 		if(Plongeur.positionJ1 !=0 && Plongeur.positionJ2!=0) { // si les deux joueurs ne sont pas remonté a la surface
-			System.out.println("cas !=0 J1 & J2 i : ");
+			
 			for(int i=1;i<nList.size()-2;i++) {
-				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
+				
 				
 				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
@@ -195,9 +220,8 @@ public class Partie extends Main{
 		}
 		
 		else {
-			System.out.println("cas !=0 J1 | J2 i : ");
+			
 			for(int i=1;i<nList.size();i++) {
-				System.out.print(i + " " + nList.get(i).coffreList.get(0).presence + " | ");
 				
 				if (nList.get(i).coffreList.get(0).presence == false && nList.get(i).coffreList.get(0).dropped == false) { //Déplacement coffres perdus
 					nList.get(nList.size()-1).coffreList.add(nList.get(i).coffreList.get(0));
@@ -217,7 +241,9 @@ public class Partie extends Main{
 			tempJ1Score = 0;
 			tempJ2Score = 0;
 			
-		} }
+		} 
+		
+		}
 		
 		updateNiveauInfo();
 		
@@ -226,6 +252,11 @@ public class Partie extends Main{
 	} // fin de nextPartie
 	
 	public static void updateNiveauInfo() {
+		
+		/*
+		 * Fonction qui remet correctement les élements dans les instances de la classe niveau
+		 * Elle est neccessaire à chaque changement de partie/round 1,2,3
+		 */
 		
 		for(int i=0;i<nList.size();i++) {
 			nList.get(i).position =i;
@@ -243,7 +274,13 @@ public class Partie extends Main{
 		nList.get(0).presenceJoueur2[0]=true;
 		
 	}
-	public static void EcranNextPartie() throws Exception {
+	public static void EcranNextPartie() throws Exception { 
+		
+		/* Ceci est un écran qui affiche les scores en fin de partie
+		 * Il n'a rien de bien compliqué, il dispose de deux boutons droite gauche 
+		 * qui permmettent de terminer la session (ferme le jeu) ou de recommencer une partie
+		 * L'unique difficulté est de bien remettre à zéro les scores 
+		 */ 
 		
 		Boolean bool1 = false;
 		StdDraw.picture(X_MAX/2, Y_MAX/2,"SnorkUnkingLogo.png", 380*SW, 240*SH);
@@ -319,21 +356,12 @@ public class Partie extends Main{
 	        	
 	        	Runtime.getRuntime().exit(0);
 	        	System.exit(0);
-	        	return;
-	        	
+	        	return; 
+	        	// Sans la commande return, System.exit(0) ne fonctionne pas. 	        	
 	        }
         	
         	} // Detection choix mode de jeu
 		}
 	}
-	
-	
-	public static void printList(List<NiveauC> list) {
-		for (int d=0; d<list.size();d++) {
-			if (d==list.size()) {
-				System.out.println(list.get(d));
-			}
-			System.out.println(list.get(d));
-		}
-	}		
+		
 }

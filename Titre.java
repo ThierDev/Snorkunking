@@ -24,12 +24,17 @@ public class Titre extends Main{
 		
 		Titre.avertissement = avertissement;
 		Titre.Overall =true;
-		Launch();
+		Launch(); // chaque nouvelle instance appelle la fonction launch()
 		
 	}
 	
 	
 	public static void Launch() throws Exception {	
+		
+		/*
+		 * Cette fonction gère le générique du début et le menu intéractif
+		 * le booléen avertissement permet de passer (ou pas) l'animation épique de départ
+		 */
 		Boolean bool1 = false;
 		
 		Font FontSelctionTitre = new Font("Arial", Font.BOLD,(int)(40*SW));
