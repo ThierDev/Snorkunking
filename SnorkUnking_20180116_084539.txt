@@ -1,0 +1,5 @@
+ERROR - 08:45:39: org.xml.sax.SAXParseExceptionpublicId: /SnorkUnking/.settings/org.eclipse.jdt.core.prefs; systemId: file:///SnorkUnking/.settings/org.eclipse.jdt.core.prefs; lineNumber: 1; columnNumber: 1; Contenu non autorisé dans le prologue.
+ERROR - 08:45:39: org.xml.sax.SAXParseExceptionpublicId: /SnorkUnking/.settings/org.eclipse.jdt.core.prefs; systemId: file:///SnorkUnking/.settings/org.eclipse.jdt.core.prefs; lineNumber: 1; columnNumber: 1; Contenu non autorisé dans le prologue.
+WARNING - 08:46:07: Convert SnorkUnking
+ERROR - 08:46:07: org.xml.sax.SAXParseExceptionpublicId: /SnorkUnking/.settings/org.eclipse.jdt.core.prefs; systemId: file:///SnorkUnking/.settings/org.eclipse.jdt.core.prefs; lineNumber: 1; columnNumber: 1; Contenu non autorisé dans le prologue.
+ERROR - 08:46:07: org.xml.sax.SAXParseExceptionpublicId: /SnorkUnking/.settings/org.eclipse.jdt.core.prefs; systemId: file:///SnorkUnking/.settings/org.eclipse.jdt.core.prefs; lineNumber: 1; columnNumber: 1; Contenu non autorisé dans le prologue.
